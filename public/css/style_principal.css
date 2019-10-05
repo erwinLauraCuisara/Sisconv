@@ -48,3 +48,41 @@ html, body {
 .m-b-md {
     margin-bottom: 30px;
 }
+
+.img-logo {
+    width: 100%;
+    height: 100%;
+}
+.nav-color{
+    background-color: #86898d;
+}
+.nav-titulo{
+    display: block;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.my-nav:hover{
+    background-color: transparent;
+    text-decoration: none;
+    color:white;
+}
+.nav-otros{
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: white;
+    display: block;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+.my-nav-otros:hover{
+    background-color: transparent;
+    text-decoration: none;
+    color:black;
+}

@@ -15,45 +15,35 @@
             
         <!-- Styles -->
         <link href="{{asset('css/style_principal.css')}}" rel="Stylesheet">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
      <!-- Agregando navbar footer -->
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+     <nav class="navbar navbar-expand-lg navbar-light nav-color" style="padding: 0px 15px 0px 15px;">
+        <a class="navbar-brand" href="" style="width: 3%; padding:0">
+            <img src="{{URL::asset('/img/Siscon_icono.png')}}" alt="logo" class="img-logo">
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <a class="nav-titulo my-nav" href="">SisCon</a>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="my-nav-otros nav-otros" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="my-nav-otros nav-otros" href="#">Convocatorias</a>
+            </li>
+            </ul>
+            <ul class="navbar-nav">
+            <li class="nav-item" style="float:right">
+                <a class="my-nav-otros nav-otros" href="#">Registrar</a>
+            </li>
+            <li class="nav-item" style="float:right">
+                <a class="my-nav-otros nav-otros" href="#">Iniciar Sessión</a>
+            </li>
+            </ul>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+     </nav>
 
 <!-- termina codigo bootstraap navbar -->
             @yield('content')
@@ -62,72 +52,6 @@
 
 <!-- Footer Links -->
 <div class="container-fluid text-center text-md-left">
-
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-md-6 mt-md-0 mt-3">
-
-      <!-- Content -->
-      <h5 class="text-uppercase">Footer Content</h5>
-      <p>Here you can use rows and columns to organize your footer content.</p>
-
-    </div>
-    <!-- Grid column -->
-
-    <hr class="clearfix w-100 d-md-none pb-3">
-
-    <!-- Grid column -->
-    <div class="col-md-3 mb-md-0 mb-3">
-
-      <!-- Links -->
-      <h5 class="text-uppercase">Links</h5>
-
-      <ul class="list-unstyled">
-        <li>
-          <a href="#!">Link 1</a>
-        </li>
-        <li>
-          <a href="#!">Link 2</a>
-        </li>
-        <li>
-          <a href="#!">Link 3</a>
-        </li>
-        <li>
-          <a href="#!">Link 4</a>
-        </li>
-      </ul>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-md-3 mb-md-0 mb-3">
-
-      <!-- Links -->
-      <h5 class="text-uppercase">Links</h5>
-
-      <ul class="list-unstyled">
-        <li>
-          <a href="#!">Link 1</a>
-        </li>
-        <li>
-          <a href="#!">Link 2</a>
-        </li>
-        <li>
-          <a href="#!">Link 3</a>
-        </li>
-        <li>
-          <a href="#!">Link 4</a>
-        </li>
-      </ul>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
 
 </div>
 <!-- Footer Links -->
