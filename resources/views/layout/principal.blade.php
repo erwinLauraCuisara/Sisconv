@@ -49,16 +49,16 @@
             @yield('content')
      
 <footer class="page-footer font-small blue pt-4">
-
-<!-- Footer Links -->
+<img src="{{URL::asset('/img/footer_ima.jpg')}}" alt="footer_img" style="width:100%; height:100px">
 <div class="container-fluid text-center text-md-left">
-
 </div>
-<!-- Footer Links -->
 
 <!-- Copyright -->
-<div class="footer-copyright text-center py-3">© 2018 Copyright:
-  <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+<div class="footer-copyright text-center py-3">
+<img src="{{URL::asset('/img/Siscon_icono.png')}}" alt="logo" class="img-logo" style="width:7%;">
+<br>    
+© 2019 Copyright:
+  <a href="#"> A.R.E.S srl</a>
 </div>
 <!-- Copyright -->
 
