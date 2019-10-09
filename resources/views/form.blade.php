@@ -2,65 +2,73 @@
 @section('content')
 
 <!DOCTYPE html>
-<div class="container">
+<div class="container" style="margin-top: 15px">
 
 <html lang="en">
+  <div class="p">
+
+  </div>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
-</head>
+    <h2>Registrar convocatoria</h2>
+  </head>
 
 <body>
     
 
     <form>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
+  <div class="form-row" style="margin-top: 15px">
+    <div class="form-group col-md-6" >
+      <label for="inputEmail4">Titulo de convocatoria</label>
+      <input type="email" class="form-control" id="inputEmail4" >
     </div>
     <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <label for="inputPassword4">Fecha inicio</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputPassword4">Fecha final</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputAddress">Area</label>
+      <input type="text" class="form-control" id="inputAddress" >
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputAddress">Gestion</label>
+
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    2-2019
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">2-2019</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">1-2020</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">2-2020</a>
+  </div>
+</div>
+
     </div>
   </div>
   <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
+    <label for="inputAddress2">Descripcion</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <div class="checkbox">
+  <label>
+    <input type="checkbox" data-toggle="toggle">
+    Option one is enabled
+  </label>
+</div>
+<button type="button" class="btn btn-secondary btn-lg btn-block">Guardad convocatoria</button>
 </form>
 
 
