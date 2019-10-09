@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
+
+
+Route::get('/form', function () {
+    return view('form');
+})->name('registrar'); 
