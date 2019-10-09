@@ -22,7 +22,7 @@ class CreateConvocatoriasTable extends Migration
             $table->dateTime('fechaFin');
             $table->dateTime('fechaPublicRes');
             $table->string('tipo')->nullable;
-            $table->string('visible')->nullable;
+            $table->boolean('visible')->nullable;
             $table->timestamps();
         });
     }
