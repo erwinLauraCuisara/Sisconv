@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/convocatorias', function () {
+    return view('convocatorias.index');
+});

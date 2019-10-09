@@ -31,7 +31,7 @@
                 <a class="my-nav-otros nav-otros" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="my-nav-otros nav-otros" href="#">Convocatorias</a>
+                <a class="my-nav-otros nav-otros" href="{{url('/convocatorias')}}">Convocatorias</a>
             </li>
             </ul>
             <ul class="navbar-nav">
