@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/convocatorias', function () {
     return view('convocatorias.index');
 });
+Route::resource('/convocatorias/create','ConvocatoriaController');
