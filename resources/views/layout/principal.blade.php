@@ -35,12 +35,29 @@
             </li>
             </ul>
             <ul class="navbar-nav">
-            <li class="nav-item" style="float:right">
-                <a class="my-nav-otros nav-otros" href="#">Registrar</a>
-            </li>
-            <li class="nav-item" style="float:right">
-                <a class="my-nav-otros nav-otros" href="#">Iniciar Sessión</a>
-            </li>
+                @if (Auth::guest())
+                    <li class="nav-item" style="float:right">
+                        <a class="my-nav-otros nav-otros" href="#">Registrar</a>
+                    </li>
+                    <li class="nav-item" style="float:right">
+                        <a class="my-nav-otros nav-otros" href="#">Iniciar Sessión</a>
+                    </li>
+                @else
+                    <li class="dropdown">
+
+                         <li>
+                            <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                        Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                            </form>
+                         </li>
+                    </li>
+                 @endif
             </ul>
         </div>
      </nav>
