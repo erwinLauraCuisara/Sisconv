@@ -22,13 +22,13 @@ class CreateUsuariosTable extends Migration
             $table->string('email')->unique();
             $table->string('contrasenia')->nullable();
             $table->string('profesion');
-            $table->string('postular')->nullable();
-            $table->string('evaluar')->nullable();
-            $table->string('verConv')->nullable();
-            $table->string('editarConv')->nullable();
-            $table->string('crearConv')->nullable();
-            $table->string('bajaConv')->nullable();
-            $table->string('verReportes')->nullable();
+            $table->boolean('postular')->nullable();
+            $table->boolean('evaluar')->nullable();
+            $table->boolean('verConv')->nullable();
+            $table->boolean('editarConv')->nullable();
+            $table->boolean('crearConv')->nullable();
+            $table->boolean('bajaConv')->nullable();
+            $table->boolean('verReportes')->nullable();
             $table->timestamps();
         });
     }
