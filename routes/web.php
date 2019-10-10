@@ -29,3 +29,10 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout','AdminLoginController@logout')->name('admin.logout');
 });
 
+Route::prefix('usuario')->group(function(){
+    Route::get('login', 'Auth\UsuarioLoginController@showLoginForm')->name('usuario.login');
+    Route::post('login', 'Auth\UsuarioLoginController@login')->name('usuario.login.submit');    
+    Route::get('/','UsuarioController@index')->name('usuario.dashboard');
+    Route::get('/logout','UsuarioLoginController@logout')->name('usuario.logout');
+});
+

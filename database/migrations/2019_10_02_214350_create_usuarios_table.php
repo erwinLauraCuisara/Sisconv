@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('telefono');
             $table->string('celular');
             $table->string('email')->unique();
-            $table->string('contrasenia')->nullable();
+            $table->string('password')->nullable();
             $table->string('profesion');
             $table->string('postular')->nullable();
             $table->string('evaluar')->nullable();

@@ -40,7 +40,7 @@
                         <a class="my-nav-otros nav-otros" href="#">Registrar</a>
                     </li>
                     <li class="nav-item" style="float:right">
-                        <a class="my-nav-otros nav-otros" href="#">Iniciar Sessión</a>
+                        <a class="my-nav-otros nav-otros" href="{{ route('usuario.login') }}">Iniciar Sessión</a>
                     </li>
                 @else
                     <li class="dropdown">
