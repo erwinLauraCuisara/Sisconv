@@ -14,7 +14,7 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        //
+        return view('convocatorias.form');
     }
 
     /**
@@ -35,7 +35,17 @@ class ConvocatoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'fTitulo' => 'required',
+            'fFecIni' => 'required',
+            'fFecFin' => 'required',
+            'fArea' => 'required',
+            'fGest' => 'required',
+            'fDescrip' => 'required',
+            'fView' => 'required',
+        ]);
+        $emps = new Employe;
+        $emps = new convocatoria;
     }
 
     /**
