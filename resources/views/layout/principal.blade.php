@@ -20,10 +20,10 @@
     <body>
      <!-- Agregando navbar footer -->
      <nav class="navbar navbar-expand-lg navbar-light nav-color" style="padding: 0px 15px 0px 15px;">
-        <a class="navbar-brand" href="" style="width: 3%; padding:0">
+        <a class="navbar-brand" href="{{url('/')}}" style="width: 3%; padding:0">
             <img src="{{URL::asset('/img/Siscon_icono.png')}}" alt="logo" class="img-logo">
         </a>
-        <a class="nav-titulo my-nav" href="">SisCon</a>
+        <a class="nav-titulo my-nav" href="{{url('/')}}">SisCon</a>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
