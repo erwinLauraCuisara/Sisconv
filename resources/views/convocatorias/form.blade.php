@@ -26,36 +26,36 @@
       <div class="form-row" style="margin-top: 15px">
         <div class="form-group col-md-6">
           <label for="inputEmail4">Titulo de convocatoria</label>
-          <input type="text" name="fTitulo" class="form-control" id="inputEmail4">
+          <input type="text" name="titulo" class="form-control" id="inputEmail4">
         </div>
         <div class="form-group col-md-2">
           <label for="inputPassword4">Fecha inicio</label>
-          <input type="date" name="fFecIni" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+          <input type="date" name="fechaIni" class="form-control" id="inputPassword4" placeholder="09/10/2019">
         </div>
         <div class="form-group col-md-2">
           <label for="inputPassword4">Fecha final</label>
-          <input type="date" name="fFecFin" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+          <input type="date" name="fechaFin" class="form-control" id="inputPassword4" placeholder="09/10/2019">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputAddress">Area</label>
-          <input type="text" name="fArea" class="form-control" id="inputAddress">
+          <input type="text" name="area" class="form-control" id="inputAddress">
         </div>
         <div class="form-group col-md-2">
           <label for="inputAddress">Gestion</label>
-
-          <input type="date" name="fGest" class="form-control" id="inputPassword4" placeholder="2-2019">
-
+          <!-- 
+          <input type="date-yyyy" name="fGest" class="form-control" id="inputPassword4" placeholder="2-2019">
+-->
         </div>
       </div>
       <div class="form-group">
         <label for="inputAddress2">Descripcion</label>
-        <textarea class="form-control" name="fDescrip" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="fView" data-toggle="toggle">
+          <input type="checkbox" name="visible" data-toggle="toggle">
           Option one is enabled
         </label>
       </div>

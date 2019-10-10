@@ -20,10 +20,10 @@ class CreateConvocatoriasTable extends Migration
             $table->string('descripcion',255);
             $table->dateTime('fechaIni');
             $table->dateTime('fechaFin');
-            $table->dateTime('fechaPublicRes');
-            $table->string('tipo')->nullable;
+          //  $table->dateTime('fechaPublicRes');
+         //   $table->string('tipo')->nullable;
             $table->boolean('visible')->nullable;
-            $table->timestamps();
+           // $table->timestamps();
         });
     }
 

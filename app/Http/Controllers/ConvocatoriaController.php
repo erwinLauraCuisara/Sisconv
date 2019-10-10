@@ -46,6 +46,16 @@ class ConvocatoriaController extends Controller
         ]);
         $emps = new Employe;
         $emps = new convocatoria;
+
+        $emps->fname = $request->input('titulo');
+        $emps->fname = $request->input('area');
+        $emps->fname = $request->input('descripcion');
+        $emps->fname = $request->input('fechaIni');
+        $emps->fname = $request->input('fechaFin');
+        //$emps->fname = $request->input('fDescrip');
+        $emps->fname = $request->input('visible');
+        
+        $emps->save();
     }
 
     /**
