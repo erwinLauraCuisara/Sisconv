@@ -25,41 +25,40 @@
       {{ csrf_field() }}
       <div class="form-row" style="margin-top: 15px">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">Titulo de convocatoria</label>
-          <input type="text" name="titulo" class="form-control" id="inputEmail4">
+          <label for="Titulo">{{'Titulo de convocatoria'}}</label>
+          <input type="text" name="Titulo" class="form-control" id="Titulo">
         </div>
         <div class="form-group col-md-2">
-          <label for="inputPassword4">Fecha inicio</label>
-          <input type="date" name="fechaIni" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+          <label for="fechaIni">{{'Fecha inicio'}}</label>
+          <input type="date" name="fechaIni" class="form-control" id="fechaIni" placeholder="09/10/2019">
         </div>
         <div class="form-group col-md-2">
-          <label for="inputPassword4">Fecha final</label>
-          <input type="date" name="fechaFin" class="form-control" id="inputPassword4" placeholder="09/10/2019">
+          <label for="fechaFin">{{'Fecha final'}}</label>
+          <input type="date" name="fechaFin" class="form-control" id="fechaFin" placeholder="09/10/2019">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="inputAddress">Area</label>
-          <input type="text" name="area" class="form-control" id="inputAddress">
+          <label for="Area">{{'Area'}}</label>
+          <input type="text" name="area" class="form-control" id="Area">
         </div>
         <div class="form-group col-md-2">
-          <label for="inputAddress">Gestion</label>
+          <label for="inputAddress">{{'Gestion'}}</label>
           <!-- 
-          <input type="date-yyyy" name="fGest" class="form-control" id="inputPassword4" placeholder="2-2019">
--->
+          <input type="date-yyyy" name="fGest" class="form-control" id="inputPassword4" placeholder="2-2019">-->
         </div>
       </div>
       <div class="form-group">
-        <label for="inputAddress2">Descripcion</label>
-        <textarea class="form-control" name="descripcion" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="Descripcion">{{'Descripcion'}}</label>
+        <textarea class="form-control" name="descripcion" id="Descripcion" rows="3"></textarea>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="visible" data-toggle="toggle">
-          Option one is enabled
+          <input type="checkbox" name="visible" id="visible" value="1">
+          publicado
         </label>
-      </div>
-      <button type="button" class="btn btn-secondary btn-lg btn-block">Guardad convocatoria</button>
+      </div>-->
+      <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
     </form>
 
 
