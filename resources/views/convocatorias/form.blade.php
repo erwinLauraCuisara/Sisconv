@@ -25,6 +25,7 @@
       {{ csrf_field() }}
       <div class="form-row" style="margin-top: 15px">
         <div class="form-group col-md-6">
+
           <label for="Titulo">{{'Titulo de convocatoria'}}</label>
           <input type="text" name="Titulo" class="form-control" id="Titulo">
         </div>
@@ -35,10 +36,12 @@
         <div class="form-group col-md-2">
           <label for="fechaFin">{{'Fecha final'}}</label>
           <input type="date" name="fechaFin" class="form-control" id="fechaFin" placeholder="09/10/2019">
+
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
+
           <label for="Area">{{'Area'}}</label>
           <input type="text" name="area" class="form-control" id="Area">
         </div>
@@ -59,6 +62,7 @@
         </label>
       </div>-->
       <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
+
     </form>
 
 

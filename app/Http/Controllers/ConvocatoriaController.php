@@ -17,6 +17,7 @@ class ConvocatoriaController extends Controller
         $datos['convocatoria']=convocatoria::paginate(5);
         return view('convocatorias.index',$datos);
       //return view('convocatorias.form');
+
     }
 
     /**
@@ -38,7 +39,9 @@ class ConvocatoriaController extends Controller
      */
     public function store(Request $request)
     {
+
         /*$this->validate($request,[
+
             'fTitulo' => 'required',
             'fFecIni' => 'required',
             'fFecFin' => 'required',
@@ -47,7 +50,9 @@ class ConvocatoriaController extends Controller
             'fDescrip' => 'required',
             'fView' => 'required',
         ]);
+
         //$emps = new Employe;
+
         $emps = new convocatoria;
 
         $emps->fname = $request->input('titulo');
@@ -58,6 +63,7 @@ class ConvocatoriaController extends Controller
         //$emps->fname = $request->input('fDescrip');
         $emps->fname = $request->input('visible');
         
+
         $emps->save();*/
 
         
@@ -69,6 +75,7 @@ class ConvocatoriaController extends Controller
             Convocatoria::insert($datosConvocatoria);
             return redirect('convocatorias'); 
         }
+
     }
 
     /**
