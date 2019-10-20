@@ -11,10 +11,10 @@
 |
 */
 
+use Symfony\Component\Console\Input\Input;
+
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/convocatorias', function () {
-    return view('convocatorias.index');
-});
-Route::resource('/convocatorias/create','ConvocatoriaController');
+Route::resource('convocatorias','ConvocatoriaController');
+
