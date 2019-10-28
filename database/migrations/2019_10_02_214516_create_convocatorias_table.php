@@ -15,7 +15,7 @@ class CreateConvocatoriasTable extends Migration
     {
         Schema::create('convocatorias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo')->nullable;
+            $table->string('titulo')->nullable();
             $table->string('area');
             $table->string('descripcion',255);
             $table->dateTime('fechaIni');
