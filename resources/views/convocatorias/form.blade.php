@@ -91,12 +91,65 @@
               </div>
             </div>
           </div>  -->
-          <div>
-            <p >Adjuntar Imagen:  <input type="file" name="imagen"> </p>
+          <!--<div >
+            <label for="imagen" style="padding: 5px 10px; background: #f55d3e; color: #fff; border: 0px solid "><img src="{{URL::asset('/img/cargarImagen.png')}}" height="50"> <input type="file" name="imagen" > </label>
           
             <p >Adjuntar documento<input type="file" name="pdf"></p>
 
           </div>
+        -->
+        <style type="text/css">
+          .subirImagen{
+              padding: 5px 10px;
+              background: #1E90FF;
+              color:#000000;
+              border:0px solid #1E90FF;
+          }
+           
+          .subirImagen:hover{
+              color:# ;
+              background: #008080 ;
+
+          }
+          .subirPdf{
+              padding: 5px 10px;
+              background: #1E90FF;
+              color:#000000;
+              border:0px solid #1E90FF;
+          }
+           
+          .subirPdf:hover{
+              color:# ;
+              background: #008080;
+        </style>
+        <script type="text/javascript">
+          function cambiar(nombre, info){
+          var pdrs = document.getElementById(nombre).files[0].name;
+            document.getElementById(info).innerHTML = pdrs;
+
+        }
+        </script>
+        
+        <div>
+        <label for="imagen" class="subirImagen">
+          <img src="{{URL::asset('/img/cargarImagen.png')}}" height="50">
+          <i class="fas fa-cloud-upload-alt"></i> cargar imagen
+        </label> 
+        <input id="imagen" name="imagen" onchange='cambiar("imagen","info")' type="file" 
+        style='display: none;' accept="image/*"/>
+        <div id="info"></div>
+        </div>
+        
+        
+        
+        <label for="pdf" class="subirPdf">
+          <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
+          <i class="fas fa-cloud-upload-alt"></i> SUBIR PDF
+        </label>
+        <input id="pdf" name="pdf" onchange='cambiar("pdf","ref")' type="file" 
+        style='display: none;' accept="application/pdf"/>
+        <div id="ref"></div>
+        </div>
 
 
         
