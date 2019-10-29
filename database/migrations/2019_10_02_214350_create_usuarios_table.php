@@ -30,7 +30,7 @@ class CreateUsuariosTable extends Migration
             $table->boolean('bajaConv');
             $table->boolean('verReportes');
 
-            $table->integer('ComisionCalificadora_id')->unsigned();
+            $table->integer('ComisionCalificadora_id')->unsigned()->nullable();
             $table->foreign('ComisionCalificadora_id')->references('id')->on('comision_calificadoras')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
 
