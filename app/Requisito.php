@@ -4,17 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class convocatoria extends Model
+class Requisito extends Model
 {
-
     public function archivos(){
         return $this->morphMany('App\Archivo','archivoTable');
     }
-    public function comisionCalificadoras(){
-        return $this->hasMany('App\ComisionCalificadora');
+    public function convocatorias(){
+        return $this->hasMany('App\convocatorias');
     }
     public function usuarios(){
-        return $this->belongsToMany('App\usuario');
+        return $this->belongsToMany('App\usuario')->using('App\Requisito_usuario');
     }
-
 }

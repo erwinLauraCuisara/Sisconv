@@ -15,21 +15,26 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
+            $table->string('nombre');
             $table->string('apellidos');
-            $table->string('telefono');
-            $table->string('celular');
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
             $table->string('email')->unique();
-            $table->string('contrasenia')->nullable();
-            $table->string('profesion');
-            $table->boolean('postular')->nullable();
-            $table->boolean('evaluar')->nullable();
-            $table->boolean('verConv')->nullable();
-            $table->boolean('editarConv')->nullable();
-            $table->boolean('crearConv')->nullable();
-            $table->boolean('bajaConv')->nullable();
-            $table->boolean('verReportes')->nullable();
+            $table->string('contrasenia');
+            $table->string('profesion')->nullable();
+            $table->boolean('postular');
+            $table->boolean('evaluar');
+            $table->boolean('verConv');
+            $table->boolean('editarConv');
+            $table->boolean('crearConv');
+            $table->boolean('bajaConv');
+            $table->boolean('verReportes');
+
+            $table->integer('ComisionCalificadora_id')->unsigned()->nullable();
+            $table->foreign('ComisionCalificadora_id')->references('id')->on('comision_calificadoras')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
+            
         });
     }
 
