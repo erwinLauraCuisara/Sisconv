@@ -15,18 +15,17 @@ class CreateConvocatoriasTable extends Migration
     {
         Schema::create('convocatorias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo')->nullable;
-            $table->string('area');
-            $table->string('descripcion',255);
-            $table->dateTime('fechaIni');
-            $table->dateTime('fechaFin');
-           
-           
-            
+            $table->string('titulo');
+            $table->string('area')->nullable();
+            $table->string('descripcion',255)->nullable();
+            $table->dateTime('fechaIni')->nullable();
+            $table->dateTime('fechaFin')->nullable();
           //  $table->dateTime('fechaPublicRes');
          //   $table->string('tipo')->nullable;
             $table->boolean('visible')->default(true);
-           // $table->timestamps();
+            $table->integer('ComisionCalificadora_id')->unsigned();
+            $table->foreign('ComisionCalificadora_id')->references('id')->on('comision_calificadoras')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
