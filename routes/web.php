@@ -18,3 +18,6 @@ Route::get('/', function () {
 });
 Route::resource('convocatorias','ConvocatoriaController');
 
+Route::get("/storage/convocatorias/{file}",function ($file){
+	return Storage::download("storage/convocatorias/$file");
+});

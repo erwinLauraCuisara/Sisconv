@@ -15,13 +15,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <h2>Registrar convocatoria</h2>
   </head>
 
   <body>
 
 
-    <form action="{{ action('ConvocatoriaController@store') }}" method="POST">
+    <form action="{{ action('ConvocatoriaController@store') }}" method="POST" enctype="multipart/form-data">
       {{ csrf_field() }}
       <div class="form-row" style="margin-top: 15px">
         <div class="form-group col-md-6">
@@ -61,6 +62,46 @@
           publicado
         </label>
       </div>-->
+
+      <!--subir archivo-->
+      
+         <!-- <div class="file-field">
+            <div class="z-depth-1-half mb-4">
+              <img src="{{URL::asset('/img/cargar.png')}}" class="img-fluid"
+                alt="example placeholder">
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn btn-mdb-color btn-rounded float-left">
+                <span>Choose file</span>
+                <input type="file" name="imagen">
+              </div>
+            </div>
+          </div>
+        
+        
+          <div class="file-field">
+            <div class="mb-4">
+              <img src="{{URL::asset('/img/cargarImagen.png')}}"
+                class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn btn-mdb-color btn-rounded float-left">
+                <span>Add photo</span>
+                <input type="file" name="pdf">
+              </div>
+            </div>
+          </div>  -->
+          <div>
+            <p >Adjuntar Imagen:  <input type="file" name="imagen"> </p>
+          
+            <p >Adjuntar documento<input type="file" name="pdf"></p>
+
+          </div>
+
+
+        
+
+
       <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
 
     </form>

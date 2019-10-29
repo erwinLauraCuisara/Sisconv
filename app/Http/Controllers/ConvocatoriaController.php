@@ -67,14 +67,29 @@ class ConvocatoriaController extends Controller
         $emps->save();*/
 
         
-        $datosConvocatoria=request()->except("_token");
+
+        
+        $datosConvocatoria=request()->except("_token","imagen","pdf");
         foreach ($datosConvocatoria as $datos ) {
             if(!isset($datosConvocatoria['visible'])){
                 $datosConvocatoria['visible']=false;
             }
             Convocatoria::insert($datosConvocatoria);
-            return redirect('convocatorias'); 
+            
         }
+
+        
+        $imagen=$request->file("imagen");
+        $sub_path="storage/convocatorias";
+        $real_name=$imagen->getClientOriginalName();
+        $destino_path=public_path($sub_path);
+        $imagen->move($destino_path,$real_name);
+        $pdf=$request->file("pdf");
+        $real_name=$pdf->getClientOriginalName();
+        $pdf->move($destino_path,$real_name);
+
+
+        return redirect('convocatorias'); 
 
     }
 
