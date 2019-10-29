@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class convocatoria extends Model
 {
+
     public function archivos(){
         return $this->morphMany('App\Archivo','archivoTable');
     }
@@ -15,4 +16,5 @@ class convocatoria extends Model
     public function usuarios(){
         return $this->belongsToMany('App\usuario');
     }
+
 }

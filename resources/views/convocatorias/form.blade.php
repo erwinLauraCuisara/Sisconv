@@ -15,13 +15,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <h2>Registrar convocatoria</h2>
   </head>
 
   <body>
 
 
-    <form action="{{ action('ConvocatoriaController@store') }}" method="POST">
+    <form action="{{ action('ConvocatoriaController@store') }}" method="POST" enctype="multipart/form-data">
       {{ csrf_field() }}
       <div class="form-row" style="margin-top: 15px">
         <div class="form-group col-md-6">
@@ -61,6 +62,99 @@
           publicado
         </label>
       </div>-->
+
+      <!--subir archivo-->
+      
+         <!-- <div class="file-field">
+            <div class="z-depth-1-half mb-4">
+              <img src="{{URL::asset('/img/cargar.png')}}" class="img-fluid"
+                alt="example placeholder">
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn btn-mdb-color btn-rounded float-left">
+                <span>Choose file</span>
+                <input type="file" name="imagen">
+              </div>
+            </div>
+          </div>
+        
+        
+          <div class="file-field">
+            <div class="mb-4">
+              <img src="{{URL::asset('/img/cargarImagen.png')}}"
+                class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+            </div>
+            <div class="d-flex justify-content-center">
+              <div class="btn btn-mdb-color btn-rounded float-left">
+                <span>Add photo</span>
+                <input type="file" name="pdf">
+              </div>
+            </div>
+          </div>  -->
+          <!--<div >
+            <label for="imagen" style="padding: 5px 10px; background: #f55d3e; color: #fff; border: 0px solid "><img src="{{URL::asset('/img/cargarImagen.png')}}" height="50"> <input type="file" name="imagen" > </label>
+          
+            <p >Adjuntar documento<input type="file" name="pdf"></p>
+
+          </div>
+        -->
+        <style type="text/css">
+          .subirImagen{
+              padding: 5px 10px;
+              background: #1E90FF;
+              color:#000000;
+              border:0px solid #1E90FF;
+          }
+           
+          .subirImagen:hover{
+              color:# ;
+              background: #008080 ;
+
+          }
+          .subirPdf{
+              padding: 5px 10px;
+              background: #1E90FF;
+              color:#000000;
+              border:0px solid #1E90FF;
+          }
+           
+          .subirPdf:hover{
+              color:# ;
+              background: #008080;
+        </style>
+        <script type="text/javascript">
+          function cambiar(nombre, info){
+          var pdrs = document.getElementById(nombre).files[0].name;
+            document.getElementById(info).innerHTML = pdrs;
+
+        }
+        </script>
+        
+        <div>
+        <label for="imagen" class="subirImagen">
+          <img src="{{URL::asset('/img/cargarImagen.png')}}" height="50">
+          <i class="fas fa-cloud-upload-alt"></i> cargar imagen
+        </label> 
+        <input id="imagen" name="imagen" onchange='cambiar("imagen","info")' type="file" 
+        style='display: none;' accept="image/*"/>
+        <div id="info"></div>
+        </div>
+        
+        
+        
+        <label for="pdf" class="subirPdf">
+          <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
+          <i class="fas fa-cloud-upload-alt"></i> SUBIR PDF
+        </label>
+        <input id="pdf" name="pdf" onchange='cambiar("pdf","ref")' type="file" 
+        style='display: none;' accept="application/pdf"/>
+        <div id="ref"></div>
+        </div>
+
+
+        
+
+
       <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
 
     </form>

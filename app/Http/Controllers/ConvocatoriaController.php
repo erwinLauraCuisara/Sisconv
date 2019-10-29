@@ -67,14 +67,52 @@ class ConvocatoriaController extends Controller
         $emps->save();*/
 
         
+
+       
         $datosConvocatoria=request()->except("_token");
+        /*
         foreach ($datosConvocatoria as $datos ) {
             if(!isset($datosConvocatoria['visible'])){
                 $datosConvocatoria['visible']=false;
             }
-            Convocatoria::insert($datosConvocatoria);
-            return redirect('convocatorias'); 
+
+            $request=Convocatoria::insert($datosConvocatoria);
+        
         }
+        */
+        if(!isset($datosConvocatoria['visible'])){
+                $datosConvocatoria['visible']=false;
+        }
+        $data=new convocatoria;
+        $data->titulo = $datosConvocatoria['Titulo'];
+        $data->area = $datosConvocatoria['area'];
+        $data->descripcion = $datosConvocatoria['descripcion'];
+        $data->fechaIni = $datosConvocatoria['fechaIni'];
+        $data->fechaFin = $datosConvocatoria['fechaFin'];
+        $data->visible = $datosConvocatoria['visible'];
+        
+        $id=$data->id;
+        
+
+        $imagen=$request->file("imagen");
+        $sub_path="storage/convocatorias/$id";
+        if(isset($imagen)){
+            //$real_name=$imagen->getClientOriginalName();
+            $destino_path=public_path($sub_path);
+            $tamanio = $imagen->getSize();
+            $extension = $imagen->getClientOriginalExtension();
+            $imagen->move($destino_path,"imagen".".$extension");
+        }
+        
+        $pdf=$request->file("pdf");
+        if(isset($pdf)){
+            //$real_name=$pdf->getClientOriginalName();
+            $tamanio = $pdf->getSize();
+            $pdf->move($destino_path,"documento.pdf");
+        }
+
+        $data->save();
+        return redirect('convocatorias'); 
 
     }
 
