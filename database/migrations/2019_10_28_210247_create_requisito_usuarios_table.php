@@ -14,7 +14,7 @@ class CreateRequisitoUsuariosTable extends Migration
     public function up()
     {
         Schema::create('requisito_usuarios', function (Blueprint $table) {
-            $table->boolean('valido')->default('0');
+            $table->boolean('valido')->default(false);
             $table->string('observaciones')->nullable();
             $table->integer('usuario_id')->unsigned();
             $table->integer('Requisito_id')->unsigned();
