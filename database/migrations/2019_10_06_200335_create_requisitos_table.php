@@ -18,7 +18,11 @@ class CreateRequisitosTable extends Migration
             $table->string('nombre');
             $table->datetime('fechaIni')->nullable();
             $table->datetime('fechaFin')->nullable();
+            $table->integer('convocatoria_id')->unsigned();
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
+            
         });
     }
 

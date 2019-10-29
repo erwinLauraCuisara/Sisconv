@@ -18,6 +18,8 @@ class CreateRequerimientosTable extends Migration
             $table->datetime('fechaIni')->nullable();
             $table->datetime('fechaFin')->nullable();
             $table->double('porcentajeNota');
+            $table->integer('convocatoria_id')->unsigned();
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

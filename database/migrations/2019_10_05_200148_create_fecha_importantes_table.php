@@ -17,6 +17,8 @@ class CreateFechaImportantesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->datetime('fecha');
+            $table->integer('convocatoria_id')->unsigned();
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
