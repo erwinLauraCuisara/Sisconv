@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+    <link href="{{asset('css/style_form_conv.css')}}" rel="Stylesheet"> 
   </head>
 
   <body>
@@ -71,7 +71,7 @@
           Publicado
         </label>
 
-      </div>-->
+      </div>
 
       <!--subir archivo-->
       
@@ -108,30 +108,6 @@
 
           </div>
         -->
-        <style type="text/css">
-          .subirImagen{
-              padding: 5px 10px;
-              background: #1E90FF;
-              color:#000000;
-              border:0px solid #1E90FF;
-          }
-           
-          .subirImagen:hover{
-              color:# ;
-              background: #008080 ;
-
-          }
-          .subirPdf{
-              padding: 5px 10px;
-              background: #1E90FF;
-              color:#000000;
-              border:0px solid #1E90FF;
-          }
-           
-          .subirPdf:hover{
-              color:# ;
-              background: #008080;
-        </style>
         <script type="text/javascript">
           function cambiar(nombre, info){
           var pdrs = document.getElementById(nombre).files[0].name;
@@ -139,28 +115,28 @@
 
         }
         </script>
-        
-        <div>
-        <label for="imagen" class="subirImagen">
-          <img src="{{URL::asset('/img/cargarImagen.png')}}" height="50">
-          <i class="fas fa-cloud-upload-alt"></i> cargar imagen
-        </label> 
-        <input id="imagen" name="imagen" onchange='cambiar("imagen","info")' type="file" 
-        style='display: none;' accept="image/*"/>
-        <div id="info"></div>
-        </div>
-        
-        
-        
+        <div class="row">
+        <div class="col-md-6 centrear">
+          <label for="imagen" class="subirImagen">
+            <img src="{{URL::asset('/img/cargarImagen.png')}}" height="50">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p class="texto_imagen_sub">IMAGEN</p>
+          </label> 
+          <input id="imagen" name="imagen" onchange='cambiar("imagen","info")' type="file" 
+          style='display: none;' accept="image/*"/>
+          <div id="info"></div>
+        </div>  
+        <div class="col-md-6 centrear">
         <label for="pdf" class="subirPdf">
           <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
-          <i class="fas fa-cloud-upload-alt"></i> SUBIR PDF
+          <i class="fas fa-cloud-upload-alt"></i> 
+          <p class="texto_imagen_sub">PDF</p>
         </label>
         <input id="pdf" name="pdf" onchange='cambiar("pdf","ref")' type="file" 
         style='display: none;' accept="application/pdf"/>
         <div id="ref"></div>
         </div>
-
+        </div>
 
       <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
 
