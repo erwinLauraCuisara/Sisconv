@@ -110,8 +110,26 @@
         -->
         <script type="text/javascript">
           function cambiar(nombre, info){
-          var pdrs = document.getElementById(nombre).files[0].name;
-            document.getElementById(info).innerHTML = pdrs;
+            var limTam=0;
+            if(nombre=="imagen"){
+              limTam=2048
+            }
+            else{
+              limTam=8192
+            }
+            var file=document.getElementById(nombre).files[0];
+            var salida = document.getElementById(info);
+            if(file.size/1024>limTam){
+              document.getElementById(nombre).value = "";
+              salida.classList.add("existe-error");
+              salida.innerHTML= "archivo muy grande";
+            }
+            else{
+              salida.classList.remove("existe-error");
+              var pdrs = file.name;
+              document.getElementById(info).innerHTML = pdrs;
+            }
+          
 
         }
         </script>
