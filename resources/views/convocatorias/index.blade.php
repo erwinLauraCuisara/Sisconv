@@ -13,7 +13,6 @@
             <th>Id</th>
             <th>Titulo</th>
             <th>Area</th>
-            <!--<th>Descripcion</th>-->
             <th>Fecha Publicación</th>
             <th>Fecha Finalización</th>
         </tr>
@@ -25,7 +24,6 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$convocatoria->titulo}}</td>
             <td>{{$convocatoria->area}}</td>
-            <!--<td>{{$convocatoria->descripcion}}</td>-->
             <td>{{$convocatoria->fechaIni}}</td>
             <td>{{$convocatoria->fechaFin}}</td>
             <td>
@@ -38,7 +36,6 @@
                 </form>
               </td>
         </tr>
-
     @endforeach
     </tbody>
 </table>
