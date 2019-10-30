@@ -90,7 +90,7 @@ class ConvocatoriaController extends Controller
         $data->fechaIni = $datosConvocatoria['fechaIni'];
         $data->fechaFin = $datosConvocatoria['fechaFin'];
         $data->visible = $datosConvocatoria['visible'];
-        
+        $data->save();
         $id=$data->id;
         
 
@@ -111,7 +111,7 @@ class ConvocatoriaController extends Controller
             $pdf->move($destino_path,"documento.pdf");
         }
 
-        $data->save();
+        
         return redirect('convocatorias'); 
 
     }
