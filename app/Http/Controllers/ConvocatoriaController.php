@@ -96,9 +96,11 @@ class ConvocatoriaController extends Controller
 
         $imagen=$request->file("imagen");
         $sub_path="storage/convocatorias/$id";
+        $destino_path=public_path($sub_path);
+        if(mkdir($destino_path, 0777, true)){
         if(isset($imagen)){
             //$real_name=$imagen->getClientOriginalName();
-            $destino_path=public_path($sub_path);
+           
             $tamanio = $imagen->getSize();
             $extension = $imagen->getClientOriginalExtension();
             $imagen->move($destino_path,"imagen".".$extension");
@@ -109,6 +111,7 @@ class ConvocatoriaController extends Controller
             //$real_name=$pdf->getClientOriginalName();
             $tamanio = $pdf->getSize();
             $pdf->move($destino_path,"documento.pdf");
+        }
         }
 
         
