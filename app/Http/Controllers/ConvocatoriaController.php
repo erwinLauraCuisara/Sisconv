@@ -100,7 +100,7 @@ class ConvocatoriaController extends Controller
         if(mkdir($destino_path, 0777, true)){
         if(isset($imagen)){
             //$real_name=$imagen->getClientOriginalName();
-           
+            
             $tamanio = $imagen->getSize();
             $extension = $imagen->getClientOriginalExtension();
             $imagen->move($destino_path,"imagen".".$extension");
