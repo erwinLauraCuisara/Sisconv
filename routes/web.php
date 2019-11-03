@@ -13,9 +13,7 @@
 
 use Symfony\Component\Console\Input\Input;
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'ConvocatoriaUsuarioController@index');
 Route::resource('convocatorias','ConvocatoriaController');
 
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){

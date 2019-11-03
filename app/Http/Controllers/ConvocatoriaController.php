@@ -14,8 +14,8 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        $datos['convocatoria']=convocatoria::paginate(5);
-        return view('convocatorias.index',$datos);
+        $convocatorias=convocatoria::paginate(2);
+        return view('convocatorias.index')->with(compact('convocatorias'));
       //return view('convocatorias.form');
 
     }

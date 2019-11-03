@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\convocatoria_usuario;
 use Illuminate\Http\Request;
+use App\convocatoria;
 
 class ConvocatoriaUsuarioController extends Controller
 {
@@ -14,7 +15,8 @@ class ConvocatoriaUsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $convocatorias=convocatoria::all();
+        return view('index')->with(compact('convocatorias'));
     }
 
     /**

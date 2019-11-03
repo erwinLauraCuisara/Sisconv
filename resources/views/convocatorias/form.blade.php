@@ -1,7 +1,7 @@
 @extends('layout.principal')
 @section('content')
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <div class="container" style="margin-top: 15px">
 
   <html lang="en">
@@ -18,7 +18,8 @@
     <link href="{{asset('css/style_form_conv.css')}}" rel="Stylesheet"> 
   </head>
 
-  <body>
+  <body> -->
+  <div class="container" style="margin-top: 15px">
   <h2>REGISTRAR CONVOCATORIA</h2>
 
 
@@ -169,6 +170,7 @@
 
   </body>
 </div>
+  </div>
 
 </html>
 @stop
