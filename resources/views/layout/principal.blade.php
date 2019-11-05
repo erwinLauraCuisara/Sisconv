@@ -14,7 +14,8 @@
         <link href="{{ asset('css/personalizado/bootstrap.min.css') }}" rel="Stylesheet">
         <link href="{{ asset('css/personalizado/style_principal.css') }}" rel="Stylesheet">   
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">                
+        <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">                 -->
+        <link href="{{ asset('css/personalizado/prueba.css') }}" rel="stylesheet">
         <!-- fin botstrap -->
             
         <!-- Styles --> 
