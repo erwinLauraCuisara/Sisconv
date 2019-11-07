@@ -163,4 +163,8 @@ class ConvocatoriaController extends Controller
     {
         //
     }
+    public function evaluador(){
+        $convocatorias=convocatoria::all();
+        return view('convocatorias.evaluador')->with(compact('convocatorias'));
+    }
 }
