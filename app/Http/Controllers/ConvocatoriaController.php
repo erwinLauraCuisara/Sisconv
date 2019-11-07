@@ -163,4 +163,12 @@ class ConvocatoriaController extends Controller
     {
         //
     }
+
+    public function baja($convocatoria)
+    {
+        $c=convocatoria::find($convocatoria);
+        $c->baja=true;
+        $c->save();
+        return redirect("convocatorias")->with("mensaje","la convocatoria a sido dado de baja correctamente");
+    }
 }

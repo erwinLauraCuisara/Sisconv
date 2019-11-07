@@ -23,6 +23,10 @@ class CreateConvocatoriasTable extends Migration
           //  $table->dateTime('fechaPublicRes');
          //   $table->string('tipo')->nullable;
             $table->boolean('visible')->default(true);
+            
+            //el campo de abajo es para dar de baja una convocatoria;  true= esta dado de baja.
+            $table->boolean('baja')->default(false);
+
             $table->integer('ComisionCalificadora_id')->unsigned()->nullable();
             $table->foreign('ComisionCalificadora_id')->references('id')->on('comision_calificadoras')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

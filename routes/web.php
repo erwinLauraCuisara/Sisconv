@@ -21,3 +21,5 @@ Route::resource('convocatorias','ConvocatoriaController');
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
+
+Route::delete("/convocatorias/baja/{convocatoria}","ConvocatoriaController@baja")->name('convocatorias.baja');
