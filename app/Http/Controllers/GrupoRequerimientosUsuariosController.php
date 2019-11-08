@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\GrupoRequerimiento;
+use App\Grupo_requerimientos_usuarios;
 use Illuminate\Http\Request;
 
-class GrupoRequerimientoController extends Controller
+class GrupoRequerimientosUsuariosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class GrupoRequerimientoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\GrupoRequerimiento  $grupoRequerimiento
+     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
      * @return \Illuminate\Http\Response
      */
-    public function show(GrupoRequerimiento $grupoRequerimiento)
+    public function show(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
     {
         //
     }
@@ -52,10 +52,10 @@ class GrupoRequerimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\GrupoRequerimiento  $grupoRequerimiento
+     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
      * @return \Illuminate\Http\Response
      */
-    public function edit(GrupoRequerimiento $grupoRequerimiento)
+    public function edit(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
     {
         //
     }
@@ -64,10 +64,10 @@ class GrupoRequerimientoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GrupoRequerimiento  $grupoRequerimiento
+     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GrupoRequerimiento $grupoRequerimiento)
+    public function update(Request $request, Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
     {
         //
     }
@@ -75,10 +75,10 @@ class GrupoRequerimientoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\GrupoRequerimiento  $grupoRequerimiento
+     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GrupoRequerimiento $grupoRequerimiento)
+    public function destroy(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
     {
         //
     }
