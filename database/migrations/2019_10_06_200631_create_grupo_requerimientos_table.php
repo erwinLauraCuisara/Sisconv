@@ -17,8 +17,8 @@ class CreateGrupoRequerimientosTable extends Migration
             $table->increments('id');
             $table->string("nombre");
             $table->double('maxNota');
-            $table->integer('Requerimiento_id')->unsigned();
-            $table->foreign('Requerimiento_id')->references('id')->on('requerimientos')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('convocatoria_id')->unsigned();
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
