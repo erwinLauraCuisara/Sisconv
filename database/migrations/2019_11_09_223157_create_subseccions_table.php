@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGrupoItemsTable extends Migration
+class CreateSubseccionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGrupoItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('grupo_items', function (Blueprint $table) {
+        Schema::create('subseccions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
             $table->string('descripcion', 255);

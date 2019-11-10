@@ -18,11 +18,11 @@ class CreateNotaGruposTable extends Migration
             $table->double('notaParcial')->nullable();
             $table->integer('usuario_id')->unsigned();
             $table->integer('Requerimiento_id')->unsigned()->nullable();
-            $table->integer('GrupoItems_id')->unsigned()->nullable();
-            $table->unique(['usuario_id','Requerimiento_id','GrupoItems_id']);
+            $table->integer('Subseccion_id')->unsigned()->nullable();
+            $table->unique(['usuario_id','Requerimiento_id','Subseccion_id']);
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('Requerimiento_id')->references('id')->on('requerimientos')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('GrupoItems_id')->references('id')->on('grupo_items')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('Subseccion_id')->references('id')->on('subseccions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

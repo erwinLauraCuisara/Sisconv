@@ -15,6 +15,8 @@ class CreateCodigoInscripcionsTable extends Migration
     {
         Schema::create('codigo_inscripcions', function (Blueprint $table) {
             $table->increments('id');
+            $table->dateTime('fechaIniBoleta');
+            $table->dateTime('fechaFinBoleta');
             $table->string('codigo');
             $table->boolean('valido')->default(false);
             $table->integer('convocatoria_id')->unsigned();

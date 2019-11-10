@@ -15,4 +15,7 @@ class Requerimiento extends Model
     public function usuarios(){
         return $this->belongsToMany('App\usuario')->using('App\Requerimiento_usuario');
     }
+    public function seccions(){
+        return $this->belongsToMany(Seccion::class);
+    }
 }
