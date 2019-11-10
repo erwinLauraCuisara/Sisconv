@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody style="font-weight: bold">
-    @foreach($convocatoria as $convocatoria)
+    @foreach($convocatorias as $convocatoria)
         
         <tr>
             <td>{{$convocatoria->visible}}</td>
@@ -37,9 +37,9 @@
                 </form>
               </td>
         </tr>
-        
     @endforeach
     </tbody>
 </table>
+{{$convocatorias->links()}}
 </div>
 @stop
