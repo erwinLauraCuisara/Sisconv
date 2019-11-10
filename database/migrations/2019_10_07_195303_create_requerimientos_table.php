@@ -15,11 +15,10 @@ class CreateRequerimientosTable extends Migration
     {
         Schema::create('requerimientos', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('fechaIni')->nullable();
-            $table->datetime('fechaFin')->nullable();
-            $table->double('porcentajeNota');
-            $table->integer('GrupoRequerimiento_id')->unsigned();
-            $table->foreign('GrupoRequerimiento_id')->references('id')->on('grupo_requerimientos')->onDelete('cascade')->onUpdate('cascade');
+            $table->double('MaximaNota');
+            $table->string('descripcion',255);  
+            $table->integer('convocatoria_id')->unsigned();
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

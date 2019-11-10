@@ -18,17 +18,19 @@ class CreateConvocatoriasTable extends Migration
             $table->string('titulo');
             $table->string('area')->nullable();
             $table->string('descripcion',255)->nullable();
-            $table->dateTime('fechaIni')->nullable();
-            $table->dateTime('fechaFin')->nullable();
-          //  $table->dateTime('fechaPublicRes');
+            $table->dateTime('fechaIni');
+            $table->dateTime('fechaFin');
+            $table->dateTime('fechaPublicRes')->nullable();
          //   $table->string('tipo')->nullable;
+            $table->string('gestion')->nullable();
             $table->boolean('visible')->default(true);
-            
-            //el campo de abajo es para dar de baja una convocatoria;  true= esta dado de baja.
-            $table->boolean('baja')->default(false);
-
+            $table->string('imagen')->nullable();
+            $table->string('pdf')->nullable();
+            $table->string('materia')->nullable();
+            $table->dateTime('fechaLimRequisitos')->nullable();
+            $table->dateTime('fechaLimRequerimientos')->nullable();
             $table->integer('ComisionCalificadora_id')->unsigned()->nullable();
-            $table->foreign('ComisionCalificadora_id')->references('id')->on('comision_calificadoras')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ComisionCalificadora_id')->references('id')->on('comisionCalificadora')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

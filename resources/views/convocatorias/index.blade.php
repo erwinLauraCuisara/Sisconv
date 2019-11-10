@@ -19,7 +19,7 @@
     </thead>
     <tbody style="font-weight: bold">
     @foreach($convocatoria as $convocatoria)
-        @if($convocatoria->baja==false)
+        
         <tr>
             <td>{{$convocatoria->visible}}</td>
             <td>{{$loop->iteration}}</td>
@@ -30,14 +30,14 @@
             <td>
                 <a class="btn btn-primary" href="">Editar</a>
                 <a class="btn btn-secondary" href="">Ver</a>
-                <form action="{{route('convocatorias.baja',$convocatoria->id)}}" method="post" style="display:inline">
+                <form action="" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{ method_field('DELETE')}}
                 <button class="btn btn-danger" type="submit" onclick="return confirm('¿Eliminar la convocatoria?')">Borrar</button>
                 </form>
               </td>
         </tr>
-        @endif
+        
     @endforeach
     </tbody>
 </table>

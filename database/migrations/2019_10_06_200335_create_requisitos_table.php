@@ -16,9 +16,9 @@ class CreateRequisitosTable extends Migration
         Schema::create('requisitos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->datetime('fechaIni')->nullable();
-            $table->datetime('fechaFin')->nullable();
             $table->integer('convocatoria_id')->unsigned();
+            $table->boolean('indispensable')->default(false);
+            $table->string('descripcion',255)->nullable();
             $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
 

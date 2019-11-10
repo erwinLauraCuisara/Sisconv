@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ComisionCalificadora;
+use App\NotaItem;
 use Illuminate\Http\Request;
 
-class ComisionCalificadoraController extends Controller
+class NotaItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ComisionCalificadoraController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ComisionCalificadora  $comisionCalificadora
+     * @param  \App\NotaItem  $notaItem
      * @return \Illuminate\Http\Response
      */
-    public function show(ComisionCalificadora $comisionCalificadora)
+    public function show(NotaItem $notaItem)
     {
         //
     }
@@ -52,10 +52,10 @@ class ComisionCalificadoraController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ComisionCalificadora  $comisionCalificadora
+     * @param  \App\NotaItem  $notaItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(ComisionCalificadora $comisionCalificadora)
+    public function edit(NotaItem $notaItem)
     {
         //
     }
@@ -64,10 +64,10 @@ class ComisionCalificadoraController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ComisionCalificadora  $comisionCalificadora
+     * @param  \App\NotaItem  $notaItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ComisionCalificadora $comisionCalificadora)
+    public function update(Request $request, NotaItem $notaItem)
     {
         //
     }
@@ -75,10 +75,10 @@ class ComisionCalificadoraController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ComisionCalificadora  $comisionCalificadora
+     * @param  \App\NotaItem  $notaItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ComisionCalificadora $comisionCalificadora)
+    public function destroy(NotaItem $notaItem)
     {
         //
     }

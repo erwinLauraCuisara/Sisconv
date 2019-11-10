@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\NotaGrupoRequerimiento;
+use App\CodigoInscripcion;
 use Illuminate\Http\Request;
 
-class NotaGrupoRequerimientoController extends Controller
+class CodigoInscripcionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class NotaGrupoRequerimientoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\NotaGrupoRequerimiento  $notaGrupoRequerimiento
+     * @param  \App\CodigoInscripcion  $codigoInscripcion
      * @return \Illuminate\Http\Response
      */
-    public function show(NotaGrupoRequerimiento $notaGrupoRequerimiento)
+    public function show(CodigoInscripcion $codigoInscripcion)
     {
         //
     }
@@ -52,10 +52,10 @@ class NotaGrupoRequerimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\NotaGrupoRequerimiento  $notaGrupoRequerimiento
+     * @param  \App\CodigoInscripcion  $codigoInscripcion
      * @return \Illuminate\Http\Response
      */
-    public function edit(NotaGrupoRequerimiento $notaGrupoRequerimiento)
+    public function edit(CodigoInscripcion $codigoInscripcion)
     {
         //
     }
@@ -64,10 +64,10 @@ class NotaGrupoRequerimientoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\NotaGrupoRequerimiento  $notaGrupoRequerimiento
+     * @param  \App\CodigoInscripcion  $codigoInscripcion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NotaGrupoRequerimiento $notaGrupoRequerimiento)
+    public function update(Request $request, CodigoInscripcion $codigoInscripcion)
     {
         //
     }
@@ -75,10 +75,10 @@ class NotaGrupoRequerimientoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\NotaGrupoRequerimiento  $notaGrupoRequerimiento
+     * @param  \App\CodigoInscripcion  $codigoInscripcion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NotaGrupoRequerimiento $notaGrupoRequerimiento)
+    public function destroy(CodigoInscripcion $codigoInscripcion)
     {
         //
     }
