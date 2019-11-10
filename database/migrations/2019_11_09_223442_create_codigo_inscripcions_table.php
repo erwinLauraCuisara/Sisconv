@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConvocatoriasGrupoRequerimientosTable extends Migration
+class CreateCodigoInscripcionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateConvocatoriasGrupoRequerimientosTable extends Migration
      */
     public function up()
     {
-        Schema::create('convocatorias_grup', function (Blueprint $table) {
-            $table->integer('GrupoReq_oid')->unsigned();
+        Schema::create('codigo_inscripcions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('codigo');
+            $table->boolean('valido')->default(false);
             $table->integer('convocatoria_id')->unsigned();
-            $table->unique(['GrupoReq_oid','convocatoria_id']);
-            $table->foreign('GrupoReq_oid')->references('id')->on('grupo_requerimientos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
         });
     }
 
@@ -30,6 +31,6 @@ class CreateConvocatoriasGrupoRequerimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('convocatorias_grupo_requerimientos');
+        Schema::dropIfExists('codigo_inscripcions');
     }
 }

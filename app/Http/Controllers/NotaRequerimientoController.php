@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Convocatorias_grupo_requerimientos;
+use App\NotaRequerimiento;
 use Illuminate\Http\Request;
 
-class ConvocatoriasGrupoRequerimientosController extends Controller
+class NotaRequerimientoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ConvocatoriasGrupoRequerimientosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Convocatorias_grupo_requerimientos  $convocatorias_grupo_requerimientos
+     * @param  \App\NotaRequerimiento  $notaRequerimiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Convocatorias_grupo_requerimientos $convocatorias_grupo_requerimientos)
+    public function show(NotaRequerimiento $notaRequerimiento)
     {
         //
     }
@@ -52,10 +52,10 @@ class ConvocatoriasGrupoRequerimientosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Convocatorias_grupo_requerimientos  $convocatorias_grupo_requerimientos
+     * @param  \App\NotaRequerimiento  $notaRequerimiento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Convocatorias_grupo_requerimientos $convocatorias_grupo_requerimientos)
+    public function edit(NotaRequerimiento $notaRequerimiento)
     {
         //
     }
@@ -64,10 +64,10 @@ class ConvocatoriasGrupoRequerimientosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Convocatorias_grupo_requerimientos  $convocatorias_grupo_requerimientos
+     * @param  \App\NotaRequerimiento  $notaRequerimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Convocatorias_grupo_requerimientos $convocatorias_grupo_requerimientos)
+    public function update(Request $request, NotaRequerimiento $notaRequerimiento)
     {
         //
     }
@@ -75,10 +75,10 @@ class ConvocatoriasGrupoRequerimientosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Convocatorias_grupo_requerimientos  $convocatorias_grupo_requerimientos
+     * @param  \App\NotaRequerimiento  $notaRequerimiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Convocatorias_grupo_requerimientos $convocatorias_grupo_requerimientos)
+    public function destroy(NotaRequerimiento $notaRequerimiento)
     {
         //
     }

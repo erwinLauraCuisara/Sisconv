@@ -13,7 +13,9 @@ class CreateConvocatoriaUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('convocatoria_usuarios', function (Blueprint $table) {
+        Schema::create('postula', function (Blueprint $table) {
+            $table->string('codigo');
+            $table->boolean('valido')->default(false);
             $table->integer('usuario_id')->unsigned();
             $table->integer('convocatoria_id')->unsigned();
             $table->unique(['usuario_id','convocatoria_id']);

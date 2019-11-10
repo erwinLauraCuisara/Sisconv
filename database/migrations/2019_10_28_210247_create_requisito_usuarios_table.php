@@ -13,15 +13,17 @@ class CreateRequisitoUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('requisito_usuarios', function (Blueprint $table) {
+        Schema::create('req_usuario', function (Blueprint $table) {
             $table->boolean('valido')->default(false);
-            $table->string('observaciones')->nullable();
+            $table->string('observaciones',255)->nullable();
             $table->integer('usuario_id')->unsigned();
             $table->integer('Requisito_id')->unsigned();
-            $table->unique(['usuario_id','Requisito_id']);
+            $table->integer('convocatoria_id')->unsigned();
+            $table->unique(['usuario_id','Requisito_id','convocatoria_id']);
+            $table->foreign('convocatoria_id')->references('id')->on('convocatorias')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('Requisito_id')->references('id')->on('requisitos')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            $table->timestamps();   
         });
     }
 

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Requerimiento_usuario;
+use App\RequerimientoSeccion;
 use Illuminate\Http\Request;
 
-class RequerimientoUsuarioController extends Controller
+class RequerimientoSeccionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RequerimientoUsuarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Requerimiento_usuario  $requerimiento_usuario
+     * @param  \App\RequerimientoSeccion  $requerimientoSeccion
      * @return \Illuminate\Http\Response
      */
-    public function show(Requerimiento_usuario $requerimiento_usuario)
+    public function show(RequerimientoSeccion $requerimientoSeccion)
     {
         //
     }
@@ -52,10 +52,10 @@ class RequerimientoUsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Requerimiento_usuario  $requerimiento_usuario
+     * @param  \App\RequerimientoSeccion  $requerimientoSeccion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Requerimiento_usuario $requerimiento_usuario)
+    public function edit(RequerimientoSeccion $requerimientoSeccion)
     {
         //
     }
@@ -64,10 +64,10 @@ class RequerimientoUsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Requerimiento_usuario  $requerimiento_usuario
+     * @param  \App\RequerimientoSeccion  $requerimientoSeccion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Requerimiento_usuario $requerimiento_usuario)
+    public function update(Request $request, RequerimientoSeccion $requerimientoSeccion)
     {
         //
     }
@@ -75,10 +75,10 @@ class RequerimientoUsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Requerimiento_usuario  $requerimiento_usuario
+     * @param  \App\RequerimientoSeccion  $requerimientoSeccion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requerimiento_usuario $requerimiento_usuario)
+    public function destroy(RequerimientoSeccion $requerimientoSeccion)
     {
         //
     }

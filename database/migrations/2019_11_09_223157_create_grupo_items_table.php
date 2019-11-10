@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComisionCalificadorasTable extends Migration
+class CreateGrupoItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateComisionCalificadorasTable extends Migration
      */
     public function up()
     {
-        Schema::create('comision_calificadoras', function (Blueprint $table) {
+        Schema::create('grupo_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('titulo');
+            $table->string('descripcion', 255);
+            $table->integer('puntoNumero')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateComisionCalificadorasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comision_calificadoras');
+        Schema::dropIfExists('grupo_items');
     }
 }

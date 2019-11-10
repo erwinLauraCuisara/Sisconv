@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Grupo_requerimientos_usuarios;
+use App\GrupoItems;
 use Illuminate\Http\Request;
 
-class GrupoRequerimientosUsuariosController extends Controller
+class GrupoItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class GrupoRequerimientosUsuariosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
+     * @param  \App\GrupoItems  $grupoItems
      * @return \Illuminate\Http\Response
      */
-    public function show(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
+    public function show(GrupoItems $grupoItems)
     {
         //
     }
@@ -52,10 +52,10 @@ class GrupoRequerimientosUsuariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
+     * @param  \App\GrupoItems  $grupoItems
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
+    public function edit(GrupoItems $grupoItems)
     {
         //
     }
@@ -64,10 +64,10 @@ class GrupoRequerimientosUsuariosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
+     * @param  \App\GrupoItems  $grupoItems
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
+    public function update(Request $request, GrupoItems $grupoItems)
     {
         //
     }
@@ -75,10 +75,10 @@ class GrupoRequerimientosUsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Grupo_requerimientos_usuarios  $grupo_requerimientos_usuarios
+     * @param  \App\GrupoItems  $grupoItems
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grupo_requerimientos_usuarios $grupo_requerimientos_usuarios)
+    public function destroy(GrupoItems $grupoItems)
     {
         //
     }
