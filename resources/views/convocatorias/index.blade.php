@@ -30,10 +30,10 @@
             <td>
                 <a class="btn btn-primary" href="">Editar</a>
                 <a class="btn btn-secondary" href="">Ver</a>
-                <form action="" method="post" style="display:inline">
+                <form action="{{route('convocatorias.destroy', $convocatoria->id)}}" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{ method_field('DELETE')}}
-                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Eliminar la convocatoria?')">Borrar</button>
+                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar esta convocatoria?')">Borrar</button>
                 </form>
               </td>
         </tr>

@@ -76,9 +76,22 @@ class ConvocatoriaController extends Controller
     }
 
 
-    public function destroy(convocatoria $convocatoria)
+    public function destroy($id)
     {
-        //
+        $convocatoria=convocatoria::find($id);
+        $convocatoria->delete();
+        $sub_path="storage/convocatorias/$id";
+        $destino_path=public_path($sub_path);
+        foreach(glob($destino_path . "/*") as $archivos_carpeta){             
+        if (is_dir($archivos_carpeta)){
+          rmDir_rf($archivos_carpeta);
+        } else {
+        unlink($archivos_carpeta);
+        }
+      }
+      rmdir($destino_path);
+     
+        return redirect('convocatorias');
     }
 
     public function evaluador(){
