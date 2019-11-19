@@ -12,9 +12,19 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function _construct()
+    {
+        $this->middleware('auth:usuario');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //
+        return view('adminHome');
     }
 
     /**

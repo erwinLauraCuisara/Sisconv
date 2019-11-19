@@ -26,3 +26,10 @@ Route::get("/evaluador/convocatorias",'ConvocatoriaController@evaluador');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin','AdminController@index');
+Route::get('/usuario','UsuarioController@index');
