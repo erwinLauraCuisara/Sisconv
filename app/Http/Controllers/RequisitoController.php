@@ -14,6 +14,7 @@ class RequisitoController extends Controller
      */
     public function index()
     {
+        
         //
     }
 
@@ -22,9 +23,9 @@ class RequisitoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($prueba)
     {
-        //
+         //
     }
 
     /**
@@ -44,9 +45,11 @@ class RequisitoController extends Controller
      * @param  \App\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function show(Requisito $requisito)
+    public function show($requisito)
     {
-        //
+        // = array('id' =>"$requisito");
+            
+         return view('convocatorias.formRequisitos')->with(compact('requisito'));
     }
 
     /**
@@ -57,7 +60,7 @@ class RequisitoController extends Controller
      */
     public function edit(Requisito $requisito)
     {
-        //
+        
     }
 
     /**

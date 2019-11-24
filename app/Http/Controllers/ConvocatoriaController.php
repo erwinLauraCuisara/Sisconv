@@ -57,7 +57,7 @@ class ConvocatoriaController extends Controller
         }
 
         
-        return redirect('convocatorias'); 
+        return redirect(route('requisitos.show', $id)); 
 
     }
     public function show(convocatoria $convocatoria)
