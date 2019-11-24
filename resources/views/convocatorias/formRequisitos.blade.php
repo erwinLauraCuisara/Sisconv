@@ -98,8 +98,10 @@
 
 
 <br><br>
-<button type="  " class="btn btn-secondary btn-lg btn-block">Siguiente</button>
 
+<form action="{{route('requerimientos.show', $requisito)}}" method="get" style="display:inline">
+<button type="submit" class="btn btn-secondary btn-lg btn-block">Siguiente</button>
+</form>
 
 </div>
 

@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 Route::resource('convocatorias','ConvocatoriaController');
 Route::resource('requisitos','RequisitoController');
+Route::resource('requerimientos','RequerimientoController');
 
 
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){

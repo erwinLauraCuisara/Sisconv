@@ -44,9 +44,9 @@ class RequerimientoController extends Controller
      * @param  \App\Requerimiento  $requerimiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Requerimiento $requerimiento)
+    public function show($requerimiento)
     {
-        //
+       return "terminar los requerimientos con el id de convocatoria= ".$requerimiento;
     }
 
     /**
