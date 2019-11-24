@@ -120,7 +120,7 @@
         </div>
         </div>
 
-      <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block">Siguiente</button>
 
     </form>
 
