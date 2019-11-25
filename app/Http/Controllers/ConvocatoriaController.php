@@ -32,6 +32,7 @@ class ConvocatoriaController extends Controller
         $data->fechaIni = $datosConvocatoria['fechaIni'];
         $data->fechaFin = $datosConvocatoria['fechaFin'];
         $data->visible = $datosConvocatoria['visible'];
+        $data->fechaLimRequisitos=$datosConvocatoria['fechaFin'];
         $data->save();
         $id=$data->id;
         
@@ -57,7 +58,7 @@ class ConvocatoriaController extends Controller
         }
 
         
-        return redirect('convocatorias'); 
+        return redirect(route('requisitos.show', $id)); 
 
     }
     public function show(convocatoria $convocatoria)

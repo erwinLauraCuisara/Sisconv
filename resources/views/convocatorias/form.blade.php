@@ -72,42 +72,6 @@
         </label>
 
       </div>
-
-      <!--subir archivo-->
-      
-         <!-- <div class="file-field">
-            <div class="z-depth-1-half mb-4">
-              <img src="{{URL::asset('/img/cargar.png')}}" class="img-fluid"
-                alt="example placeholder">
-            </div>
-            <div class="d-flex justify-content-center">
-              <div class="btn btn-mdb-color btn-rounded float-left">
-                <span>Choose file</span>
-                <input type="file" name="imagen">
-              </div>
-            </div>
-          </div>
-        
-        
-          <div class="file-field">
-            <div class="mb-4">
-              <img src="{{URL::asset('/img/cargarImagen.png')}}"
-                class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
-            </div>
-            <div class="d-flex justify-content-center">
-              <div class="btn btn-mdb-color btn-rounded float-left">
-                <span>Add photo</span>
-                <input type="file" name="pdf">
-              </div>
-            </div>
-          </div>  -->
-          <!--<div >
-            <label for="imagen" style="padding: 5px 10px; background: #f55d3e; color: #fff; border: 0px solid "><img src="{{URL::asset('/img/cargarImagen.png')}}" height="50"> <input type="file" name="imagen" > </label>
-          
-            <p >Adjuntar documento<input type="file" name="pdf"></p>
-
-          </div>
-        -->
         <script type="text/javascript">
           function cambiar(nombre, info){
             var limTam=0;
@@ -156,7 +120,7 @@
         </div>
         </div>
 
-      <button type="submit" class="btn btn-secondary btn-lg btn-block">Guardar convocatoria</button>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block">Siguiente</button>
 
     </form>
 

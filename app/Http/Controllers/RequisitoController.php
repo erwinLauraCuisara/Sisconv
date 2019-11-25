@@ -14,6 +14,7 @@ class RequisitoController extends Controller
      */
     public function index()
     {
+        
         //
     }
 
@@ -22,9 +23,9 @@ class RequisitoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($prueba)
     {
-        //
+         //
     }
 
     /**
@@ -44,9 +45,11 @@ class RequisitoController extends Controller
      * @param  \App\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function show(Requisito $requisito)
+    public function show($requisito)
     {
-        //
+        // = array('id' =>"$requisito");
+            
+         return view('convocatorias.formRequisitos')->with(compact('requisito'));
     }
 
     /**
@@ -57,7 +60,7 @@ class RequisitoController extends Controller
      */
     public function edit(Requisito $requisito)
     {
-        //
+        
     }
 
     /**
@@ -78,8 +81,37 @@ class RequisitoController extends Controller
      * @param  \App\Requisito  $requisito
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requisito $requisito)
+    public function destroy($id)
     {
-        //
+        $requisito=Requisito::find($id);
+        $id=$requisito->convocatoria_id;
+        $requisito->delete();
+     
+        return redirect(route('requisitos.show', $id));
+    }
+
+    public function agregar($requisito, Request $request)
+    {
+        //return "holaa este es el id:". $requisito.$request;
+        $datosRequisito=request()->except("_token");
+
+        if(!isset($datosRequisito['Indispensable'])){
+                $datosRequisito['Indispensable']=false;
+        }
+
+        $data=new Requisito;
+        $data->nombre = $datosRequisito['Titulo'];
+        $data->convocatoria_id = $requisito;
+        $data->indispensable = $datosRequisito['Indispensable'];
+        $data->descripcion = $datosRequisito['descripcion'];
+        $data->save();
+
+        $convocatoria=\App\convocatoria::find($requisito);
+        $convocatoria->fechaLimRequisitos=$datosRequisito['fechaFin'];
+        $convocatoria->save();
+
+
+        //return view('convocatorias.formRequisitos')->with(compact('requisito'));
+        return redirect(route('requisitos.show', $requisito));
     }
 }
