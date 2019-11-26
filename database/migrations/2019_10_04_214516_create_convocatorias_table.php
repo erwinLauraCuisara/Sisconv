@@ -23,6 +23,7 @@ class CreateConvocatoriasTable extends Migration
             $table->dateTime('fechaPublicRes')->nullable();
             //$table->string('tipo')->nullable;
             //$table->string('gestion')->nullable();
+            $table->string('codigo')->nullable();
             $table->boolean('visible')->default(true);
             $table->string('imagen')->nullable();
             $table->string('pdf')->nullable();

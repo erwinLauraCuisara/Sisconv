@@ -33,6 +33,7 @@ class ConvocatoriaController extends Controller
         $data->fechaFin = $datosConvocatoria['fechaFin'];
         $data->visible = $datosConvocatoria['visible'];
         $data->fechaLimRequisitos=$datosConvocatoria['fechaFin'];
+        $data->codigo=uniqid();
         $data->save();
         $id=$data->id;
         
@@ -56,6 +57,7 @@ class ConvocatoriaController extends Controller
             $pdf->move($destino_path,"documento.pdf");
         }
         }
+
 
         
         return redirect(route('requisitos.show', $id)); 
