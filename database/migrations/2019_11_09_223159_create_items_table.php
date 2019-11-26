@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemsSubseccionTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateItemsSubseccionTable extends Migration
      */
     public function up()
     {
-        Schema::create('items_subseccion', function (Blueprint $table) {
-            $table->integer('item_id')->unsigned();
+        Schema::create('items', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('subseccion_id')->unsigned();
-            $table->unique(['subseccion_id','item_id']);
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('subseccion_id')->references('id')->on('subseccions')->onDelete('cascade')->onUpdate('cascade');
+            $table->double('notaPorItem');
+            $table->string('nombre');
+            $table->string('descripcion',255)->nullable();
+            $table->integer('puntoNumero')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateItemsSubseccionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupoitems_items');
+        Schema::dropIfExists('items');
     }
 }

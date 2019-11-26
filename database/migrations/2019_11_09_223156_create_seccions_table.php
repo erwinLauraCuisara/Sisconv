@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequerimientoSeccionTable extends Migration
+class CreateSeccionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRequerimientoSeccionTable extends Migration
      */
     public function up()
     {
-        Schema::create('requerimiento_seccion', function (Blueprint $table) {
+        Schema::create('seccions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->double('NotaMaxima');
+            $table->integer('puntoNumero')->nullable();
             $table->integer('requerimiento_id')->unsigned()->nullable();
-            $table->integer('seccion_id')->unsigned()->nullable();
-            $table->unique(['requerimiento_id','Seccion_id']);
             $table->foreign('requerimiento_id')->references('id')->on('requerimientos')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('seccion_id')->references('id')->on('seccions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateRequerimientoSeccionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requerimiento_seccions');
+        Schema::dropIfExists('seccions');
     }
 }

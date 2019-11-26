@@ -18,6 +18,8 @@ class CreateSubseccionsTable extends Migration
             $table->string('titulo');
             $table->string('descripcion', 255);
             $table->integer('puntoNumero')->nullable();
+            $table->integer('seccion_id')->unsigned();
+            $table->foreign('seccion_id')->references('id')->on('seccions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
