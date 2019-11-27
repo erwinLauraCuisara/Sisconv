@@ -46,7 +46,7 @@ class RequerimientoController extends Controller
      */
     public function show($requerimiento)
     {
-       return "terminar los requerimientos con el id de convocatoria= ".$requerimiento;
+       return view('convocatorias.formRequerimientos')->with(compact('requerimiento'));
     }
 
     /**
@@ -81,5 +81,24 @@ class RequerimientoController extends Controller
     public function destroy(Requerimiento $requerimiento)
     {
         //
+    }
+
+
+        public function agregar($requerimiento, Request $request)
+    {
+        //return "holaa este es el id:". $requerimiento.$request;
+        $datosRequerimiento=request()->except("_token");
+        $data=new Requerimiento;
+        $data->Titulo = $datosRequerimiento['Titulo'];
+        $data->convocatoria_id = $requerimiento;
+        $data->MaximaNota = $datosRequerimiento['MaximaNota'];
+        $data->descripcion = $datosRequerimiento['descripcion'];
+        $data->fechaInicial = $datosRequerimiento['fechaIni'];
+        $data->fechaFinal = $datosRequerimiento['fechaFin'];
+        $data->save();
+
+
+        //return view('convocatorias.formRequisitos')->with(compact('requisito'));
+        return redirect(route('secciones.show', $data->id));
     }
 }

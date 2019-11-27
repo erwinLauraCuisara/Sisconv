@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Seccion;
 use Illuminate\Http\Request;
 
-class SeccionController extends Controller
+class SubSeccionController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -41,21 +40,25 @@ class SeccionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Seccion  $seccion
+     * @param  \App\SeccionGrupoitems  $seccionGrupoitems
      * @return \Illuminate\Http\Response
      */
-    public function show($seccion)
+    public function show($subseccion)
     {
-        return view('convocatorias.formSecciones')->with(compact('seccion'));
+    	$subsecciones=\DB::select("SELECT subseccions.* ,  seccions.titulo AS titulo_seccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$subseccion]);
+
+        
+        return view('convocatorias.formSubsecciones')->with(compact('subsecciones'));
+    	//return $subsecciones;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Seccion  $seccion
+     * @param  \App\SeccionGrupoitems  $seccionGrupoitems
      * @return \Illuminate\Http\Response
      */
-    public function edit(Seccion $seccion)
+    public function edit(SeccionGrupoitems $seccionGrupoitems)
     {
         //
     }
@@ -64,10 +67,10 @@ class SeccionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Seccion  $seccion
+     * @param  \App\SeccionGrupoitems  $seccionGrupoitems
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seccion $seccion)
+    public function update(Request $request, SeccionGrupoitems $seccionGrupoitems)
     {
         //
     }
@@ -75,30 +78,11 @@ class SeccionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Seccion  $seccion
+     * @param  \App\SeccionGrupoitems  $seccionGrupoitems
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SeccionGrupoitems $seccionGrupoitems)
     {
-        $seccion=Seccion::find($id);
-        $id=$seccion->requerimiento_id;
-        $seccion->delete();
-     
-        return redirect(route('secciones.show', $id));
-    }
-    public function agregar($requerimiento, Request $request)
-    {
-        //return "holaa este es el id:". $requerimiento.$request;
-        $datosRequisito=request()->except("_token");
-
-        $data=new Seccion;
-        $data->titulo = $datosRequisito['Titulo'];
-        $data->requerimiento_id = $requerimiento;
-        $data->NotaMaxima = $datosRequisito['NotaMaxima'];
-        $data->save();
-
-
-        //return view('convocatorias.formRequisitos')->with(compact('requisito'));
-        return redirect(route('secciones.show', $requerimiento));
+        //
     }
 }

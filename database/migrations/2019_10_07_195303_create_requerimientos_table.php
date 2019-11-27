@@ -15,6 +15,7 @@ class CreateRequerimientosTable extends Migration
     {
         Schema::create('requerimientos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('Titulo')->nullable();  
             $table->double('MaximaNota');
             $table->dateTime('fechaInicial');
             $table->dateTime('fechaFinal');
