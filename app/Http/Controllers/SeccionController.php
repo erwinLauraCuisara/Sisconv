@@ -44,9 +44,9 @@ class SeccionController extends Controller
      * @param  \App\Seccion  $seccion
      * @return \Illuminate\Http\Response
      */
-    public function show(Seccion $seccion)
+    public function show($seccion)
     {
-        //
+        return view('convocatorias.formSecciones')->with(compact('seccion'));
     }
 
     /**
@@ -78,8 +78,27 @@ class SeccionController extends Controller
      * @param  \App\Seccion  $seccion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seccion $seccion)
+    public function destroy($id)
     {
-        //
+        $seccion=Seccion::find($id);
+        $id=$seccion->requerimiento_id;
+        $seccion->delete();
+     
+        return redirect(route('secciones.show', $id));
+    }
+    public function agregar($requerimiento, Request $request)
+    {
+        //return "holaa este es el id:". $requerimiento.$request;
+        $datosRequisito=request()->except("_token");
+
+        $data=new Seccion;
+        $data->titulo = $datosRequisito['Titulo'];
+        $data->requerimiento_id = $requerimiento;
+        $data->NotaMaxima = $datosRequisito['NotaMaxima'];
+        $data->save();
+
+
+        //return view('convocatorias.formRequisitos')->with(compact('requisito'));
+        return redirect(route('secciones.show', $requerimiento));
     }
 }

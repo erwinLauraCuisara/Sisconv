@@ -44,9 +44,14 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
-        //
+            $items=\DB::select("SELECT items.* ,  seccions.titulo AS titulo_seccion,subseccions.titulo AS titulo_subseccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos ,items where items.subseccion_id=subseccions.id and subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$id]);
+            $subsecciones=\DB::select("SELECT subseccions.titulo, subseccions.id from requerimientos, subseccions, seccions WHERE requerimientos.id=seccions.requerimiento_id and requerimientos.id=? group by subseccions.id",[$id]);
+            
+        
+        return view('convocatorias.formItems')->with(compact('items','id','subsecciones'));
+        //return $subs  ecciones;
     }
 
     /**
@@ -82,4 +87,18 @@ class ItemController extends Controller
     {
         //
     }
+   public function agregar($id, Request $request)
+    {
+      $datosItems=request()->except("_token");
+        $data=new \App\Item;
+        $data->nombre = $datosItems['nombre'];
+        $data->notaPorItem =  $datosItems['NotaPorItem'];
+        $data->descripcion = $datosItems['descripcion'];
+        $data->subseccion_id=$datosItems['subSeccion'];
+        $data->save();
+        $items=\DB::select("SELECT items.* ,  seccions.titulo AS titulo_seccion,subseccions.titulo AS titulo_subseccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos ,items where items.subseccion_id=subseccions.id and subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$id]);
+            $subsecciones=\DB::select("SELECT subseccions.titulo, subseccions.id from requerimientos, subseccions, seccions WHERE requerimientos.id=seccions.requerimiento_id and requerimientos.id=? group by subseccions.id",[$id]);
+            
+        
+        return view('convocatorias.formItems')->with(compact('items','id','subsecciones'));        }
 }
