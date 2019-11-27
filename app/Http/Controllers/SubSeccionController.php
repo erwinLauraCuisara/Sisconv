@@ -34,7 +34,8 @@ class SubSeccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return "holaa este es el id:". $requisito.$request;
+
     }
 
     /**
@@ -85,4 +86,18 @@ class SubSeccionController extends Controller
     {
         //
     }
+
+    public function agregar($subseccion, Request $request)
+    {
+      $datosSubseccion=request()->except("_token");
+        $data=new \App\Subseccion;
+        $data->titulo = $datosSubseccion['Titulo'];
+        $data->seccion_id =  $datosSubseccion['Seccion'];
+        $data->descripcion = $datosSubseccion['descripcion'];
+        $data->save();
+        $subsecciones=\DB::select("SELECT subseccions.* ,  seccions.titulo AS titulo_seccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$subseccion]);
+
+        
+        return view('convocatorias.formSubsecciones')->with(compact('subsecciones'));
+        }
 }

@@ -40,5 +40,6 @@ Route::get("requisitos/add/{requisito}",'RequisitoController@agregar')->name('re
 Route::get("requerimientos/add/{requerimiento}",'RequerimientoController@agregar')->name('requerimientos.agregar');
 
 Route::get("secciones/add/{seccion}",'SeccionController@agregar')->name('secciones.agregar');
+Route::get("subsecciones/add/{subseccion}",'SubSeccionController@agregar')->name('subsecciones.agregar');
 
 

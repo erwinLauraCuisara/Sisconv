@@ -2,7 +2,7 @@
 @extends('layout.principal')
 @section('content')
 <div  style="padding:3%">
-<h1>Requisitos</h1>
+<h1>Subsecciones</h1>
 
 
 <table class="table table-light table-hover">
@@ -16,6 +16,10 @@
     </thead>
     <tbody style="font-weight: bold">
     <label style="display:none">
+      @if(!empty($subsecciones))
+      {{$id=$subsecciones[0]->id_requerimiento}}
+      {{$secciones=\App\Seccion::where("requerimiento_id",$id)->get()}}
+      @endif
    
     </label>
     @foreach($subsecciones as $re) 
@@ -36,28 +40,36 @@
         </tr>
     @endforeach
     </tbody>
-     {{$secciones=\App\Seccion::where("requerimiento_id",$re->id_requerimiento)->get()}}
+     
 </table>
 <br>
 <br>
 
 
 
-<form action="" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+<form action="{{route('subsecciones.agregar',$id)}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
     {{ csrf_field() }}
     
     <br>
 <hr style="border-top: 3px double #8c8b8b">
 <br>
-    <h2>¿Desea agregar nuevos requisitos?</h2>
+    <h2>¿Desea agregar nuevas subsecciones?</h2>
     <div class="form-group col-md-6">
-          <label for="Titulo">{{'Titulo del requisito'}}</label>
+          <label for="Titulo">{{'Titulo'}}</label>
           <input type="text" name="Titulo" class="form-control" id="Titulo" required>
           <div class="invalid-feedback">
             Debe llenar el campo
           </div>
     </div>
-        
+    <div class="form-group col-md-5">
+          <label for="Seccion">{{'Seccion'}}</label>
+            <select class="form-control" name="Seccion" id="Seccion">
+              <option value="0">Sin seleccionar</option>
+              @foreach ($secciones as $seccion)
+              <option value="{{ $seccion->id }}">{{ $seccion->titulo}}</option>
+              @endforeach
+            </select>
+          </div>
     <div class="form-group">
         <label for="Descripcion">{{'Descripcion'}}</label>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
@@ -65,14 +77,8 @@
             Debe llenar el campo
         </div>
     </div>
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name="Indispensable" id="Indispensable" value="1">
-          Indispensable
-    </label>
 
-      </div>
-    <button type="submit" class="btn btn-success">Agregar requisito</button>
+    <button type="submit" class="btn btn-success">Agregar sub Seccion</button>
 </form>
 
 
