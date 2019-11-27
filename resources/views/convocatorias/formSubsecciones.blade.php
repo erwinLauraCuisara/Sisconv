@@ -16,11 +16,11 @@
     </thead>
     <tbody style="font-weight: bold">
     <label style="display:none">
-      @if(!empty($subsecciones))
-      {{$id=$subsecciones[0]->id_requerimiento}}
+
+
+      
       {{$secciones=\App\Seccion::where("requerimiento_id",$id)->get()}}
-      @endif
-   
+
     </label>
     @foreach($subsecciones as $re) 
 
@@ -84,7 +84,7 @@
 
 <br><br>
 
-<form action="" method="get" style="display:inline">
+<form action="{{route('items.show', $id)}}" method="get" style="display:inline">
 <button type="submit" class="btn btn-secondary btn-lg btn-block">Siguiente</button>
 </form>
 

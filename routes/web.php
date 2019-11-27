@@ -21,6 +21,8 @@ Route::resource('requisitos','RequisitoController');
 Route::resource('requerimientos','RequerimientoController');
 Route::resource('secciones','SeccionController');
 Route::resource('subsecciones','SubSeccionController');
+Route::resource('items','ItemController');
+
 
 
 
@@ -41,5 +43,5 @@ Route::get("requerimientos/add/{requerimiento}",'RequerimientoController@agregar
 
 Route::get("secciones/add/{seccion}",'SeccionController@agregar')->name('secciones.agregar');
 Route::get("subsecciones/add/{subseccion}",'SubSeccionController@agregar')->name('subsecciones.agregar');
-
+Route::get("items/add/{item}",'ItemController@agregar')->name('items.agregar');
 

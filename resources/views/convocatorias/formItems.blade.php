@@ -1,52 +1,35 @@
 
 @extends('layout.principal')
 @section('content')
-<!DOCTYPE html>
-<div class="container" style="margin-top: 15px">
 
-  <html lang="en">
-  <div class="p">
-
-  </div>
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="{{asset('css/personalizado/style_form_conv.css')}}" rel="Stylesheet"> 
-  </head>
-
-  <body>
 <div  style="padding:3%">
-<h1>Requisitos</h1>
+<h1>Items </h1>
 
 
 <table class="table table-light table-hover">
     <thead class="thead-light">
         <tr>
-            <th>Indispensable</th>
-            <th>Titulo</th>
+            <th>Nombre</th>
             <th>Descripcion</th>
+            <th>Seccion</th>
+            <th>Sub seccion</th>
         </tr>
     </thead>
     <tbody style="font-weight: bold">
     <label style="display:none">
-    {{$requisitos=\App\Requisito::where("convocatoria_id","$requisito")->get()}}
-    </label>
-    @foreach($requisitos as $re)
-
-        
+     
+      </label>
+    @foreach($items as $re)
         <tr>
-            <td>{{$re->indispensable}}</td>
             <td>{{$re->nombre}}</td>
             <td>{{$re->descripcion}}</td>
+            <td>{{$re->titulo_seccion}}</td>
+            <td>{{$re->titulo_subseccion}}</td>
             <td>
-                <form action="{{route('requisitos.destroy', $re->id)}}" method="post" style="display:inline">
+                <form action="" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{ method_field('DELETE')}}
-                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar esta convocatoria?')">Borrar</button>
+                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar este item?')">Borrar</button>
                 </form>
               </td>
         </tr>
@@ -58,26 +41,35 @@
 
 
 
-<form action="{{route('requisitos.agregar', $requisito)}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+<form action="{{route('items.agregar', $id)}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <div class="form-group col-md-4">
-          <label for="fechaFin">{{'Fecha limite de entrega de requisitos'}}</label>
-          <input type="date" name="fechaFin" class="form-control" id="fechaFin" value="<?php echo date('Y-m-d',strtotime(\App\convocatoria::find($requisito)->fechaLimRequisitos))?>" placeholder="09/10/2019" required>
-          <div class="invalid-feedback">
-            Fecha invalida
-          </div>
-    </div>
     <br>
 <hr style="border-top: 3px double #8c8b8b">
 <br>
     <h2>¿Desea agregar nuevos requisitos?</h2>
     <div class="form-group col-md-6">
-          <label for="Titulo">{{'Titulo del requisito'}}</label>
-          <input type="text" name="Titulo" class="form-control" id="Titulo" required>
+          <label for="Nombre">{{'Nombre'}}</label>
+          <input type="text" name="nombre" class="form-control" id="nombre" required>
           <div class="invalid-feedback">
             Debe llenar el campo
           </div>
     </div>
+    <div class="form-group col-md-6">
+          <label for="NotaPorItem">{{'Nota por item'}}</label>
+          <input type="text" name="NotaPorItem" class="form-control" id="NotaPorItem" required>
+          <div class="invalid-feedback">
+            Debe llenar el campo
+          </div>
+    </div>
+    <div class="form-group col-md-5">
+          <label for="subSeccion">{{'Sub seccion'}}</label>
+            <select class="form-control" name="subSeccion" id="subSeccion">
+              <option value="0">Sin seleccionar</option>
+              @foreach ($subsecciones as $subseccion)
+              <option value="{{ $subseccion->id }}">{{$subseccion->titulo}}</option>
+              @endforeach
+            </select>
+          </div>
         
     <div class="form-group">
         <label for="Descripcion">{{'Descripcion'}}</label>
@@ -86,20 +78,13 @@
             Debe llenar el campo
         </div>
     </div>
-    <div class="checkbox">
-        <label>
-          <input type="checkbox" name="Indispensable" id="Indispensable" value="1">
-          Indispensable
-    </label>
-
-      </div>
     <button type="submit" class="btn btn-success">Agregar requisito</button>
 </form>
 
 
 <br><br>
 
-<form action="{{route('requerimientos.show', $requisito)}}" method="get" style="display:inline">
+<form action="{{action('ConvocatoriaController@store')}}" method="get" style="display:inline">
 <button type="submit" class="btn btn-secondary btn-lg btn-block">Siguiente</button>
 </form>
 
@@ -130,8 +115,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-  </body>
   
-</div>
-</html>
 @stop
