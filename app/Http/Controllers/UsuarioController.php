@@ -24,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('adminHome');
+        return view('homeUsuario');
     }
 
     /**

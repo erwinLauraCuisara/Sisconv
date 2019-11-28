@@ -3,9 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class usuario extends Model
+class Usuario extends Authenticatable
 {
+    use Notifiable;
+    protected $guard = 'usuario';
+
+    protected $fillable=[
+        'nombre',
+        'email',
+        'password',
+        'apellidos',
+        'rol',
+        'telefono',
+        'celular',
+        'profesion',
+        'postular',
+        'validar',
+        'evaluar',
+        'editarConv',
+        'borrarConv',
+        'verReportes',
+    ];
+    protected $hidden =[
+        'password',
+    ];
     public function archivos(){
         return $this->morphMany('App\Archivo','archivoTable');
     }
