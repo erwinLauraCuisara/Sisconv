@@ -1,0 +1,27 @@
+.select img {
+    -webkit-transition:all .9s ease; /* Safari y Chrome */
+    -moz-transition:all .9s ease; /* Firefox */
+    -o-transition:all .9s ease; /* IE 9 */
+    -ms-transition:all .9s ease; /* Opera */
+    width:100%;
+    }
+    .select:hover img {
+    -webkit-transform:scale(1.10);
+    -moz-transform:scale(1.10);
+    -ms-transform:scale(1.10);
+    -o-transform:scale(1.10);
+    transform:scale(1.10);
+    }
+    .select {/*Ancho y altura son modificables al requerimiento de cada uno*/
+    width:80px;
+    overflow:hidden;
+    }
+.txt{
+    color:rgb(46, 7, 7);
+    text-transform: uppercase;
+    text-shadow: 2px 2px #cec2c2;
+}
+a, a:hover{
+    color:black;
+    text-decoration: none;
+}
