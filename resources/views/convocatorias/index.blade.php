@@ -47,9 +47,11 @@
                           <a href="" rel="tooltip" title="Editar Convocatorias" class="btn btn-success btn-fab btn-round">
                               <i class="material-icons">edit</i>
                           </a>
-                          <a href="" rel="tooltip" title="Eliminar Convocatorias" class="btn btn-danger btn-fab btn-round">
-                              <i class="material-icons">clear</i>
-                          </a>
+                          <form action="{{route('convocatorias.destroy', $convocatoria->id)}}" method="post" style="display:inline">
+                {{csrf_field()}}
+                {{ method_field('DELETE')}}
+                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar esta convocatoria?')">Borrar</button>
+                </form>
                       </td>
                     </tr>
                     @endforeach
