@@ -85,7 +85,7 @@ class PostularController extends Controller
         $mensaje="codigo incorrecto porfabor vuelva a intentarlo";
         $codigo=request()->except("_token");
         $convocatoria=\App\convocatoria::find($idConvocatoria);
-        $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1",[$idConvocatoria]);
+        $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1 AND convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
         if($convocatoria->codigo==$codigo['codigo']){
             $mensaje="";
            
@@ -124,7 +124,7 @@ class PostularController extends Controller
         }
 
 
-        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0",[$idConvocatoria]);
+        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
            return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));
        }
 
@@ -153,11 +153,11 @@ class PostularController extends Controller
                 $archivo->save();
         }
 
-        $secciones=\DB::select('SELECT seccions.* FROM seccions, requerimientos WHERE seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
         $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[0]->id,$idConvocatoria]);
         $contador=0;
 
-        $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=? AND subseccions.id=?',[$idConvocatoria,$secciones[0]->id]);
+        $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
 
            return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
 

@@ -6,8 +6,7 @@
   <div class="main main-raised">
     <div class="container">  
     <div class="section text-center">
-        <h1 class="title">Calificacion de meritos</h1>
-        <h2 class="title">Adjunte los requerimientos que tiene</h2>
+        <h1 class="title">Calificacion de meritos de {{$secciones[0]->convocatoriaTitulo}}</h1>
         <h2 class="title">SECCION: {{$secciones[$contador]->titulo}}</h2>
         <h2 class="title">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
        
@@ -21,8 +20,9 @@
 
         @foreach($subsecciones as $subseccion)
         <h3 class="title">Subseccion: {{$subseccion->titulo}}</h3>
+        <h4 class="title">{{$subseccion->descripcion}}</h4>
           
-            <table class="table">
+            <table class="table" id="{{$subseccion->id}}">
             	{{ csrf_field() }}
              <thead>
                  <tr>
@@ -32,9 +32,13 @@
                     <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
                  </tr>
              </thead>
-                <tbody>
-                @foreach($items as $item)
+
+             
+             @foreach($items as $item)
+          
                 @if($item->subseccion_id==$subseccion->id)
+                <tbody>
+                
                     <label style="display:none">
                     {{$id=$item->id}}
                     {{$idT="$id"."texto"}}
