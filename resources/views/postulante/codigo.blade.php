@@ -13,7 +13,7 @@
     @if(isset($mensaje))
         {{$mensaje}}
     @endif
-    <form action="{{route('postular.getRequisitosIndispensables', $idConvocatoria) }}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+    <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria) }}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
 
       {{ csrf_field() }}
       <div class="form-row " style="margin-top: 15px">
