@@ -97,9 +97,38 @@ class PostularController extends Controller
     }
 
     public function setRequisitosIndispensables($idConvocatoria , Request $request){
-        $codigo=request()->except("_token");
-        $s=$codigo['1'];
-        echo "$s";
+        $ids=request()->except("_token");
+        $idUsuario=\Auth::user()->id;
+        $sub_path="storage/convocatorias/$idConvocatoria/reqIndispensables";
+        $destino_path=public_path($sub_path);
+        if (!file_exists($destino_path)) {
+                mkdir($destino_path, 0777, true);
+                }
+                foreach ($ids as $idRequisito =>$value) {
+              
+               $pdf=$request->file($idRequisito);
+               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+               $pdf->move($destino_path,$nombreArchivo);
 
-    }
+                $archivo=new \App\Archivo;
+                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+                $archivo->tipo="requisito indispensable";
+                $archivo->Requisito_id=$idRequisito;
+                $archivo->user_id=$idUsuario;
+                $archivo->convocatoria_id=$idConvocatoria;
+                $archivo->user_id=$idUsuario;
+                $archivo->save();
+        }
+
+
+        
+            
+      
+        }
+
+        
+        
+        
+
+    
 }

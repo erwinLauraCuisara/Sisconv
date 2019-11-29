@@ -9,9 +9,10 @@
         <h2 class="title">Adjunte los requisitos indispensables</h2>
         <div class="team">
           <div class="row">
-
-          <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria)}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+			
+          <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria)}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             <table class="table">
+            	{{ csrf_field() }}
              <thead>
                  <tr>
                     <th>Requisito</th>

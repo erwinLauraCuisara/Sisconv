@@ -80,7 +80,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 	Route::get("/postular/requerimientosIndispensables/{idConvocatoria}",'PostularController@getRequisitosIndispensables')->name('postular.getRequisitosIndispensables');
 
 	//ruta para guardar los pdf de los requerimientos indispensables
-	Route::get("/postular/requerimientosIndispensables/add/{idConvocatoria}",'PostularController@setRequisitosIndispensables')->name('postular.setRequisitosIndispensables');
+	Route::post("/postular/requerimientosIndispensables/add/{idConvocatoria}",'PostularController@setRequisitosIndispensables')->name('postular.setRequisitosIndispensables');
 
 
 
