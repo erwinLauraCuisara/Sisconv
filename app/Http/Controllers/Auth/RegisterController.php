@@ -73,7 +73,7 @@ class RegisterController extends Controller
         return $user;
     }
 
-    protected function createEvaluador(array $data)
+    protected function createReceptor(array $data)
     {
         $user = User::create([
             'name' => $data['name'],
@@ -81,7 +81,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        $user->assignRole('evaluador');
+        $user->assignRole('receptor');
         return $user;
     }
 }

@@ -80,12 +80,12 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{{url('/register/evaluador')}}">
-                          Registrar Evaluador
+                      <a href="{{url('/register/receptor')}}">
+                          Registrar Receptor
                       </a>
                   </li>
                   @endrole
-                  @role('evaluador')
+                  @role('receptor')
                   <li>
                       <a href="{{url('/home')}}">
                           Convocatorias Asignadas

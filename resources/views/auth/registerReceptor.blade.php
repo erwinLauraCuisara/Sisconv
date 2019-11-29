@@ -7,7 +7,7 @@
         <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <br><br>
           <div class="card card-login" style="height:34em;">
-            <form class="form" method="POST" action="{{ url('register/evaluador') }}">
+            <form class="form" method="POST" action="{{ url('register/receptor') }}">
                 {{ csrf_field() }}
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Registro</h4>
@@ -63,6 +63,7 @@
         </div>
       </div>
     </div>
+
     <footer class="footer">
       <div class="container">
         <nav class="float-left">
