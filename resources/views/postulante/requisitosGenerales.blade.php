@@ -6,28 +6,28 @@
   <div class="main main-raised">
     <div class="container">  
     <div class="section text-center">
-        <h2 class="title">Adjunte los requisitos indispensables</h2>
+        <h2 class="title">Adjunte los requisitos generales</h2>
         <div class="team">
           <div class="row">
 			
-          <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria)}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+          <form action="{{route('postular.addRequisitosGenerales', $idConvocatoria)}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             <table class="table">
             	{{ csrf_field() }}
              <thead>
                  <tr>
-                    <th>Requisito</th>
+                    <th>Requisito G</th>
                     <th>Archivo adjuntado</th>
                     <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
                  </tr>
              </thead>
                 <tbody>
-                @foreach($requisitosIndispensables as $requisitosIndispensable)
+                @foreach($requisitosGenerales as $requisitosGenerale)
                 <label style="display:none">
-                {{$id=$requisitosIndispensable->id}}
+                {{$id=$requisitosGenerale->id}}
                 {{$idT="$id"."texto"}}
             	</label>
                     <tr>
-                      <td>{{$requisitosIndispensable->nombre}}</td>
+                      <td>{{$requisitosGenerale->nombre}}</td>
                       	<th><div id="{{$idT}}" ></div></th>
                      
                       <td class="td-actions text-right">
