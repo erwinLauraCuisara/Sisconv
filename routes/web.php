@@ -67,9 +67,28 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+ 
 
+//Rutas para postular  {
+
+	//ruta para el poner el codigo
+	Route::get("/postular/{idConvocatoria}",function ($idConvocatoria){
+	return view('postulante.codigo')->with(compact('idConvocatoria'));
+	})->name('postular.codigo');
+
+	//ruta para mostrar los requerimientos indispensables
+	Route::get("/postular/requerimientosIndispensables/{idConvocatoria}",'PostularController@getRequisitosIndispensables')->name('postular.getRequisitosIndispensables');
+
+	Route::resource('postular','PostularController');
+
+//
 
 Route::get("/evaluador/convocatorias",'ConvocatoriaController@evaluador');
 
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::get("/postular/{codigo}",function ($codigo){
+	return view('convocatorias.formRequerimientos')->with(compact('requerimiento'));;
+});
