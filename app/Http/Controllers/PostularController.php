@@ -153,8 +153,47 @@ class PostularController extends Controller
                 $archivo->save();
         }
 
+        $secciones=\DB::select('SELECT seccions.* FROM seccions, requerimientos WHERE seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
+        $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[0]->id,$idConvocatoria]);
+        $contador=0;
+
+        $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=? AND subseccions.id=?',[$idConvocatoria,$secciones[0]->id]);
+
+           return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
 
      
+       }
+
+       public function addItems($idConvocatoria, $contador ,$secciones,Request $request){
+
+        // En realidad es agregar requisitos indispensables y no set
+
+        $ids=request()->except("_token");
+        $idUsuario=\Auth::user()->id;
+        $sub_path="storage/convocatorias/$idConvocatoria/reqIndispensables";
+        $destino_path=public_path($sub_path);
+        if (!file_exists($destino_path)) {
+                mkdir($destino_path, 0777, true);
+                }
+                foreach ($ids as $idRequisito =>$value) {
+              
+               $pdf=$request->file($idRequisito);
+               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+               $pdf->move($destino_path,$nombreArchivo);
+
+                $archivo=new \App\Archivo;
+                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+                $archivo->tipo="requisito indispensable";
+                $archivo->Requisito_id=$idRequisito;
+                $archivo->user_id=$idUsuario;
+                $archivo->convocatoria_id=$idConvocatoria;
+                $archivo->user_id=$idUsuario;
+                $archivo->save();
+        }
+
+
+        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0",[$idConvocatoria]);
+           return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));
        }
 
         
