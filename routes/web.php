@@ -58,9 +58,9 @@ Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('register', 'Auth\RegisterController@register');
 
 
-//Rutas de Registro Evaluador
-Route::get('register/evaluador', 'Auth\RegisterController@showRegistrationFormEvaluador')->name('register');
-Route::post('register/evaluador', 'Auth\RegisterController@registerEvaluador');
+//Rutas de Registro Receptor
+Route::get('register/receptor', 'Auth\RegisterController@showRegistrationFormReceptor')->name('register');
+Route::post('register/receptor', 'Auth\RegisterController@registerReceptor');
 
 //Rutas de Recuperar Contraseña
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -95,7 +95,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 //
 
-Route::get("/evaluador/convocatorias",'ConvocatoriaController@evaluador');
+Route::get("/receptor/convocatorias",'ConvocatoriaController@receptor');
 
 
 Route::get('/home', 'HomeController@index');

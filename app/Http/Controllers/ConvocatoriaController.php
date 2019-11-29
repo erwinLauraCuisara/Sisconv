@@ -99,9 +99,9 @@ class ConvocatoriaController extends Controller
         return redirect('convocatorias');
     }
 
-    public function evaluador(){
+    public function receptor(){
         $convocatorias=convocatoria::all();
-        return view('convocatorias.evaluador')->with(compact('convocatorias'));
+        return view('convocatorias.receptor')->with(compact('convocatorias'));
 
     }
     
