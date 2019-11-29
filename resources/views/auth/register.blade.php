@@ -12,7 +12,6 @@
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Registro</h4>
               </div>
-              <p class="description text-center">Completa tus datos</p>
               <div class="card-body">
               <div class="input-group">
                   <div class="input-group-prepend">
@@ -56,6 +55,9 @@
                 </div>
               </div>
               <div class="footer text-center">
+              <div>
+                <a href="{{ url('login') }}"><span class="text-dark font-weight-bold">Ya tengo una cuenta</span></a>
+                </div>
                 <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Registrarse</a>
               </div>
             </form>

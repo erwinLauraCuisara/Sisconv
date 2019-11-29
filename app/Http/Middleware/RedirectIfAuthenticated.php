@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ((auth()->check()) && (@Auth::user()->hasRole('postulante') || @Auth::user() ->hasRole('evaluador'))) 
+        if ((auth()->check()) && (@Auth::user()->hasRole('postulante') || @Auth::user() ->hasRole('receptor'))) 
         {  
             return redirect('/home');       
         }

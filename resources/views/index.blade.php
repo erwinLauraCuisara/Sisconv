@@ -33,11 +33,27 @@
                     <p class="card-description">{{$convocatoria->descripcion}}</p>
                   </div>
                   <div class="card-footer justify-content-center">
+                  @if (Auth::guest())
+                    <form action="{{ url('register') }}" method="get" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ingresar para postular</button>
+                    </form>
+                  @else
+                  @role('postulante')
                     <form action="{{route('postular.codigo', $convocatoria->id) }}" method="get" style="display:inline">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Postular</button>
                     </form>
-                    
-                    
+                  @endrole
+                  @role('administrador')
+                    <form action="" method="get" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ver Convocatoria</button>
+                    </form>
+                  @endrole
+                  @role('receptor')
+                    <form action="" method="get" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ver Convocatoria</button>
+                    </form>
+                  @endrole
+                  @endif
                   </div>
                 </div>
               </div>

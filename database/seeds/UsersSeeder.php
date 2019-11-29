@@ -15,18 +15,18 @@ class UsersSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Administrator',
+                'name' => 'Administrador',
                 'apellidos' => 'Admin',
-                'email' => 'admin@admin.com',
+                'email' => 'administrador@gmail.com',
                 'password' => bcrypt('admin'),
                 'remember_token' => '',
             ]
         ];
 
-        foreach ($users as $item) {
-            $user = User::create($item);
+        foreach ($users as $user) {
+            $user = User::create($user);
 
-            if ($user->name == 'Administrator') {
+            if ($user->name == 'Administrador') {
                 $user->assignRole(['administrador']);
             }
         }

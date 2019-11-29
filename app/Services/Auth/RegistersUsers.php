@@ -21,9 +21,9 @@ trait RegistersUsers
         return view('auth.register');
     }
 
-    public function showRegistrationFormEvaluador()
+    public function showRegistrationFormReceptor()
     {
-        return view('auth.registerEvaluador');
+        return view('auth.registerReceptor');
     }
     /**
      * Handle a registration request for the application.
@@ -43,11 +43,11 @@ trait RegistersUsers
                         ?: redirect($this->redirectPath());
     }
 
-    public function registerEvaluador(Request $request)
+    public function registerReceptor(Request $request)
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->createEvaluador($request->all())));
+        event(new Registered($user = $this->createReceptor($request->all())));
 
         $this->guard()->login($user);
 
