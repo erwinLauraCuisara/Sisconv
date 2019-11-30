@@ -16,13 +16,13 @@
                 {{$contador=$contador+1}}  
               </label>
 			
-          <form action="" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+          <form action="{{route('postular.addItems',['idConvocatoria'=>$idConvocatoria, 'secciones'=>$secciones, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
 
         @foreach($subsecciones as $subseccion)
         <h3 class="title">Subseccion: {{$subseccion->titulo}}</h3>
         <h4 class="title">{{$subseccion->descripcion}}</h4>
           
-            <table class="table" id="{{$subseccion->id}}">
+            <table class="table">
             	{{ csrf_field() }}
              <thead>
                  <tr>
@@ -53,14 +53,12 @@
                 
                       <div class="col-md-12 centrear">
                 <label for="{{$id}}" class="subirPdf">
-                  <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
-                  <i class="fas fa-cloud-upload-alt"></i> 
-                  <p class="texto_imagen_sub">PDF</p>
-                </label>
-                <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" 
-                style='display: none;' accept="application/pdf"/>
-                
-                </div>
+            <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
+            <i class="fas fa-cloud-upload-alt"></i> 
+            <p class="texto_imagen_sub">PDF</p>
+          </label>
+          <input id="{{$id}}" name="{{$id}}[]" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" multiple  accept="application/pdf"/>
+          </div>
                 
                       </td>
                     </tr>
@@ -85,8 +83,20 @@
 
   <script type="text/javascript">
           function cambiar(nombre, info){
-          var pdrs = document.getElementById(nombre).files[0].name;
-            document.getElementById(info).innerHTML = pdrs;
+              var pdrs="";
+          for (paso = 0; paso < 100; paso++) {
+            try {
+              pdrs=pdrs+"*"+document.getElementById(nombre).files[paso].name+"<br>";
+            }
+            catch(error) {
+              break;
+            }
+        
+            
+          };
+          
+
+          document.getElementById(info).innerHTML = pdrs;
 
         }
         </script>

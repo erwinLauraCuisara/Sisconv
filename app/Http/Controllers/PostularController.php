@@ -137,20 +137,20 @@ class PostularController extends Controller
         if (!file_exists($destino_path)) {
                 mkdir($destino_path, 0777, true);
                 }
-                foreach ($ids as $idRequisito =>$value) {
-              
-               $pdf=$request->file($idRequisito);
-               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
-               $pdf->move($destino_path,$nombreArchivo);
+        foreach ($ids as $idRequisito =>$value) {
+      
+       $pdf=$request->file($idRequisito);
+       $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+       $pdf->move($destino_path,$nombreArchivo);
 
-                $archivo=new \App\Archivo;
-                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
-                $archivo->tipo="requisito general";
-                $archivo->Requisito_id=$idRequisito;
-                $archivo->user_id=$idUsuario;
-                $archivo->convocatoria_id=$idConvocatoria;
-                $archivo->user_id=$idUsuario;
-                $archivo->save();
+        $archivo=new \App\Archivo;
+        $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+        $archivo->tipo="requisito general";
+        $archivo->Requisito_id=$idRequisito;
+        $archivo->user_id=$idUsuario;
+        $archivo->convocatoria_id=$idConvocatoria;
+        $archivo->user_id=$idUsuario;
+        $archivo->save();
         }
 
         $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
@@ -164,37 +164,20 @@ class PostularController extends Controller
      
        }
 
-       public function addItems($idConvocatoria, $contador ,$secciones,Request $request){
+       public function addItems(Request $request, $array){
 
-        // En realidad es agregar requisitos indispensables y no set
-
-        $ids=request()->except("_token");
-        $idUsuario=\Auth::user()->id;
-        $sub_path="storage/convocatorias/$idConvocatoria/reqIndispensables";
-        $destino_path=public_path($sub_path);
-        if (!file_exists($destino_path)) {
-                mkdir($destino_path, 0777, true);
-                }
-                foreach ($ids as $idRequisito =>$value) {
-              
-               $pdf=$request->file($idRequisito);
-               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
-               $pdf->move($destino_path,$nombreArchivo);
-
-                $archivo=new \App\Archivo;
-                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
-                $archivo->tipo="requisito indispensable";
-                $archivo->Requisito_id=$idRequisito;
-                $archivo->user_id=$idUsuario;
-                $archivo->convocatoria_id=$idConvocatoria;
-                $archivo->user_id=$idUsuario;
-                $archivo->save();
+            $input=$request->all();
+            $sub_path="storage/convocatorias";
+            $destino_path=public_path($sub_path);
+            if($files=$request->file('1')){
+            foreach($files as $file){
+            $name=$file->getClientOriginalName();
+            $file->move($destino_path,$name);
+            }
+        
         }
-
-
-        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0",[$idConvocatoria]);
-           return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));
-       }
+        return "list";
+    }
 
         
         
