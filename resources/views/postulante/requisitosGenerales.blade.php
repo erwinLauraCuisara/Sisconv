@@ -57,8 +57,20 @@
 
   <script type="text/javascript">
           function cambiar(nombre, info){
-          var pdrs = document.getElementById(nombre).files[0].name;
-            document.getElementById(info).innerHTML = pdrs;
+              var pdrs="";
+          for (paso = 0; paso < 100; paso++) {
+            try {
+              pdrs=pdrs+"*"+document.getElementById(nombre).files[paso].name+"<br>";
+            }
+            catch(error) {
+              break;
+            }
+        
+            
+          };
+          
+
+          document.getElementById(info).innerHTML = pdrs;
 
         }
         </script>
