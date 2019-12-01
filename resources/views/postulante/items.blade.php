@@ -13,10 +13,9 @@
         <div class="team">
           <div class="row">
             <label style="display:none">
-                {{$contador=$contador+1}}  
+                
               </label>
-			
-          <form action="{{route('postular.addItems',['idConvocatoria'=>$idConvocatoria, 'secciones'=>$secciones, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+			      
 
         @foreach($subsecciones as $subseccion)
         <h3 class="title">Subseccion: {{$subseccion->titulo}}</h3>
@@ -28,53 +27,27 @@
                  <tr>
                     <th>Nombre Item</th>
                     <th>Nota por Item</th>
-                     <th>Archivos subidos</th>
+                    <th>Archivos subidos</th>
+                    <th>Archivos cargados</th>
                     <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
                  </tr>
              </thead>
-
+            
+ 
              
              @foreach($items as $item)
           
                 @if($item->subseccion_id==$subseccion->id)
-                <tbody>
-                
-                    <label style="display:none">
-                    {{$id=$item->id}}
-                    {{$idT="$id"."texto"}}
-                  </label>
-                    <tr>
-                      <td>{{$item->nombre}}</td>
-                      <td>{{$item->notaPorItem}}</td>
-                      <th><div id="{{$idT}}" ></div></th>
-                     
-                      <td class="td-actions text-right">
-                          
-                
-                      <div class="col-md-12 centrear">
-                <label for="{{$id}}" class="subirPdf">
-            <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
-            <i class="fas fa-cloud-upload-alt"></i> 
-            <p class="texto_imagen_sub">PDF</p>
-          </label>
-          <input id="{{$id}}" name="{{$id}}[]" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" multiple  accept="application/pdf"/>
-          </div>
-                
-                      </td>
-                    </tr>
-                    @endif
-                    @endforeach
+                  @include('postulante.formulario',[$item, $contador])
+                @endif
+              @endforeach
 
-			
-
-                   
-                </tbody>
-            </table>
+           </table>
             @endforeach
             <div class="col-md-5 ml-auto mr-auto text-center">
-          <button type="submit" class="btn btn-primary ">Guardar y continuar</button>
+          <button type="submit" class="btn btn-primary ">CONTINUAR</button>
         </div>
-            </form>
+
           </div>
         </div>
       </div>

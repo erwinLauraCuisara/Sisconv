@@ -43,7 +43,9 @@ class ConvocatoriaController extends Controller
         $imagen=$request->file("imagen");
         $sub_path="storage/convocatorias/$id";
         $destino_path=public_path($sub_path);
-        if(mkdir($destino_path, 0777, true)){
+        if (!file_exists($destino_path)) {
+                mkdir($destino_path, 0777, true);
+                }
         if(isset($imagen)){
             //$real_name=$imagen->getClientOriginalName();
             
@@ -58,7 +60,7 @@ class ConvocatoriaController extends Controller
             $tamanio = $pdf->getSize();
             $pdf->move($destino_path,"documento.pdf");
         }
-        }
+        
 
 
         
