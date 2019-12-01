@@ -44,9 +44,15 @@
 
            </table>
             @endforeach
-            <div class="col-md-5 ml-auto mr-auto text-center">
-          <button type="submit" class="btn btn-primary ">CONTINUAR</button>
-        </div>
+            
+
+
+
+            <form action="{{route('postular.addRequisitosGenerales',['idConvocatoria'=>$idConvocatoria, 'contador'=>$contador])}}" method="post" style="display:inline">
+              {{ csrf_field() }}
+              <input type="hidden" name="xd" value="xd">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button>
+            </form>
 
           </div>
         </div>
