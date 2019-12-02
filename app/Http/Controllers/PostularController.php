@@ -121,6 +121,13 @@ class PostularController extends Controller
                 $archivo->convocatoria_id=$idConvocatoria;
                 $archivo->user_id=$idUsuario;
                 $archivo->save();
+
+                $data=new req_usuario;
+                $data->user_id = $idUsuario;
+                $data->Requisito_id = $idRequisito;
+                $data->convocatoria_id =$idConvocatoria;
+                $data->save();
+
                 } catch (\Illuminate\Database\QueryException $ex) {
             
                 //
@@ -155,6 +162,11 @@ class PostularController extends Controller
         $archivo->convocatoria_id=$idConvocatoria;
         $archivo->user_id=$idUsuario;
         $archivo->save();
+        $data=new req_usuario;
+        $data->user_id = $idUsuario;
+        $data->Requisito_id = $idRequisito;
+        $data->convocatoria_id =$idConvocatoria;
+        $data->save();
         //$contador=0;
         
         } catch (\Illuminate\Database\QueryException $ex) {

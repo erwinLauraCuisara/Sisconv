@@ -49,8 +49,8 @@
                     </form>
                   @endrole
                   @role('receptor')
-                    <form action="" method="get" style="display:inline">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ver Convocatoria</button>
+                    <form action="{{route('receptor.show', $convocatoria->id)}}" method="get" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Ver Postulantes</button>
                     </form>
                   @endrole
                   @endif

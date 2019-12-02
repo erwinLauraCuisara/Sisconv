@@ -88,8 +88,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 	//ruta para guardar los items
 	Route::post("/postular/items/add/{idItem}/{contador}",'PostularController@addItems')->name('postular.addItems');
 
-	
+	//}
 
+	//Ruta para receptor
+	Route::post("/receptor/{idConvocatoria}",'RequisitoController@receptorShow')->name('receptor.show');
 
 
 

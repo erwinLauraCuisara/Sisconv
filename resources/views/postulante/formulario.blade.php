@@ -8,7 +8,8 @@
   </div>
 @endif
    		<?php  
-		$archivos=\App\Archivo::where('Item_id',$item->id)->get();
+    $idUser=\Auth::user()->id;
+		$archivos=\App\Archivo::where('Item_id',$item->id)->where('user_id',$idUser)->get();
 		$texto="";
 		
 		foreach($archivos as $archivo){

@@ -106,6 +106,13 @@ class RequisitoController extends Controller
         $data->descripcion = $datosRequisito['descripcion'];
         $data->save();
 
+        $data=new req_usuario;
+        $data->nombre = $datosRequisito['Titulo'];
+        $data->convocatoria_id = $requisito;
+        $data->indispensable = $datosRequisito['Indispensable'];
+        $data->descripcion = $datosRequisito['descripcion'];
+        $data->save();
+
         $convocatoria=\App\convocatoria::find($requisito);
         $convocatoria->fechaLimRequisitos=$datosRequisito['fechaFin'];
         $convocatoria->save();
@@ -113,5 +120,12 @@ class RequisitoController extends Controller
 
         //return view('convocatorias.formRequisitos')->with(compact('requisito'));
         return redirect(route('requisitos.show', $requisito));
+    }
+
+    public function receptorShow($idConvocatoria)
+    {
+        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuario , convocatorias WHERE users.id=req_usuario.user_id AND req_usuario.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+            
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes'));
     }
 }
