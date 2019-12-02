@@ -9,8 +9,9 @@
         <h2 class="title">Adjunte los requisitos generales</h2>
         <div class="team">
           <div class="row">
+            <?php $contador=0; ?>
 			
-          <form action="{{route('postular.addRequisitosGenerales', $idConvocatoria)}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+          <form action="{{route('postular.addRequisitosGenerales', ['idConvocatoria'=>$idConvocatoria, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             <table class="table">
                 {{ csrf_field() }}
               <thead>

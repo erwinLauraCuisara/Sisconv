@@ -112,7 +112,7 @@ class PostularController extends Controller
                $pdf=$request->file($idRequisito);
                $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
                $pdf->move($destino_path,$nombreArchivo);
-
+               try {
                 $archivo=new \App\Archivo;
                 $archivo->ruta="$sub_path"."/"."$nombreArchivo";
                 $archivo->tipo="requisito indispensable";
@@ -121,16 +121,28 @@ class PostularController extends Controller
                 $archivo->convocatoria_id=$idConvocatoria;
                 $archivo->user_id=$idUsuario;
                 $archivo->save();
+
+                $data=new req_usuario;
+                $data->user_id = $idUsuario;
+                $data->Requisito_id = $idRequisito;
+                $data->convocatoria_id =$idConvocatoria;
+                $data->save();
+
+                } catch (\Illuminate\Database\QueryException $ex) {
+            
+                //
+                    }
         }
 
 
-        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
+            $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
            return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));
        }
 
 
-    public function addRequisitosGenerales($idConvocatoria , Request $request){
+    public function addRequisitosGenerales($idConvocatoria, $contador , Request $request){
         $ids=request()->except("_token");
+        if(!isset($ids['xd'])){  
         $idUsuario=\Auth::user()->id;
         $sub_path="storage/convocatorias/$idConvocatoria/reqGenerales";
         $destino_path=public_path($sub_path);
@@ -138,11 +150,10 @@ class PostularController extends Controller
                 mkdir($destino_path, 0777, true);
                 }
         foreach ($ids as $idRequisito =>$value) {
-      
-       $pdf=$request->file($idRequisito);
-       $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
-       $pdf->move($destino_path,$nombreArchivo);
-        try {
+       try {
+        $pdf=$request->file($idRequisito);
+        $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+        $pdf->move($destino_path,$nombreArchivo);
         $archivo=new \App\Archivo;
         $archivo->ruta="$sub_path"."/"."$nombreArchivo";
         $archivo->tipo="requisito general";
@@ -151,22 +162,39 @@ class PostularController extends Controller
         $archivo->convocatoria_id=$idConvocatoria;
         $archivo->user_id=$idUsuario;
         $archivo->save();
+        $data=new req_usuario;
+        $data->user_id = $idUsuario;
+        $data->Requisito_id = $idRequisito;
+        $data->convocatoria_id =$idConvocatoria;
+        $data->save();
+        //$contador=0;
+        
         } catch (\Illuminate\Database\QueryException $ex) {
-            //
+            
+           
             }
         
         }
+        }
+        else{
+            $contador+=1;
+        }
 
-        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
-        $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[0]->id,$idConvocatoria]);
-        $contador=0;
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        //return $contador;
+        if($contador<count($secciones)){
+        $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[$contador]->id,$idConvocatoria]);
+        
 
         $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
         
 
 
            return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
-
+       }
+       else{
+        return view('postulante.RegistroCompletado');
+       }
      
        }
 
@@ -183,25 +211,27 @@ class PostularController extends Controller
             
                   
             if($pdfs=$request->file($idItem)){
-                        $i=0;
                foreach($pdfs as $pdf){
-               $nombreArchivo="$idConvocatoria"."$idItem"."$idUsuario"."$i".".pdf";
-                $pdf->move($destino_path,$nombreArchivo);
-                $i=$i+1;
                 $real_name=$pdf->getClientOriginalName();
+                if(!\DB::table('archivos')->where('Item_id',$idItem)->where('user_id',$idUsuario)->where('nombreOriginal',$real_name)->exists()){
                 $archivo=new \App\Archivo;
-                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+                
                 $archivo->tipo="item";
                 $archivo->Item_id=$idItem;
                 $archivo->nombreOriginal=$real_name;
                 $archivo->user_id=$idUsuario;
                 $archivo->convocatoria_id=$idConvocatoria;
                 $archivo->user_id=$idUsuario;
+                
+                $nombreArchivo="$idConvocatoria"."$idItem"."$idUsuario".".$real_name".".pdf";
+                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+                $pdf->move($destino_path,$nombreArchivo);
                 $archivo->save();
+                }
                 }
             }
             $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?',[$idConvocatoria]);
-            $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[0]->id,$idConvocatoria]);
+            $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[$contador]->id,$idConvocatoria]);
              $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
 
         return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
@@ -210,6 +240,9 @@ class PostularController extends Controller
             
         
     }
+
+
+    
 
         
         
