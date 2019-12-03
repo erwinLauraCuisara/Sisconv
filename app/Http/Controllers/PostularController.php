@@ -122,6 +122,8 @@ class PostularController extends Controller
                 $archivo->user_id=$idUsuario;
                 $archivo->save();
 
+
+
                 $data=new \App\Req_usuario;
                 $data->user_id = $idUsuario;
                 $data->Requisito_id = $idRequisito;
@@ -133,7 +135,16 @@ class PostularController extends Controller
                 //
                     }
         }
-
+        try {
+            $validado=new \App\Validado;
+            $validado->user_id=$idUsuario;
+            $validado->convocatoria_id=$idConvocatoria;
+            $validado->save();
+            }
+             catch (\Illuminate\Database\QueryException $ex) {
+            
+                //
+                    }
 
             $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
            return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));

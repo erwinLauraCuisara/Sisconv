@@ -21,9 +21,13 @@ Route::resource('convocatorias','ConvocatoriaController');
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
-Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
-	return Storage::download("storage/convocatorias/$id/$file");
+Route::get("/storage/convocatorias/{id}/reqGenerales/{file}",function ($id,$file){
+	return Storage::download("storage/convocatorias/$id/reqGenerales/$file");
 });
+Route::get("/storage/convocatorias/{id}/reqIndispensables/{file}",function ($id,$file){
+	return Storage::download("storage/convocatorias/$id/reqIndispensables/$file");
+});
+
 
 //RUTAS DE ROLES
 Route::resource('roles','RoleController');
