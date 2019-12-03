@@ -91,11 +91,13 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 	//}
 
 	//Ruta para receptor
-	Route::post("/receptor/{idConvocatoria}",'RequisitoController@receptorShow')->name('receptor.show');
+	Route::get("/receptor/{idConvocatoria}",'RequisitoController@receptorShow')->name('receptor.show');
+
+	Route::get("/receptor/evaluar/{idConvocatoria}/{idUser}",'RequisitoController@evaluar')->name('receptor.evaluar');
 
 
 
-	Route::resource('postular','PostularController');
+Route::resource('postular','PostularController');
 
 //
 

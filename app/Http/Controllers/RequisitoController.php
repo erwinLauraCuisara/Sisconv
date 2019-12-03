@@ -105,13 +105,14 @@ class RequisitoController extends Controller
         $data->indispensable = $datosRequisito['Indispensable'];
         $data->descripcion = $datosRequisito['descripcion'];
         $data->save();
-
-        $data=new req_usuario;
+        /*
+        $data=new \App\Requisito;
         $data->nombre = $datosRequisito['Titulo'];
         $data->convocatoria_id = $requisito;
         $data->indispensable = $datosRequisito['Indispensable'];
         $data->descripcion = $datosRequisito['descripcion'];
         $data->save();
+        */
 
         $convocatoria=\App\convocatoria::find($requisito);
         $convocatoria->fechaLimRequisitos=$datosRequisito['fechaFin'];
@@ -124,8 +125,16 @@ class RequisitoController extends Controller
 
     public function receptorShow($idConvocatoria)
     {
-        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuario , convocatorias WHERE users.id=req_usuario.user_id AND req_usuario.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        
+        $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
             
-         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes'));
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados','idUser'));
+    }
+    public function evaluar($idConvocatoria, $idUser)
+    {
+        $requisitos=\DB::select('SELECT requisitos.* , req_usuarios.* FROM requisitos, req_usuarios, convocatorias, users WHERE req_usuarios.user_id=users.id AND req_usuarios.Requisito_id=requisitos.id AND req_usuarios.convocatoria_id=convocatorias.id AND req_usuarios.convocatoria_id=? AND req_usuarios.user_id=?',[$idConvocatoria,$idUser]);
+            
+         return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria'));
     }
 }

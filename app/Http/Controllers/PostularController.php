@@ -122,7 +122,7 @@ class PostularController extends Controller
                 $archivo->user_id=$idUsuario;
                 $archivo->save();
 
-                $data=new req_usuario;
+                $data=new \App\Req_usuario;
                 $data->user_id = $idUsuario;
                 $data->Requisito_id = $idRequisito;
                 $data->convocatoria_id =$idConvocatoria;
@@ -162,7 +162,7 @@ class PostularController extends Controller
         $archivo->convocatoria_id=$idConvocatoria;
         $archivo->user_id=$idUsuario;
         $archivo->save();
-        $data=new req_usuario;
+        $data=new \App\Req_usuario;
         $data->user_id = $idUsuario;
         $data->Requisito_id = $idRequisito;
         $data->convocatoria_id =$idConvocatoria;

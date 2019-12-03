@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="{{ asset('/css/material-kit.css?v=2.0.6') }}" rel="stylesheet" />
+
   
 </head>
 

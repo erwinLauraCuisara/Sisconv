@@ -14,7 +14,8 @@
                  <tr>
                     <th>Validado</th>
                     <th>usuario</th>
-                    <th>Area</th>
+                    <th>correo</th>
+                    
                     <th class="text-right"></th>
                  </tr>
              </thead>
@@ -22,37 +23,29 @@
                 @foreach($postulantes as $postulante)
                     <tr>
                       <td>
-                      <?php      
-                        if(($convocatoria->visible)==true)
-                            echo "Si";
-                        else
+                      <?php
+                        $validado=\App\Validado::where('user_id',$postulante->id)->where('convocatoria_id', $idConvocatoria)->get()[0]->validado;  
+                        if($validado){
+                          echo "Si";
+                        }
+                        else{
                             echo "No";
+                          }
                       ?>
                       </td>
-                      <td class="text-center">{{$loop->iteration}}</td>
-                      <td>{{$convocatoria->titulo}}</td>
-                      <td>{{$convocatoria->area}}</td>
-                      <td>{{$convocatoria->fechaIni}}</td>
-                      <td>{{$convocatoria->fechaFin}}</td>
-                      <td>{{$convocatoria->codigo}}</td>
+                      <td> <?php echo $postulante->name." ".$postulante->apellidos;?></td>
+                      <td>{{$postulante->email}}</td>
                       <td class="td-actions text-right">
-                          <a href="" rel="tooltip" title="Ver Convocatorias" class="btn btn-info btn-fab btn-round">
-                              <i class="material-icons">info</i>
-                          </a>
-                          <a href="" rel="tooltip" title="Editar Convocatorias" class="btn btn-success btn-fab btn-round">
-                              <i class="material-icons">edit</i>
-                          </a>
-                          <form action="{{route('convocatorias.destroy', $convocatoria->id)}}" method="post" style="display:inline">
-                {{csrf_field()}}
-                {{ method_field('DELETE')}}
-                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar esta convocatoria?')">Borrar</button>
+                          <form action="{{route('receptor.evaluar', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$postulante->id])}}" method="get" style="display:inline">
+                        {{csrf_field()}}
+                        {{ method_field('DELETE')}}
+                <button class="btn btn-danger" type="submit" >Validar</button>
                 </form>
                       </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-           {{$convocatorias->links()}}
           </div>
         </div>
       </div>
