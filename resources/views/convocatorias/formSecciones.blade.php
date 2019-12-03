@@ -23,8 +23,6 @@
     {{$secciones=\App\Seccion::where("requerimiento_id","$seccion")->get()}}
     </label>
     @foreach($secciones as $se)
-
-        
         <tr>
             <td>{{$se->titulo}}</td>
             <td>{{$se->NotaMaxima}}</td>

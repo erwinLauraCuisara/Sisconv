@@ -54,6 +54,11 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Ver Postulantes</button>
                     </form>
                   @endrole
+                  @role('evaluador')
+                    <form action="" method="get" style="display:inline">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Calificar Postulantes</button>
+                    </form>
+                  @endrole
                   @endif
                   </div>
                 </div>
