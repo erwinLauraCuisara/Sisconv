@@ -67,9 +67,10 @@ class ConvocatoriaController extends Controller
         return redirect(route('requisitos.show', $id)); 
 
     }
-    public function show(convocatoria $convocatoria)
+    public function show($id)
     {
-        //
+        $convocatoria=convocatoria::find($id);
+        echo "perros";
     }
 
     public function edit(convocatoria $convocatoria)

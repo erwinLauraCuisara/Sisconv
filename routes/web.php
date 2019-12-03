@@ -21,9 +21,7 @@ Route::resource('convocatorias','ConvocatoriaController');
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
-Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
-	return Storage::download("storage/convocatorias/$id/$file");
-});
+Route::get('convocatorias/{id}', 'ConvocatoriaController@show');
 
 //RUTAS DE ROLES
 Route::resource('roles','RoleController');
@@ -108,3 +106,5 @@ Route::get('/home', 'HomeController@index');
 Route::get("/postular/{codigo}",function ($codigo){
 	return view('convocatorias.formRequerimientos')->with(compact('requerimiento'));;
 });
+
+

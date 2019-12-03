@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Requisito;
 use Illuminate\Http\Request;
+use App\Requisito_usuario;
 
 class RequisitoController extends Controller
 {
@@ -126,6 +127,6 @@ class RequisitoController extends Controller
     {
         $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuario , convocatorias WHERE users.id=req_usuario.user_id AND req_usuario.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
             
-         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes'));
+         return view('convocatorias.receptor.receptor')->with(compact('idConvocatoria', 'postulantes'));
     }
 }

@@ -33,13 +33,7 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav ml-auto">
-          @role('administrador')
-          <li class="nav-item">
-              <a class="nav-link" href="{{url('/convocatorias')}}" >
-                <i class="material-icons">assignment</i> Convocatorias
-              </a>
-          </li>
-          @endrole
+          
           @if (Auth::guest())
             <li class="nav-item">
               <a class="nav-link" href="{{ url('register') }}" >
@@ -52,21 +46,33 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Siguenos en Twitter">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/" target="_blank" data-original-title="Siguenos en Twitter">
                 <i class="fa fa-twitter"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Siguenos en Facebook">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/" target="_blank" data-original-title="Siguenos en Facebook">
                 <i class="fa fa-facebook"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Siguenos en Instagram">
+              <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/" target="_blank" data-original-title="Siguenos en Instagram">
                 <i class="fa fa-instagram"></i>
               </a>
             </li>
           @else
+          <li class="nav-item">
+              <a class="nav-link" href="{{url('/home')}}" >
+                <i class="material-icons">home_work</i> Inicio
+              </a>
+          </li>
+          @role('administrador')
+          <li class="nav-item">
+              <a class="nav-link" href="{{url('/convocatorias')}}" >
+                <i class="material-icons">assignment</i> Convocatorias
+              </a>
+          </li>
+          @endrole
             <li class="dropdown">
               <a href="#" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                   {{ Auth::user()->name }} <span class="caret"></span>

@@ -30,7 +30,8 @@
                     <small class="card-description text-muted">{{$convocatoria->area}}</small>
                   </h4>
                   <div class="card-body">
-                    <p class="card-description">{{$convocatoria->descripcion}}</p>
+                    <p class="card-description text-muted">{{$convocatoria->descripcion}}</p>
+                    <a href="">Ver convocatoria</a>
                   </div>
                   <div class="card-footer justify-content-center">
                   @if (Auth::guest())
