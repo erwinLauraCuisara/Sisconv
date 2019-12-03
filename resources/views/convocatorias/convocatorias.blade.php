@@ -16,6 +16,7 @@
                     {{$id=$requisitosIndispensable->id}}
                     </label>
                     <td>{{$requisitosIndispensable->nombre}}</td>
+                    <br>
                 @endforeach  
             </tbody>
         <h4 class="title">Requisitos Generales</h4>
@@ -25,6 +26,7 @@
                     {{$id=$requisitosGenerale->id}}
                 </label>
                         <td>{{$requisitosGenerale->nombre}}</td>
+                        <br>
                     @endforeach
             </tbody>
         <div class="team">
