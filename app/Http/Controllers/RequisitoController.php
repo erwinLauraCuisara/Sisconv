@@ -134,8 +134,59 @@ class RequisitoController extends Controller
     }
     public function evaluar($idConvocatoria, $idUser)
     {
+        //para listar los requisitos de un usuario
         $requisitos=\DB::select('SELECT requisitos.* , req_usuarios.* FROM requisitos, req_usuarios, convocatorias, users WHERE req_usuarios.user_id=users.id AND req_usuarios.Requisito_id=requisitos.id AND req_usuarios.convocatoria_id=convocatorias.id AND req_usuarios.convocatoria_id=? AND req_usuarios.user_id=?',[$idConvocatoria,$idUser]);
             
-         return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria'));
+         return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria', 'idUser'));
+    }
+    public function evaluarSave($idConvocatoria, $idUser , Request $request){
+                $ids=request()->except("_token");
+            /*foreach ($ids as $idRequisito =>$value) {
+
+
+               $pdf=$ids['']
+               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+               $pdf->move($destino_path,$nombreArchivo);
+
+
+               $pdf=$request->file($idRequisito);
+               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
+               $pdf->move($destino_path,$nombreArchivo);
+               try {
+                $archivo=new \App\Archivo;
+                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
+                $archivo->tipo="requisito indispensable";
+                $archivo->Requisito_id=$idRequisito;
+                $archivo->user_id=$idUsuario;
+                $archivo->convocatoria_id=$idConvocatoria;
+                $archivo->user_id=$idUsuario;
+                $archivo->save();
+
+
+
+                $data=new \App\Req_usuario;
+                $data->user_id = $idUsuario;
+                $data->Requisito_id = $idRequisito;
+                $data->convocatoria_id =$idConvocatoria;
+                $data->save();
+
+                } catch (\Illuminate\Database\QueryException $ex) {
+            
+                //
+                    }
+        }
+        try {
+            $validado=new \App\Validado;
+            $validado->user_id=$idUsuario;
+            $validado->convocatoria_id=$idConvocatoria;
+            $validado->save();
+            }
+             catch (\Illuminate\Database\QueryException $ex) {
+            
+                //
+            }
+
+            $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
+           return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));*/
     }
 }

@@ -103,6 +103,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 	Route::get("/receptor/{idConvocatoria}",'RequisitoController@receptorShow')->name('receptor.show');
 
 	Route::get("/receptor/evaluar/{idConvocatoria}/{idUser}",'RequisitoController@evaluar')->name('receptor.evaluar');
+	Route::get("/receptor/evaluar/save/{idConvocatoria}/{idUser}",'RequisitoController@evaluarSave')->name('receptor.evaluarSave');
 
 
 
