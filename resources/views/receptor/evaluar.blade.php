@@ -43,7 +43,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <h2 class="title">Requerimientos Generales</h2>
+            <h2 class="title">Requisitos Generales</h2>
 
              <table class="table">
              <thead>
