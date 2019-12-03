@@ -21,7 +21,7 @@ Route::resource('convocatorias','ConvocatoriaController');
 Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
-Route::get('convocatorias/{id}', 'ConvocatoriaController@show');
+Route::get('convocatoria/{idConvocatoria}', 'ConvocatoriaController@show')->name('convocatorias.show');
 
 //RUTAS DE ROLES
 Route::resource('roles','RoleController');

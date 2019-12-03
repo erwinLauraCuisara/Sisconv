@@ -31,7 +31,7 @@
                   </h4>
                   <div class="card-body">
                     <p class="card-description text-muted">{{$convocatoria->descripcion}}</p>
-                    <a href="">Ver convocatoria</a>
+                    <a href="{{ route('convocatorias.show',$convocatoria->id) }}">Ver convocatoria</a>
                   </div>
                   <div class="card-footer justify-content-center">
                   @if (Auth::guest())
