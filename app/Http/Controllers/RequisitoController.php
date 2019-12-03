@@ -134,8 +134,43 @@ class RequisitoController extends Controller
     }
     public function evaluar($idConvocatoria, $idUser)
     {
+        //para listar los requisitos de un usuario
         $requisitos=\DB::select('SELECT requisitos.* , req_usuarios.* FROM requisitos, req_usuarios, convocatorias, users WHERE req_usuarios.user_id=users.id AND req_usuarios.Requisito_id=requisitos.id AND req_usuarios.convocatoria_id=convocatorias.id AND req_usuarios.convocatoria_id=? AND req_usuarios.user_id=?',[$idConvocatoria,$idUser]);
             
-         return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria'));
+         return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria', 'idUser'));
+    }
+    public function evaluarSave($idConvocatoria, $idUser , Request $request){
+    
+                $ids=request()->except("_token");
+
+                foreach ($ids as $idRequisito =>$value) {
+                   
+                    if(strpos($idRequisito, 't')==true){
+                        /*if(!isset($value)){
+                            $value="";
+                        }*/
+                        $idReq=str_replace('t','',$idRequisito);
+
+                        $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idReq)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['observaciones' => $value]);
+                    }
+                    else{
+
+                        if(!isset($value)){
+                            $value=false;
+                        }
+                        $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idRequisito)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['valido' => $value]);
+                        
+
+                    }
+                }
+            $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => true]); 
+
+              
+            $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        
+            $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
+            
+            
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados','idUser'));
     }
 }

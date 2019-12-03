@@ -3,18 +3,22 @@
 @section('content')
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
   </div>
+  <form action="{{route('receptor.evaluarSave',['idConvocatoria'=>$idConvocatoria, 'idUser'=>$idUser])}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+            {{ csrf_field() }}
   <div class="main main-raised">
     <div class="container">  
     <div class="section text-center">
         <h2 class="title">Requisitos Indispensables</h2>
         <div class="team">
           <div class="row">
+            
             <table class="table">
              <thead>
                  <tr>
                     <th>Requisito</th>
                     <th>Archivo por evaluar</th>
-                    <th class="text-right"></th>
+                    <th >Valido</th>
+                    <th>Observacion</th>
                  </tr>
              </thead>
                 <tbody>
@@ -24,8 +28,9 @@
                      <td> {{$requisito->nombre}}</td>
                       <td>
                       <?php      
-                        $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$requisito->user_id)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
+                        $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$idUser)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
                         $ruta="http://localhost:8000/$archivo";
+                        $Observacion=$requisito->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>
                       </td>
@@ -33,13 +38,14 @@
                       <td >
                       <div class="togglebutton">
                         <label>
-                          <input type="checkbox" checked=""name="validado"id="validado"value="0">
+                          <input type="checkbox" name="{{$requisito->id}}" id="{{$requisito->id}}" value="1">
                           <span class="toggle"></span>
                           Ok
                         </label>
                       </div>
         
                       </td>
+                      <td><input type="text" name="{{$Observacion}}" class="form-control" id="{{$Observacion}}" required></td>
                     </tr>
                     @endif
                     @endforeach
@@ -52,7 +58,8 @@
                  <tr>
                     <th>Requisito</th>
                     <th>Archivo por evaluar</th>
-                    <th class="text-right"></th>
+                    <th >Valido</th>
+                    <th>Observacion</th>
                  </tr>
              </thead>
                 <tbody>
@@ -62,25 +69,25 @@
                      <td> {{$requisito->nombre}}</td>
                       <td>
                       <?php      
-                        $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$requisito->user_id)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
+                        $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$idUser)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
                         $ruta="http://localhost:8000/$archivo";
+                        $Observacion=$requisito->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>
                       </td>
           
                       <td class="td-actions ">
-                      <form action="" method="get" style="display:inline">
-                        {{csrf_field()}}
-                        {{ method_field('DELETE')}}
+                      
                       <div class="togglebutton">
                         <label>
-                          <input type="checkbox" checked=""name="validado"id="validado"value="0">
+                          <input type="checkbox" name="{{$requisito->id}}" id="{{$requisito->id}}" value="1">
                           <span class="toggle"></span>
                           Ok
                         </label>
                       </div>
-                </form>
+                
                       </td>
+                      <td><input type="text" name="{{$Observacion}}" class="form-control" id="{{$Observacion}}" required></td>
                     </tr>
                     @endif
                     @endforeach
@@ -128,6 +135,8 @@
       </div>
     </div>
   </div>
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
+ </form>
  <footer class="footer">
       <div class="container">
         <nav class="float-left">
