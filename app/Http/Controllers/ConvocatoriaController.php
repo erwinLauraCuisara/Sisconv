@@ -72,7 +72,9 @@ class ConvocatoriaController extends Controller
         $convocatoria=\App\convocatoria::find($idConvocatoria);  
         $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1 AND convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
         $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
-        return view('convocatorias.convocatorias')->with(compact('convocatoria','requisitosIndispensables','requisitosGenerales'));
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        $subsecciones=\DB::select('SELECT subseccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions,subseccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id and subseccions.seccion_id=seccions.id AND subseccions.seccion_id=? ORDER BY subseccions.id',[$idConvocatoria]);
+        return view('convocatorias.convocatorias')->with(compact('convocatoria','requisitosIndispensables','requisitosGenerales','secciones','subsecciones'));
     }
 
     public function edit(convocatoria $convocatoria)

@@ -19,8 +19,7 @@
 
         @foreach($subsecciones as $subseccion)
         <h3 class="title">Subseccion: {{$subseccion->titulo}}</h3>
-        <h4 class="title">{{$subseccion->descripcion}}</h4>
-          
+        <h4 class="title">{{$subseccion->descripcion}}</h4>         
             <table class="table">
             	{{ csrf_field() }}
              <thead>

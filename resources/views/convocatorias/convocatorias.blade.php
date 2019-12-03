@@ -29,19 +29,43 @@
                         <br>
                     @endforeach
             </tbody>
+        <h4 class="title">Secciones </h4>
+        <tbody>
+            @foreach($secciones as $seccione)
+                <label style="display:none">
+                    {{$id=$seccione->id}}
+                </label>
+                        <td>{{$seccione->titulo}}</td>
+                        <br>
+                    @endforeach
+            </tbody>
+        <h4 class="title">Subsecciones </h4>
+        <h4 class="title">Items</h4>
         <div class="team">
           <div class="row">
-            <table class="table">
-             <thead>
+            <table class="table table-bordered">
+            @foreach($secciones as $seccione)
+             <thead class="thead-dark">
                  <tr>
-                    <th class="text-center">Id</th>
-                    <th>Titulo Seccion</th>
+                    <th class="text-center">{{$id=$seccione->id}}</th>
+                    <th>{{$seccione->titulo}}</th>
                     <th>Puntaje por Item</th>
-                    <th>Puntaje de la Seccion</th>
+                    <th>Nota maxima de la seccion: {{$seccione->NotaMaxima}}</th>
                     
-                 </tr>
+                 </tr> 
              </thead>
+             <tbody> 
+                @foreach($subsecciones as $subseccione)
+                    <tr>
+                      <td class="text-center">{{$id=$seccione->id}}</td>
+                      <td>{{$subseccione->titulo}}</td>
+                      <td>nota</td>
+                      <td>nota</td>
+                    </tr>
+                @endforeach
                 
+             </tbody>
+             @endforeach   
             </table>
            
           </div>
