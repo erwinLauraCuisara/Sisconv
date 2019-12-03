@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Requisito;
 use Illuminate\Http\Request;
+use App\Requisito_usuario;
 
 class RequisitoController extends Controller
 {

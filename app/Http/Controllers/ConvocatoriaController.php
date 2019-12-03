@@ -67,9 +67,12 @@ class ConvocatoriaController extends Controller
         return redirect(route('requisitos.show', $id)); 
 
     }
-    public function show(convocatoria $convocatoria)
+    public function show($idConvocatoria,Request $request)
     {
-        //
+        $convocatoria=\App\convocatoria::find($idConvocatoria);  
+        $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1 AND convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
+        $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
+        return view('convocatorias.convocatorias')->with(compact('convocatoria','requisitosIndispensables','requisitosGenerales'));
     }
 
     public function edit(convocatoria $convocatoria)

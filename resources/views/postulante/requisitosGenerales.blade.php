@@ -13,52 +13,43 @@
 			
           <form action="{{route('postular.addRequisitosGenerales', ['idConvocatoria'=>$idConvocatoria, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             <table class="table">
-            	{{ csrf_field() }}
-             <thead>
-                 <tr>
-                    <th>Requisito G</th>
-                    <th>Archivo adjuntado</th>
-                    <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
-                 </tr>
-             </thead>
-                <tbody>
-                @foreach($requisitosGenerales as $requisitosGenerale)
-                <label style="display:none">
-                {{$id=$requisitosGenerale->id}}
-                {{$idT="$id"."texto"}}
-            	</label>
-                    <tr>
-                      <td>{{$requisitosGenerale->nombre}}</td>
-                      	<th><div id="{{$idT}}" ></div></th>
-                     
-                      <td class="td-actions text-right">
-                          
-                
-                <div class="col-md-12 centrear">
-          <label for="{{$id}}" class="subirPdf">
-            <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
-            <i class="fas fa-cloud-upload-alt"></i> 
-            <p class="texto_imagen_sub">PDF</p>
-          </label>
-          <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" 
-          style='display: none;' accept="application/pdf"/>
-          
-          </div>
-                
-                      </td>
-                    </tr>
-                    @endforeach
-
-			
-
-                   
-                </tbody>
+                {{ csrf_field() }}
+              <thead>
+                  <tr>
+                      <th>Requisito G</th>
+                      <th>Archivo adjuntado</th>
+                      <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
+                  </tr>
+              </thead>
+                  <tbody>
+                    @foreach($requisitosGenerales as $requisitosGenerale)
+                    <label style="display:none">
+                      {{$id=$requisitosGenerale->id}}
+                      {{$idT="$id"."texto"}}
+                    </label>
+                        <tr>
+                          <td>{{$requisitosGenerale->nombre}}</td>
+                            <th><div id="{{$idT}}" ></div></th>
+                        
+                          <td class="td-actions text-right">
+                            <div class="col-md-12 centrear">
+                              <label for="{{$id}}" class="subirPdf">
+                                <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
+                                <i class="fas fa-cloud-upload-alt"></i> 
+                                <p class="texto_imagen_sub">PDF</p>
+                              </label>
+                              <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" 
+                              style='display: none;' accept="application/pdf"/>
+                            </div>
+                          </td>
+                        </tr>
+                        @endforeach
+                  </tbody>
             </table>
-
             <div class="col-md-5 ml-auto mr-auto text-center">
-          <button type="submit" class="btn btn-primary ">Guardar y continuar</button>
-        </div>
-            </form>
+              <button type="submit" class="btn btn-primary ">Guardar y continuar</button>
+            </div>
+          </form>
           </div>
         </div>
       </div>

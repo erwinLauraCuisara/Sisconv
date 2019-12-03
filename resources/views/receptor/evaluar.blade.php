@@ -31,12 +31,14 @@
                       </td>
           
                       <td >
-                          <div class="togglebutton">
-  <label>
-      <input type="checkbox" checked="">
-    Toggle is on
-  </label>
-</div>
+                      <div class="togglebutton">
+                        <label>
+                          <input type="checkbox" checked=""name="validado"id="validado"value="0">
+                          <span class="toggle"></span>
+                          Ok
+                        </label>
+                      </div>
+        
                       </td>
                     </tr>
                     @endif
@@ -66,11 +68,17 @@
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>
                       </td>
           
-                      <td class="td-actions text-right">
-                          <form action="" method="get" style="display:inline">
+                      <td class="td-actions ">
+                      <form action="" method="get" style="display:inline">
                         {{csrf_field()}}
                         {{ method_field('DELETE')}}
-                <button class="btn btn-danger" type="submit" >OK</button>
+                      <div class="togglebutton">
+                        <label>
+                          <input type="checkbox" checked=""name="validado"id="validado"value="0">
+                          <span class="toggle"></span>
+                          Ok
+                        </label>
+                      </div>
                 </form>
                       </td>
                     </tr>
