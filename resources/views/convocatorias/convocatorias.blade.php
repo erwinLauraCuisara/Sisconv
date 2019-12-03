@@ -27,22 +27,16 @@
                         <td>{{$requisitosGenerale->nombre}}</td>
                     @endforeach
             </tbody>
-        <h4 class="title">Secciones</h4>
-        <h4 class="title">Subsecciones</h4>
-        <h4 class="title">Items</h4>
         <div class="team">
           <div class="row">
             <table class="table">
              <thead>
                  <tr>
-                    <th>P</th>
                     <th class="text-center">Id</th>
-                    <th>Titulo</th>
-                    <th>Area</th>
-                    <th>Fecha Publicacion</th>
-                    <th>Fecha Finalizacion</th>
-                    <th>Codigo</th>
-                    <th class="text-right">Acciones</th>
+                    <th>Titulo Seccion</th>
+                    <th>Puntaje por Item</th>
+                    <th>Puntaje de la Seccion</th>
+                    
                  </tr>
              </thead>
                 

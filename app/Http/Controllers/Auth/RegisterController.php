@@ -84,4 +84,16 @@ class RegisterController extends Controller
         $user->assignRole('receptor');
         return $user;
     }
+
+    protected function createEvaluador(array $data)
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'apellidos' => $data['apellidos'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        $user->assignRole('evaluador');
+        return $user;
+    }
 }

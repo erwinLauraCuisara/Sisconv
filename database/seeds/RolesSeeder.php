@@ -20,7 +20,7 @@ class RolesSeeder extends Seeder
                 'name' => 'receptor',
             ],
             [
-                'name' => 'calificador',
+                'name' => 'evaluador',
             ],
             [
                 'name' => 'postulante',

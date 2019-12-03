@@ -91,6 +91,11 @@
                           Registrar Receptor
                       </a>
                   </li>
+                  <li>
+                      <a href="{{url('/register/evaluador')}}">
+                          Registrar Evaluador
+                      </a>
+                  </li>
                   @endrole
                   @role('receptor')
                   <li>

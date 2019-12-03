@@ -22,6 +22,13 @@ Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
 Route::get('convocatoria/{idConvocatoria}', 'ConvocatoriaController@show')->name('convocatorias.show');
+Route::get("/storage/convocatorias/{id}/reqGenerales/{file}",function ($id,$file){
+	return Storage::download("storage/convocatorias/$id/reqGenerales/$file");
+});
+Route::get("/storage/convocatorias/{id}/reqIndispensables/{file}",function ($id,$file){
+	return Storage::download("storage/convocatorias/$id/reqIndispensables/$file");
+});
+
 
 //RUTAS DE ROLES
 Route::resource('roles','RoleController');
@@ -59,6 +66,10 @@ Route::post('register', 'Auth\RegisterController@register');
 //Rutas de Registro Receptor
 Route::get('register/receptor', 'Auth\RegisterController@showRegistrationFormReceptor')->name('register');
 Route::post('register/receptor', 'Auth\RegisterController@registerReceptor');
+
+//Rutas de Registro Evaluador
+Route::get('register/evaluador', 'Auth\RegisterController@showRegistrationFormEvaluador')->name('register');
+Route::post('register/evaluador', 'Auth\RegisterController@registerEvaluador');
 
 //Rutas de Recuperar Contraseña
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
