@@ -140,53 +140,37 @@ class RequisitoController extends Controller
          return view('receptor.evaluar')->with(compact('requisitos','idConvocatoria', 'idUser'));
     }
     public function evaluarSave($idConvocatoria, $idUser , Request $request){
+    
                 $ids=request()->except("_token");
-            /*foreach ($ids as $idRequisito =>$value) {
 
+                foreach ($ids as $idRequisito =>$value) {
+                   
+                    if(strpos($idRequisito, 't')==true){
+                        /*if(!isset($value)){
+                            $value="";
+                        }*/
+                        $idReq=str_replace('t','',$idRequisito);
 
-               $pdf=$ids['']
-               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
-               $pdf->move($destino_path,$nombreArchivo);
-
-
-               $pdf=$request->file($idRequisito);
-               $nombreArchivo="$idConvocatoria"."$idRequisito"."$idUsuario".".pdf";
-               $pdf->move($destino_path,$nombreArchivo);
-               try {
-                $archivo=new \App\Archivo;
-                $archivo->ruta="$sub_path"."/"."$nombreArchivo";
-                $archivo->tipo="requisito indispensable";
-                $archivo->Requisito_id=$idRequisito;
-                $archivo->user_id=$idUsuario;
-                $archivo->convocatoria_id=$idConvocatoria;
-                $archivo->user_id=$idUsuario;
-                $archivo->save();
-
-
-
-                $data=new \App\Req_usuario;
-                $data->user_id = $idUsuario;
-                $data->Requisito_id = $idRequisito;
-                $data->convocatoria_id =$idConvocatoria;
-                $data->save();
-
-                } catch (\Illuminate\Database\QueryException $ex) {
-            
-                //
+                        $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idReq)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['observaciones' => $value]);
                     }
-        }
-        try {
-            $validado=new \App\Validado;
-            $validado->user_id=$idUsuario;
-            $validado->convocatoria_id=$idConvocatoria;
-            $validado->save();
-            }
-             catch (\Illuminate\Database\QueryException $ex) {
-            
-                //
-            }
+                    else{
 
-            $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
-           return view('postulante.requisitosGenerales')->with(compact('idConvocatoria', 'requisitosGenerales'));*/
+                        if(!isset($value)){
+                            $value=false;
+                        }
+                        $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idRequisito)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['valido' => $value]);
+                        
+
+                    }
+                }
+            $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => true]); 
+
+              
+            $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        
+            $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
+            
+            
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados','idUser'));
     }
 }

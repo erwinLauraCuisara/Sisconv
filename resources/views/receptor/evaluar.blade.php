@@ -38,14 +38,14 @@
                       <td >
                       <div class="togglebutton">
                         <label>
-                          <input type="checkbox" name="validado"id="{{$requisito->id}}" value="0">
+                          <input type="checkbox" name="{{$requisito->id}}" id="{{$requisito->id}}" value="1">
                           <span class="toggle"></span>
                           Ok
                         </label>
                       </div>
         
                       </td>
-                      <td><input type="text" class="form-control" id="{{$Observacion}}" required></td>
+                      <td><input type="text" name="{{$Observacion}}" class="form-control" id="{{$Observacion}}" required></td>
                     </tr>
                     @endif
                     @endforeach
@@ -71,6 +71,7 @@
                       <?php      
                         $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$idUser)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
                         $ruta="http://localhost:8000/$archivo";
+                        $Observacion=$requisito->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>
                       </td>
@@ -79,14 +80,14 @@
                       
                       <div class="togglebutton">
                         <label>
-                          <input type="checkbox" name="validado" id="{{$requisito->id}}" value="0">
+                          <input type="checkbox" name="{{$requisito->id}}" id="{{$requisito->id}}" value="1">
                           <span class="toggle"></span>
                           Ok
                         </label>
                       </div>
                 
                       </td>
-                      <td><input type="text" class="form-control" id="{{$Observacion}}" required></td>
+                      <td><input type="text" name="{{$Observacion}}" class="form-control" id="{{$Observacion}}" required></td>
                     </tr>
                     @endif
                     @endforeach
