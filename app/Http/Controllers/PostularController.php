@@ -154,8 +154,9 @@ class PostularController extends Controller
 
     public function addRequisitosGenerales($idConvocatoria, $contador , Request $request){
         $ids=request()->except("_token");
-        if(!isset($ids['xd'])){  
         $idUsuario=\Auth::user()->id;
+        if(!isset($ids['xd'])){  
+        
         $sub_path="storage/convocatorias/$idConvocatoria/reqGenerales";
         $destino_path=public_path($sub_path);
         if (!file_exists($destino_path)) {
@@ -205,7 +206,18 @@ class PostularController extends Controller
            return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
        }
        else{
-        return view('postulante.RegistroCompletado');
+            $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
+             try {
+            $postula=new \App\NotaRequerimiento;
+            $postula->user_id = $idUsuario;
+            $postula->Requerimiento_id = $idRequerimiento;
+            $postula->save();
+            } catch (\Illuminate\Database\QueryException $ex) {
+                
+               
+            }
+     
+            return view('postulante.RegistroCompletado');
        }
      
        }

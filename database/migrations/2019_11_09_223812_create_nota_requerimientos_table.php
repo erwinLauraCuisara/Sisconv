@@ -17,6 +17,7 @@ class CreateNotaRequerimientosTable extends Migration
             $table->double('notaComision')->nullable();
             $table->double('notaParcial')->nullable();
             $table->integer('user_id')->unsigned();
+            $table->boolean('evaluado')->default(false);
             $table->integer('Requerimiento_id')->unsigned()->nullable();
             $table->unique(['user_id','Requerimiento_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

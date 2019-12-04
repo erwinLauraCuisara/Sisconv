@@ -55,7 +55,7 @@
                     </form>
                   @endrole
                   @role('evaluador')
-                    <form action="" method="get" style="display:inline">
+                    <form action="{{route('evaluador.show', $convocatoria->id)}}" method="get" style="display:inline">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Calificar Postulantes</button>
                     </form>
                   @endrole

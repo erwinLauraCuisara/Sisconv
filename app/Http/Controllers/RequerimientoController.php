@@ -101,4 +101,17 @@ class RequerimientoController extends Controller
         //return view('convocatorias.formRequisitos')->with(compact('requisito'));
         return redirect(route('secciones.show', $data->id));
     }
+
+    public function requerimientosShow($idConvocatoria){
+
+        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users ,nota_requerimientos, requerimientos , convocatorias WHERE users.id=nota_requerimientos.user_id AND requerimientos.id=nota_requerimientos.Requerimiento_id AND convocatorias.id=requerimientos.convocatoria_id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+            
+         return view('evaluador.showEvaluador')->with(compact('idConvocatoria', 'postulantes'));
+
+    }
+    public function requerimientosShow($idConvocatoria){
+
+        
+
+    }
 }

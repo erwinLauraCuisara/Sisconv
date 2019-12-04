@@ -106,6 +106,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 	Route::get("/receptor/evaluar/save/{idConvocatoria}/{idUser}",'RequisitoController@evaluarSave')->name('receptor.evaluarSave');
 
 
+	//rutas para evaluador
+	Route::get("/evaluador/{idConvocatoria}",'RequerimientoController@requerimientosShow')->name('evaluador.show');
+	Route::get("/evaluador/evaluar/{idConvocatoria}/{idUser}",'RequisitoController@evaluar')->name('evaluador.evaluar');
+
+
 
 Route::resource('postular','PostularController');
 

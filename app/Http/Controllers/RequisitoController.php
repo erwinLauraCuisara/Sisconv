@@ -130,7 +130,7 @@ class RequisitoController extends Controller
         
         $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
             
-         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados','idUser'));
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados'));
     }
     public function evaluar($idConvocatoria, $idUser)
     {

@@ -12,10 +12,9 @@
             <table class="table">
              <thead>
                  <tr>
-                    <th>Validado</th>
+                    <th>Evaluada</th>
                     <th>usuario</th>
                     <th>correo</th>
-                    
                     <th class="text-right"></th>
                  </tr>
              </thead>
@@ -24,8 +23,9 @@
                     <tr>
                       <td>
                       <?php
-                        $validado=\App\Validado::where('user_id',$postulante->id)->where('convocatoria_id', $idConvocatoria)->get()[0]->validado;  
-                        if($validado){
+                        $idReq=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
+                        $evaluado=\App\NotaRequerimiento::where('user_id',$postulante->id)->where('Requerimiento_id', $idReq)->get()[0]->evaluado;  
+                        if($evaluado){
                           echo "Si";
                         }
                         else{
@@ -36,10 +36,10 @@
                       <td> <?php echo $postulante->name." ".$postulante->apellidos;?></td>
                       <td>{{$postulante->email}}</td>
                       <td class="td-actions text-right">
-                          <form action="{{route('receptor.evaluar', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$postulante->id])}}" method="get" style="display:inline">
+                          <form action="{{route('evaluador.evaluar', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$postulante->id])}}" method="get" style="display:inline">
                         {{csrf_field()}}
-                       
-                <button class="btn btn-danger" type="submit" >Validar</button>
+
+                <button class="btn btn-danger" type="submit" >Evaluar</button>
                 </form>
                       </td>
                     </tr>
