@@ -112,14 +112,14 @@ class RequerimientoController extends Controller
     }
     public function showItems($idConvocatoria, $idUsuario){
         //muestra el formulario para realizar las evaluacioenes
-        $contador=0;
+        $contador=0;    
         $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
         $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[$contador]->id,$idConvocatoria]);
         $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
         
 
 
-        return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
+        return view('evaluador.evaluar')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
 
 
         

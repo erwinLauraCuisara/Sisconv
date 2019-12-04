@@ -9,7 +9,6 @@
         <h1 class="title">Calificacion de meritos de {{$secciones[0]->convocatoriaTitulo}}</h1>
         <h2 class="title">SECCION: {{$secciones[$contador]->titulo}}</h2>
         <h2 class="title">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
-       
         <div class="team">
           <div class="row">
             <label style="display:none">
@@ -26,9 +25,11 @@
                  <tr>
                     <th>Nombre Item</th>
                     <th>Nota por Item</th>
-                    <th>Archivos subidos</th>
-                    <th>Archivos cargados</th>
-                    <th class="text-right">Haga click en el icono PDF para adjuntar archivo</th>
+                    <th>Archivos por evaluar</th>
+                    <th>Nota</th>
+
+                    <th class="text-right">Corregir nota</th>
+                    <th>Accion</th>
                  </tr>
              </thead>
             
@@ -47,7 +48,7 @@
 
 
 
-            <form action="{{route('postular.addRequisitosGenerales',['idConvocatoria'=>$idConvocatoria, 'contador'=>$contador])}}" method="post" style="display:inline">
+            <form action="" method="post" style="display:inline">
               {{ csrf_field() }}
               <input type="hidden" name="xd" value="xd">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button>
