@@ -109,9 +109,5 @@ class RequerimientoController extends Controller
          return view('evaluador.showEvaluador')->with(compact('idConvocatoria', 'postulantes'));
 
     }
-    public function requerimientosShow($idConvocatoria){
 
-        
-
-    }
 }
