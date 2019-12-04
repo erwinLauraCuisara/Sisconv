@@ -155,6 +155,8 @@ class PostularController extends Controller
     public function addRequisitosGenerales($idConvocatoria, $contador , Request $request){
         $ids=request()->except("_token");
         $idUsuario=\Auth::user()->id;
+
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
         if(!isset($ids['xd'])){  
         
         $sub_path="storage/convocatorias/$idConvocatoria/reqGenerales";
@@ -190,10 +192,21 @@ class PostularController extends Controller
         }
         }
         else{
+            
+            $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
+            $idSeccion=$secciones[$contador]->id;
+            $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=?',[$idUsuario,$idRequerimiento, $idSeccion])[0];
+            $nota_seccion=new \App\NotaSeccion;
+            $nota_seccion->notaComision=$notaSumItems->sumaItem;
+            $nota_seccion->notaParcial=$notaSumItems->sumaItem;
+            $nota_seccion->user_id=$idUsuario;
+            $nota_seccion->Requerimiento_id=$idRequerimiento;
+            $nota_seccion->Seccion_id=$idSeccion;
+            $nota_seccion->save();
             $contador+=1;
         }
 
-        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        
         //return $contador;
         if($contador<count($secciones)){
         $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[$contador]->id,$idConvocatoria]);
@@ -208,14 +221,22 @@ class PostularController extends Controller
        else{
             $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
              try {
+
+
+
+            $notaSecciones=\DB::select('SELECT sum(nota_seccions.notaComision) as suma FROM nota_seccions, requerimientos,seccions WHERE nota_seccions.user_id=? AND nota_seccions.Requerimiento_id=requerimientos.id AND nota_seccions.Seccion_id=seccions.id AND requerimientos.id=?',[$idUsuario, $idRequerimiento])[0];
             $postula=new \App\NotaRequerimiento;
             $postula->user_id = $idUsuario;
-            $postula->Requerimiento_id = $idRequerimiento;  
+            $postula->Requerimiento_id = $idRequerimiento; 
+            $postula->notaComision=$notaSecciones->suma;
+            $postula->notaParcial=$notaSecciones->suma; 
             $postula->save();
+
             } catch (\Illuminate\Database\QueryException $ex) {
                 
                
             }
+
      
             return view('postulante.RegistroCompletado');
        }
@@ -238,19 +259,29 @@ class PostularController extends Controller
                foreach($pdfs as $pdf){
                 $real_name=$pdf->getClientOriginalName();
                 if(!\DB::table('archivos')->where('Item_id',$idItem)->where('user_id',$idUsuario)->where('nombreOriginal',$real_name)->exists()){
+                $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
                 $archivo=new \App\Archivo;
-                
                 $archivo->tipo="item";
                 $archivo->Item_id=$idItem;
                 $archivo->nombreOriginal=$real_name;
                 $archivo->user_id=$idUsuario;
                 $archivo->convocatoria_id=$idConvocatoria;
                 $archivo->user_id=$idUsuario;
-                
+                $archivo->Requerimiento_id=$idRequerimiento;
                 $nombreArchivo="$idConvocatoria"."$idItem"."$idUsuario".".$real_name".".pdf";
                 $archivo->ruta="$sub_path"."/"."$nombreArchivo";
                 $pdf->move($destino_path,$nombreArchivo);
                 $archivo->save();
+
+                $nota_maximaItem=\App\Item::find($idItem)->notaPorItem;
+                $nota_item=new \App\NotaItem;
+                $nota_item->notaComision=$nota_maximaItem;
+                $nota_item->notaParcial=$nota_maximaItem;
+                $nota_item->user_id=$idUsuario;
+                $nota_item->Item_id=$idItem;
+                $nota_item->Requerimiento_id=$idRequerimiento;
+                $nota_item->Archivo_id=$archivo->id;
+                $nota_item->save();
                 }
                 }
             }
