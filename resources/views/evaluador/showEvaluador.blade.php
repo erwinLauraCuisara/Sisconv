@@ -36,7 +36,7 @@
                       <td> <?php echo $postulante->name." ".$postulante->apellidos;?></td>
                       <td>{{$postulante->email}}</td>
                       <td class="td-actions text-right">
-                          <form action="{{route('evaluador.evaluar', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$postulante->id])}}" method="get" style="display:inline">
+                          <form action="{{route('evaluador.showItems', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$postulante->id])}}" method="get" style="display:inline">
                         {{csrf_field()}}
 
                 <button class="btn btn-danger" type="submit" >Evaluar</button>

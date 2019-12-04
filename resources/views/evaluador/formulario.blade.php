@@ -19,7 +19,7 @@
 		$id=$item->id;
 		$idT=$id."texto";
 		?>
-		<form action="{{action('PostularController@addItems',['idItem'=>$id, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+		<form action="{{}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             	{{ csrf_field() }}
                 <tbody>   
                     <tr>
