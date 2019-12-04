@@ -1,6 +1,6 @@
 @extends('layout.principal')
 @section('body-class','profile-page sidebar-collapse')
-@section('content')
+@section('content') 
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
   </div>
   <div class="main main-raised">
@@ -37,7 +37,7 @@
              @foreach($items as $item)
           
                 @if($item->subseccion_id==$subseccion->id)
-                  @include('postulante.formulario',[$item, $contador])
+                  @include('evaluador.formulario',[$item, $contador])
                 @endif
               @endforeach
 

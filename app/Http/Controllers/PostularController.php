@@ -210,7 +210,7 @@ class PostularController extends Controller
              try {
             $postula=new \App\NotaRequerimiento;
             $postula->user_id = $idUsuario;
-            $postula->Requerimiento_id = $idRequerimiento;
+            $postula->Requerimiento_id = $idRequerimiento;  
             $postula->save();
             } catch (\Illuminate\Database\QueryException $ex) {
                 
