@@ -2,7 +2,7 @@
 @section('body-class','profile-page sidebar-collapse')
 @section('content')
 
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
 </div>
   <div class="main main-raised">
     <div class="container">  
@@ -22,10 +22,15 @@
         {{$requisitos=\App\Requisito::where("convocatoria_id","$requisito")->get()}}
         </label>
         @foreach($requisitos as $re)
-
-            
             <tr>
-                <td>{{$re->indispensable}}</td>
+                <td>
+                  <?php
+                    if(($re->indispensable)==true)
+                      echo "Indispensable";
+                    else
+                      echo "General";
+                  ?>
+                </td>
                 <td>{{$re->nombre}}</td>
                 <td>{{$re->descripcion}}</td>
                 <td>

@@ -29,7 +29,6 @@
                         <br>
                     @endforeach
             </tbody>
-
         <h4 class="title text-center h2">TABLA DE CALIFICACION DE MERITOS</h4>
         <div class="team">
           <div class="row">
@@ -75,7 +74,6 @@
              @endforeach  
              <br> 
             </table>
-           
           </div>
         </div>
       </div>

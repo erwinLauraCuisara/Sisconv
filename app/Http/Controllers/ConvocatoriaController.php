@@ -22,9 +22,7 @@ class ConvocatoriaController extends Controller
     public function store(Request $request)
     {          
         $datosConvocatoria=request()->except("_token");
-        if(!isset($datosConvocatoria['visible'])){
-                $datosConvocatoria['visible']=false;
-        }
+    
         $data=new convocatoria;
         $data->titulo = $datosConvocatoria['Titulo'];
         $data->area = $datosConvocatoria['area'];
@@ -33,9 +31,8 @@ class ConvocatoriaController extends Controller
         $data->fechaFin = $datosConvocatoria['fechaFin'];
         $data->fechaIniBole = $datosConvocatoria['fechaIniBole'];
         $data->fechaFinBole = $datosConvocatoria['fechaFinBole'];
-        $data->visible = $datosConvocatoria['visible'];
         $data->fechaLimRequisitos=$datosConvocatoria['fechaFinBole'];
-        $data->codigo=uniqid();
+        $data->codigo=substr(uniqid(rand(), true),5, 5);
         $data->save();
         $id=$data->id;
         
