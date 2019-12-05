@@ -13,7 +13,7 @@
     <thead class="thead-light">
         <tr>
             <th>Nombre</th>
-            <!-- <th>Descripcion</th> -->
+            <th>Nota Item</th>
             <th>Seccion</th>
             <th>Sub seccion</th>
         </tr>
@@ -25,7 +25,7 @@
     @foreach($items as $re)
         <tr>
             <td>{{$re->nombre}}</td>
-            <!-- <td>{{$re->descripcion}}</td> -->
+            <td>{{$re->notaPorItem}}</td>
             <td>{{$re->titulo_seccion}}</td>
             <td>{{$re->titulo_subseccion}}</td>
             <td>

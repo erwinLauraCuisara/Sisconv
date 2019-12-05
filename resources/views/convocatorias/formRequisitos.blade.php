@@ -12,7 +12,7 @@
     <table class="table table-light table-hover">
         <thead class="thead-light">
             <tr>
-                <th>Indispensable</th>
+                <th>Tipo de requisito</th>
                 <th>Titulo</th>
                 <th>Descripcion</th>
             </tr>
