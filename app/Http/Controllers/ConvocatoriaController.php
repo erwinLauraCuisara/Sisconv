@@ -22,9 +22,7 @@ class ConvocatoriaController extends Controller
     public function store(Request $request)
     {          
         $datosConvocatoria=request()->except("_token");
-        if(!isset($datosConvocatoria['visible'])){
-                $datosConvocatoria['visible']=false;
-        }
+    
         $data=new convocatoria;
         $data->titulo = $datosConvocatoria['Titulo'];
         $data->area = $datosConvocatoria['area'];
@@ -33,9 +31,8 @@ class ConvocatoriaController extends Controller
         $data->fechaFin = $datosConvocatoria['fechaFin'];
         $data->fechaIniBole = $datosConvocatoria['fechaIniBole'];
         $data->fechaFinBole = $datosConvocatoria['fechaFinBole'];
-        $data->visible = $datosConvocatoria['visible'];
         $data->fechaLimRequisitos=$datosConvocatoria['fechaFinBole'];
-        $data->codigo=uniqid();
+        $data->codigo=substr(uniqid(rand(), true),5, 5);
         $data->save();
         $id=$data->id;
         
@@ -73,8 +70,8 @@ class ConvocatoriaController extends Controller
         $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1 AND convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
         $requisitosGenerales=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=0 and convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
         $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
-        $subsecciones=\DB::select('SELECT subseccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions,subseccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id and subseccions.seccion_id=seccions.id AND subseccions.seccion_id=? ORDER BY subseccions.id',[$idConvocatoria]);
-        return view('convocatorias.convocatorias')->with(compact('convocatoria','requisitosIndispensables','requisitosGenerales','secciones','subsecciones'));
+        
+        return view('convocatorias.convocatorias')->with(compact('convocatoria','requisitosIndispensables','requisitosGenerales','secciones'));
     }
 
     public function edit(convocatoria $convocatoria)
