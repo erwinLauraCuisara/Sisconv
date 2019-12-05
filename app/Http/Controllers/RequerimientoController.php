@@ -119,7 +119,7 @@ class RequerimientoController extends Controller
         
 
 
-        return view('evaluador.evaluar')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
+        return view('evaluador.evaluar')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador','idUsuario'));
 
 
         

@@ -9,6 +9,12 @@
         <h1 class="title">Calificacion de meritos de {{$secciones[0]->convocatoriaTitulo}}</h1>
         <h2 class="title">SECCION: {{$secciones[$contador]->titulo}}</h2>
         <h2 class="title">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
+        <?php 
+            $Requerimiento_id=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
+            $notaSeccion=\App\NotaRequerimiento::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->get()[0];
+
+         ?>
+         <h2>Nota Final tabla de calificaciones : {{$notaSeccion->notaComision}}</h2>
         <div class="team">
           <div class="row">
             <label style="display:none">
@@ -18,6 +24,7 @@
 
         @foreach($subsecciones as $subseccion)
         <h3 class="title">Subseccion: {{$subseccion->titulo}}</h3>
+
         <h4 class="title">{{$subseccion->descripcion}}</h4>         
             <table class="table">
             	{{ csrf_field() }}
@@ -28,7 +35,7 @@
                     <th>Archivos por evaluar</th>
                     <th>Nota</th>
 
-                    <th class="text-right">Corregir nota</th>
+                    <th class="text-center">Corregir nota</th>
                     <th>Accion</th>
                  </tr>
              </thead>
@@ -36,9 +43,9 @@
  
              
              @foreach($items as $item)
-          
+              <?php $idItem=$item->id ?>
                 @if($item->subseccion_id==$subseccion->id)
-                  @include('evaluador.formulario',[$item, $contador])
+                  @include('evaluador.formulario',[$item, $contador,$idItem,$idUsuario])
                 @endif
               @endforeach
 
