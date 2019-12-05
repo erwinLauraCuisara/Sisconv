@@ -46,13 +46,13 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="Descripcion">{{'Descripcion'}}</label>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
         <div class="invalid-feedback">
             Debe llenar el campo
         </div>
-      </div>
+      </div> -->
     <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button> 
 </form>
   
