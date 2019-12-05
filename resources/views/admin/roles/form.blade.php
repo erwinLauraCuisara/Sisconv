@@ -2,7 +2,7 @@
 @section('body-class','landing-page sidebar-collapse')
 @section('content')
 
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
 </div>
   <div class="main main-raised">
     <div class="container">  
