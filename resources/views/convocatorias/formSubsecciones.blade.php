@@ -14,8 +14,8 @@ style="background-image: {{ URL::asset('/img/profile_city.jpg') }}">
     <thead class="thead-light">
         <tr>
             <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Punto numero</th>
+            <!-- <th>Descripcion</th>
+            <th>Punto numero</th> -->
             <th>Seccion</th>
         </tr>
     </thead>
@@ -32,8 +32,8 @@ style="background-image: {{ URL::asset('/img/profile_city.jpg') }}">
         
         <tr>
             <td>{{$re->titulo}}</td>
-            <td>{{$re->descripcion}}</td>
-            <td>{{$re->puntoNumero}}</td>
+            <!-- <td>{{$re->descripcion}}</td>
+            <td>{{$re->puntoNumero}}</td> -->
             <td>{{$re->titulo_seccion}}</td>
             <td>
                 <form action="" method="post" style="display:inline">
@@ -73,13 +73,13 @@ style="background-image: {{ URL::asset('/img/profile_city.jpg') }}">
               @endforeach
             </select>
           </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="Descripcion">{{'Descripcion'}}</label>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
         <div class="invalid-feedback">
             Debe llenar el campo
         </div>
-    </div>
+    </div> -->
 
     <button type="submit" class="btn btn-success">Agregar sub Seccion</button>
 </form>

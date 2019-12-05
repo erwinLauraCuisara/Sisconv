@@ -92,7 +92,7 @@ class RequerimientoController extends Controller
         $data->Titulo = $datosRequerimiento['Titulo'];
         $data->convocatoria_id = $requerimiento;
         $data->MaximaNota = $datosRequerimiento['MaximaNota'];
-        $data->descripcion = $datosRequerimiento['descripcion'];
+        //$data->descripcion = $datosRequerimiento['descripcion'];
         $data->fechaInicial = $datosRequerimiento['fechaIni'];
         $data->fechaFinal = $datosRequerimiento['fechaFin'];
         $data->save();

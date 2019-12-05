@@ -14,7 +14,7 @@
         <tr>
             <th>Titulo</th>
             <th>Nota Maxima</th>
-            <th>Punto Numero</th>
+            <!-- <th>Punto Numero</th> -->
 
         </tr>
     </thead>
@@ -26,7 +26,7 @@
         <tr>
             <td>{{$se->titulo}}</td>
             <td>{{$se->NotaMaxima}}</td>
-            <td>{{$se->puntoNumero}}</td>
+            <!-- <td>{{$se->puntoNumero}}</td> -->
             <td>
                 <form action="{{route('secciones.destroy', $se->id)}}" method="post" style="display:inline">
                 {{csrf_field()}}
