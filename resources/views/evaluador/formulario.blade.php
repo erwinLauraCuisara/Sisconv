@@ -24,7 +24,7 @@
                         <br>
                         <?php      
                         $ar=$archivo->ruta;
-                        $ruta="http://ares.hosting.cs.umss.edu.bo/$ar";
+                        $ruta="http://localhost:8080/$ar";
                         $Observacion=$archivo->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'>Ver Archivo</a>

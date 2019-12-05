@@ -29,7 +29,7 @@
                       <td>
                       <?php      
                         $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$idUser)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
-                        $ruta="http://ares.hosting.cs.umss.edu.bo/$archivo";
+                        $ruta="http://localhost:8080/$archivo";
                         $Observacion=$requisito->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>
@@ -70,7 +70,7 @@
                       <td>
                       <?php      
                         $archivo=\App\Archivo::where('Requisito_id',$requisito->id)->where('user_id',$idUser)->where('convocatoria_id',$idConvocatoria)->get()[0]->ruta;
-                        $ruta="http://ares.hosting.cs.umss.edu.bo/$archivo";
+                        $ruta="http://localhost:8080/$archivo";
                         $Observacion=$requisito->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'> ver archivo</a>

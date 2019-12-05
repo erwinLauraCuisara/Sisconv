@@ -26,14 +26,6 @@
                 <tbody>
                 @foreach($convocatorias as $convocatoria)
                     <tr>
-                      <td>
-                      <?php      
-                        if(($convocatoria->visible)==true)
-                            echo "Si";
-                        else
-                            echo "No";
-                      ?>
-                      </td>
                       <td class="text-center">{{$loop->iteration}}</td>
                       <td>{{$convocatoria->titulo}}</td>
                       <td>{{$convocatoria->area}}</td>
