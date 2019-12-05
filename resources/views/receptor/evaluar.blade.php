@@ -1,7 +1,7 @@
 @extends('layout.principal')
 @section('body-class','profile-page sidebar-collapse')
 @section('content')
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
   </div>
   <form action="{{route('receptor.evaluarSave',['idConvocatoria'=>$idConvocatoria, 'idUser'=>$idUser])}}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -128,8 +128,7 @@
     position:relative;
     top:1px
 }
-</style>
-          
+</style>  
           </div>
         </div>
       </div>

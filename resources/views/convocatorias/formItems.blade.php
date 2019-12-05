@@ -13,7 +13,7 @@
     <thead class="thead-light">
         <tr>
             <th>Nombre</th>
-            <th>Descripcion</th>
+            <!-- <th>Descripcion</th> -->
             <th>Seccion</th>
             <th>Sub seccion</th>
         </tr>
@@ -25,7 +25,7 @@
     @foreach($items as $re)
         <tr>
             <td>{{$re->nombre}}</td>
-            <td>{{$re->descripcion}}</td>
+            <!-- <td>{{$re->descripcion}}</td> -->
             <td>{{$re->titulo_seccion}}</td>
             <td>{{$re->titulo_subseccion}}</td>
             <td>
@@ -72,13 +72,13 @@
             </select>
           </div>
         
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="Descripcion">{{'Descripcion'}}</label>
         <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
         <div class="invalid-feedback">
             Debe llenar el campo
         </div>
-    </div>
+    </div> -->
     <button type="submit" class="btn btn-success">Agregar item</button>
 </form>
 <form action="{{action('ConvocatoriaController@store')}}" method="get" style="display:inline">

@@ -1,7 +1,7 @@
 @extends('layout.principal')
 @section('body-class','profile-page sidebar-collapse')
 @section('content')
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
   </div>
   <div class="main main-raised">
     <div class="container">  
@@ -13,7 +13,7 @@
             <table class="table">
              <thead>
                  <tr>
-                    <th>P</th>
+                    
                     <th class="text-center">Id</th>
                     <th>Titulo</th>
                     <th>Area</th>

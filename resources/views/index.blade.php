@@ -1,7 +1,7 @@
 @extends('layout.principal')
 @section('body-class','landing-page sidebar-collapse')
 @section('content')
-<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/profile_city.jpg')">
+<div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
     <div class="container">
       <div class="row">
         <div class="col-md-6">

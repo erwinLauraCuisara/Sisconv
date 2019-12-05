@@ -93,11 +93,17 @@ class ItemController extends Controller
         $data=new \App\Item;
         $data->nombre = $datosItems['nombre'];
         $data->notaPorItem =  $datosItems['NotaPorItem'];
-        $data->descripcion = $datosItems['descripcion'];
+        //$data->descripcion = $datosItems['descripcion'];
         $data->subseccion_id=$datosItems['subSeccion'];
         $data->save();
         $items=\DB::select("SELECT items.* ,  seccions.titulo AS titulo_seccion,subseccions.titulo AS titulo_subseccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos ,items where items.subseccion_id=subseccions.id and subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$id]);
-            $subsecciones=\DB::select("SELECT subseccions.titulo, subseccions.id from requerimientos, subseccions, seccions WHERE requerimientos.id=seccions.requerimiento_id and requerimientos.id=? group by subseccions.id",[$id]);
+            $subsecciones=\DB::select("SELECT subseccions.* , convocatorias.titulo as convocatoriaTitulo 
+            FROM convocatorias,seccions,subseccions, requerimientos 
+            WHERE convocatorias.id=requerimientos.convocatoria_id 
+            and seccions.requerimiento_id=requerimientos.id 
+            and subseccions.seccion_id=seccions.id 
+            AND requerimientos.convocatoria_id=1 ORDER BY subseccions.id
+            ",[$id]);
             
         
         return view('convocatorias.formItems')->with(compact('items','id','subsecciones'));        }
