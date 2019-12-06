@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="page-header header-filter" data-parallax="true" 
-style="background-image: {{ URL::asset('/img/imagen4.jpg') }}">
+style="background-image: url( {{ asset('../img/imagen4.jpg') }} );">>
+
 </div>
   <div class="main main-raised">
     <div class="container">  

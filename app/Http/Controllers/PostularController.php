@@ -83,7 +83,8 @@ class PostularController extends Controller
         //
     }
     public function getRequisitosIndispensables($idConvocatoria , Request $request){
-        $mensaje="codigo incorrecto porfabor vuelva a intentarlo";
+        
+        $mensaje="CODIGO INCORRECTO PORFAVOR VUELVA A INGRESAR EL CODIGO";
         $codigo=request()->except("_token");
         $convocatoria=\App\convocatoria::find($idConvocatoria);
         $requisitosIndispensables=\DB::select("SELECT requisitos.* from convocatorias, requisitos where requisitos.convocatoria_id=? and requisitos.indispensable=1 AND convocatorias.id=requisitos.convocatoria_id",[$idConvocatoria]);
