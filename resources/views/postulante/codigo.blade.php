@@ -10,9 +10,12 @@
     <div class="container" style="margin-top: 15px">
     <h2 class="text-center">Ingrese su codigo para poder registrarse a esta convocatoria</h2>
     <br><br>
+    <div class='text-center text-danger'>
     @if(isset($mensaje))
         {{$mensaje}}
     @endif
+    </div>
+    
     <form action="{{route('postular.getRequisitosIndispensables', $idConvocatoria) }}" method="get" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
 
       {{ csrf_field() }}

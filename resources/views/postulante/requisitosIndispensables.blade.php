@@ -33,15 +33,14 @@
                       <td class="td-actions text-right">
                           
                 
-                <div class="col-md-12 centrear">
+          <div class="col-md-12 centrear">
           <label for="{{$id}}" class="subirPdf">
             <img src="{{URL::asset('/img/subirPdf.png')}}" height="50">
             <i class="fas fa-cloud-upload-alt"></i> 
             <p class="texto_imagen_sub">PDF</p>
           </label>
-          <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file" 
+          <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file"  
           style='display: none;' accept="application/pdf"/>
-          
           </div>
                 
                       </td>
