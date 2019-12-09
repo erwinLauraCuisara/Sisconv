@@ -1,20 +1,11 @@
-@if(count($errors)>0)
-  <div>
-      <ul>
-      @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-      @endforeach                
-      </ul>
-  </div>
-@endif
+
    		<?php  
 
 		$archivos=\DB::select('SELECT archivos.* FROM items, archivos,users,convocatorias ,requerimientos WHERE archivos.user_id=users.id AND archivos.convocatoria_id=convocatorias.id AND archivos.Requerimiento_id=requerimientos.id AND archivos.Item_id=items.id AND items.id=? AND users.id=? ORDER BY archivos.id',[$idItem,$idUsuario]);
     $nota_items=\DB::select('SELECT nota_items.* FROM nota_items, users, requerimientos, archivos ,items WHERE nota_items.user_id=users.id AND nota_items.Requerimiento_id=requerimientos.id AND nota_items.Archivo_id=archivos.id AND nota_items.Item_id=items.id AND items.id=? AND users.id=? ORDER BY nota_items.Archivo_id', [$idItem,$idUsuario]);
 		
 		?>
-		<form action="" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
-            	{{ csrf_field() }}
+
                 <tbody>   
                     <tr>
                       <td>{{$item->nombre}}</td>
@@ -25,7 +16,6 @@
                         <?php      
                         $ar=$archivo->ruta;
                         $ruta="http://localhost:8000/$ar";
-                        $Observacion=$archivo->id."t";
                        ?>
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'>Ver Archivo</a>
                       @endforeach
@@ -37,23 +27,23 @@
 
                         {{$nota_item->notaComision}}
                         @endforeach
-                      </td>           
-                      <form action="" method="get" style="display:inline">
-                      {{ csrf_field() }}
+                      </td>  
+                               
+                      
                       <td>
-                        @foreach($archivos as $key=>$archivo)
+                          <form action="{{route('evaluador.save',['idItem'=>$idItem, 'idUsuario'=>$idUsuario])}}" method="get" style="display:inline">
+                              {{ csrf_field() }}
+                        @foreach($archivos as $archivo)
 
                         <br>
-                        <input type="text" name="{{$key}}" class="form-control" id="d" required>
+                        <input type="text" name="{{$archivo->id}}" class="form-control" id="{{$archivo->id}}">
                         @endforeach
-                      </td>
-
-     		             <td>
-                      <br><button type="submit" class="btn btn-primary ">Corregir Nota</button></td>
+                      <button type="submit" class="btn btn-primary ">Corregir Nota</button>
                     </form>
+                  </td>
                     </tr>       
                 </tbody>
-             </form>
+            
              <style type="text/css">
   .button {
     width:100px;

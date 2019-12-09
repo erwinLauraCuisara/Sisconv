@@ -111,6 +111,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 	Route::get("/evaluador/show/{idConvocatoria}/{idUser}",'RequerimientoController@showItems')->name('evaluador.showItems');
 
+	Route::get("/evaluador/save/{idItem}/{idUsuario}",'RequerimientoController@save')->name('evaluador.save');
+	Route::get("/evaluador/show/{idConvocatoria}/{idUser}/{contador}",'RequerimientoController@siguiente')->name('evaluador.siguiente');
+
 
 
 Route::resource('postular','PostularController');
