@@ -10,7 +10,7 @@
         <div class="team">
           <div class="row">
 			
-          <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria)}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
+          <form action="{{route('postular.setRequisitosIndispensables', $idConvocatoria)}}" method="post" class="needs-validation"  id="myForm" enctype="multipart/form-data">
             <table class="table">
             	{{ csrf_field() }}
              <thead>
@@ -39,8 +39,7 @@
             <i class="fas fa-cloud-upload-alt"></i> 
             <p class="texto_imagen_sub">PDF</p>
           </label>
-          <input id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" type="file"  
-          style='display: none;' accept="application/pdf"/>
+          <input  type="file" id="{{$id}}" name="{{$id}}" onchange="cambiar('{{$id}}','{{$idT}}')" required  accept="application/pdf" />
           </div>
                 
                       </td>

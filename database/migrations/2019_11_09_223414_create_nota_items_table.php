@@ -21,6 +21,7 @@ class CreateNotaItemsTable extends Migration
             $table->integer('Requerimiento_id')->unsigned()     ;
             $table->integer('Item_id')->unsigned();
             $table->integer('Archivo_id')->unsigned();
+            $table->boolean('validado')->default(false);
             $table->unique(['user_id','Requerimiento_id','Item_id','Archivo_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('Item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
