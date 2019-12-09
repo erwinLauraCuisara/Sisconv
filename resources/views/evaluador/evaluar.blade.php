@@ -11,10 +11,12 @@
         <h2 class="title">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
         <?php 
             $Requerimiento_id=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-            $notaSeccion=\App\NotaRequerimiento::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->get()[0];
-
+            
+            $notaRequerimiento=\App\NotaRequerimiento::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->get()[0];
+            $notaSeccion=\App\NotaSeccion::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->where('Seccion_id',$secciones[$contador]->id)->get()[0];
          ?>
-         <h2>Nota Final tabla de calificaciones : {{$notaSeccion->notaComision}}</h2>
+         <h2>Nota Final de la convocatoria : {{$notaRequerimiento->notaComision}}</h2>
+         <h2>Nota Final de esta Seccion : {{$notaSeccion->notaComision}}</h2>
         <div class="team">
           <div class="row">
             <label style="display:none">
@@ -33,7 +35,7 @@
                     <th>Nombre Item</th>
                     <th>Nota por Item</th>
                     <th>Archivos por evaluar</th>
-                    <th>Nota</th>
+              
 
                     <th class="text-center">Corregir nota</th>
                     <th>Accion</th>
@@ -55,9 +57,8 @@
 
 
 
-            <form action="" method="post" style="display:inline">
+            <form action="{{route('evaluador.siguiente',['idConvocatoria'=>$idConvocatoria,'idUser'=>$idUsuario, 'contador'=>$contador])}}" method="get" style="display:inline">
               {{ csrf_field() }}
-              <input type="hidden" name="xd" value="xd">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button>
             </form>
 
@@ -66,26 +67,6 @@
       </div>
     </div>
   </div>
-
-  <script type="text/javascript">
-          function cambiar(nombre, info){
-              var pdrs="";
-          for (paso = 0; paso < 100; paso++) {
-            try {
-              pdrs=pdrs+"*"+document.getElementById(nombre).files[paso].name+"<br>";
-            }
-            catch(error) {
-              break;
-            }
-        
-            
-          };
-          
-
-          document.getElementById(info).innerHTML = pdrs;
-
-        }
-        </script>
  <footer class="footer">
       <div class="container">
         <nav class="float-left">
