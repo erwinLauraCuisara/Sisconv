@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\convocatoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ConvocatoriaController extends Controller
 {
@@ -109,4 +110,16 @@ class ConvocatoriaController extends Controller
 
     }
     
+    public function calificacionesPostulante($idConvocatoria){
+        $convocatoria=\App\convocatoria::find($idConvocatoria); 
+        $notas=\DB::select('SELECT nota_requerimientos.*, users.name, users.email,users.id
+        FROM nota_requerimientos,users,requerimientos,convocatorias
+        WHERE convocatorias.id=requerimientos.convocatoria_id
+        AND nota_requerimientos.Requerimiento_id=requerimientos.id 
+        AND nota_requerimientos.user_id=users.id
+        and nota_requerimientos.evaluado=1
+        AND nota_requerimientos.Requerimiento_id=?'
+         ,[$idConvocatoria,]);        
+        return view('postulante.calificaciones')->with(compact('notas','convocatoria','idConvocatoria'));
+    }
 }

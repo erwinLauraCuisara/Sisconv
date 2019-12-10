@@ -22,6 +22,8 @@ Route::get("/storage/convocatorias/{id}/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/$file");
 });
 Route::get('convocatoria/{idConvocatoria}', 'ConvocatoriaController@show')->name('convocatorias.show');
+Route::get('convocatoria/{idConvocatoria}/postulantes', 'ConvocatoriaController@calificacionesPostulante')->name('convocatorias.calificacionesPostulante');
+Route::get('convocatoria/{idConvocatoria}/postulantes/{idUsuario}', 'ConvocatoriaUsuarioController@getNota')->name('convocatorias.getNota');
 Route::get("/storage/convocatorias/{id}/reqGenerales/{file}",function ($id,$file){
 	return Storage::download("storage/convocatorias/$id/reqGenerales/$file");
 });

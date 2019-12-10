@@ -3,9 +3,7 @@
 
 		$archivos=\DB::select('SELECT archivos.* FROM items, archivos,users,convocatorias ,requerimientos WHERE archivos.user_id=users.id AND archivos.convocatoria_id=convocatorias.id AND archivos.Requerimiento_id=requerimientos.id AND archivos.Item_id=items.id AND items.id=? AND users.id=? ORDER BY archivos.id',[$idItem,$idUsuario]);
     $nota_items=\DB::select('SELECT nota_items.* FROM nota_items, users, requerimientos, archivos ,items WHERE nota_items.user_id=users.id AND nota_items.Requerimiento_id=requerimientos.id AND nota_items.Archivo_id=archivos.id AND nota_items.Item_id=items.id AND items.id=? AND users.id=? ORDER BY nota_items.Archivo_id', [$idItem,$idUsuario]);
-		
 		?>
-
                 <tbody>   
                     <tr>
                       <td>{{$item->nombre}}</td>
