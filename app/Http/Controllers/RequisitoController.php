@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Archivo;
 use App\Requisito;
 use Illuminate\Http\Request;
 use App\Requisito_usuario;
@@ -191,10 +192,44 @@ class RequisitoController extends Controller
                 $value=false;
             }
             \App\Archivo::find($idArchivo)->update(['validado' => $value]);
+            $archivo=\App\Archivo::find($idArchivo);
+            if($value==true){
+                try {
+            $nota_maximaItem=\App\Item::find($archivo->Item_id)->notaPorItem;
+            $nota_item=new \App\NotaItem;
+            $nota_item->notaComision=$nota_maximaItem;
+            $nota_item->notaParcial=$nota_maximaItem;
+            $nota_item->user_id=$archivo->user_id;
+            $nota_item->Item_id=$archivo->Item_id;
+            $nota_item->Requerimiento_id=$archivo->Requerimiento_id;
+            $nota_item->Archivo_id=$archivo->id;
+            $nota_item->save();
+            } catch (\Illuminate\Database\QueryException $ex) {
+                
+               
+             }
+            }
                 
         } 
+
+            $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
+            $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+            $idSeccion=$secciones[$contador]->id;
+            $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions,archivos WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=? AND archivos.id=nota_items.Archivo_id AND archivos.validado=true',[$idUser,$idRequerimiento, $idSeccion])[0];
+            try {
+            $nota_seccion=new \App\NotaSeccion;
+            $nota_seccion->notaComision=$notaSumItems->sumaItem;
+            $nota_seccion->notaParcial=$notaSumItems->sumaItem;
+            $nota_seccion->user_id=$idUser;
+            $nota_seccion->Requerimiento_id=$idRequerimiento;
+            $nota_seccion->Seccion_id=$idSeccion;
+            $nota_seccion->save();
+            } catch (\Illuminate\Database\QueryException $ex) {
+                
+               
+            }
         $contador+=1;    
-        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        
         if($contador<count($secciones)){
         $subsecciones=\DB::select('SELECT subseccions.*  from subseccions, seccions, requerimientos ,convocatorias where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and convocatorias.id=requerimientos.convocatoria_id and subseccions.seccion_id=? AND convocatorias.id=?',[$secciones[$contador]->id,$idConvocatoria]);
         $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
@@ -204,6 +239,22 @@ class RequisitoController extends Controller
         return view('receptor.evaluarItem')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador','idUser'));
         }
         else{
+             try {
+
+
+
+            $notaSecciones=\DB::select('SELECT sum(nota_seccions.notaComision) as suma FROM nota_seccions, requerimientos,seccions WHERE nota_seccions.user_id=? AND nota_seccions.Requerimiento_id=requerimientos.id AND nota_seccions.Seccion_id=seccions.id AND requerimientos.id=?',[$idUser, $idRequerimiento])[0];
+            $postula=new \App\NotaRequerimiento;
+            $postula->user_id = $idUser;
+            $postula->Requerimiento_id = $idRequerimiento; 
+            $postula->notaComision=$notaSecciones->suma;
+            $postula->notaParcial=$notaSecciones->suma; 
+            $postula->save();
+
+            } catch (\Illuminate\Database\QueryException $ex) {
+                
+               
+            }
              
             $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
 

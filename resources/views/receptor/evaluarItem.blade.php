@@ -12,8 +12,8 @@
         <?php 
             $Requerimiento_id=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
             
-            $notaRequerimiento=\App\NotaRequerimiento::where('user_id',$idUser)->where('Requerimiento_id',$Requerimiento_id)->get()[0];
-            $notaSeccion=\App\NotaSeccion::where('user_id',$idUser)->where('Requerimiento_id',$Requerimiento_id)->where('Seccion_id',$secciones[$contador]->id)->get()[0];
+           
+            
          ?>
         <div class="team">
           <div class="row">
