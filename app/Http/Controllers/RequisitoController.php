@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Archivo;
+use App\NotaSeccion;
 use App\Requisito;
 use Illuminate\Http\Request;
 use App\Requisito_usuario;
@@ -107,15 +108,6 @@ class RequisitoController extends Controller
         $data->indispensable = $datosRequisito['Indispensable'];
         $data->descripcion = $datosRequisito['descripcion'];
         $data->save();
-        /*
-        $data=new \App\Requisito;
-        $data->nombre = $datosRequisito['Titulo'];
-        $data->convocatoria_id = $requisito;
-        $data->indispensable = $datosRequisito['Indispensable'];
-        $data->descripcion = $datosRequisito['descripcion'];
-        $data->save();
-        */
-
         $convocatoria=\App\convocatoria::find($requisito);
         $convocatoria->fechaLimRequisitos=$datosRequisito['fechaFin'];
         $convocatoria->save();
@@ -143,7 +135,7 @@ class RequisitoController extends Controller
     public function evaluarSave($idConvocatoria, $idUser , Request $request){
     
                 $ids=request()->except("_token");
-
+                $reqIndispensable=true;
                 foreach ($ids as $idRequisito =>$value) {
                    
                     if(strpos($idRequisito, 't')==true){
@@ -159,7 +151,14 @@ class RequisitoController extends Controller
                         if(!isset($value)){
                             $value=false;
                         }
+
                         $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idRequisito)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['valido' => $value]);
+                        
+                        if(Requisito::find($idRequisito)->indispensable==1){
+                            $reqIndispensable=$reqIndispensable and $value;
+                        }
+
+                        $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => true]);
                         
 
                     }
@@ -217,9 +216,16 @@ class RequisitoController extends Controller
             $idSeccion=$secciones[$contador]->id;
             $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions,archivos WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=? AND archivos.id=nota_items.Archivo_id AND archivos.validado=true',[$idUser,$idRequerimiento, $idSeccion])[0];
             try {
+            $notaMaxSeccion=$secciones[$contador]->NotaMaxima;
             $nota_seccion=new \App\NotaSeccion;
+            if($notaMaxSeccion<=$notaSumItems->sumaItem){
             $nota_seccion->notaComision=$notaSumItems->sumaItem;
             $nota_seccion->notaParcial=$notaSumItems->sumaItem;
+            }
+            else{
+            $nota_seccion->notaComision=$notaMaxSeccion;
+            $nota_seccion->notaParcial=$notaMaxSeccion; 
+            }
             $nota_seccion->user_id=$idUser;
             $nota_seccion->Requerimiento_id=$idRequerimiento;
             $nota_seccion->Seccion_id=$idSeccion;
@@ -259,7 +265,7 @@ class RequisitoController extends Controller
             $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
 
             $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
-            $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => true]); 
+             
     
     
         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados','idUser'));
