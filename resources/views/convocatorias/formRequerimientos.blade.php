@@ -39,7 +39,7 @@
       <div class="form-row">
         <div class="form-group col-md-6">
 
-          <label for="MaximaNota">{{'Maxima nota'}}</label>
+          <label for="MaximaNota">{{'Porcentaje de la Tabla de Calificacion de Meritos en la Convocatoria'}}</label>
           <input type="text" name="MaximaNota" class="form-control" id="MaximaNota" required>
           <div class="invalid-feedback">
             Debe llenar el campo

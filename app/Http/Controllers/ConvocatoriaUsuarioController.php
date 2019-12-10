@@ -19,6 +19,20 @@ class ConvocatoriaUsuarioController extends Controller
         return view('index')->with(compact('convocatorias'));
     }
 
+    public function getNota($idConvocatoria, $idUsuario){
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
+        $notas=\DB::select('SELECT nota_requerimientos.*, users.name, users.email,users.id
+        FROM nota_requerimientos,users,requerimientos,convocatorias
+        WHERE convocatorias.id=requerimientos.convocatoria_id
+        AND nota_requerimientos.Requerimiento_id=requerimientos.id 
+        AND nota_requerimientos.user_id=users.id
+        and nota_requerimientos.evaluado=1
+        AND nota_requerimientos.Requerimiento_id=?'
+         ,[$idConvocatoria,]);   
+        return view('postulante.calificacionIndividual')->with(compact('idConvocatoria', 'secciones','subsecciones','items','idUsuario','notas'));
+    } 
+
     /**
      * Show the form for creating a new resource.
      *

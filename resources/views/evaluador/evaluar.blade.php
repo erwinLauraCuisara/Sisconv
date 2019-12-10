@@ -5,18 +5,19 @@
   </div>
   <div class="main main-raised">
     <div class="container">  
-    <div class="section text-center">
-        <h1 class="title">Calificacion de meritos de {{$secciones[0]->convocatoriaTitulo}}</h1>
-        <h2 class="title">SECCION: {{$secciones[$contador]->titulo}}</h2>
-        <h2 class="title">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
+    <div class="section ">
+        <h1 class="title text-center">Calificacion de meritos de {{$secciones[0]->convocatoriaTitulo}}</h1>
+        <h2 class="title text-center">SECCION: {{$secciones[$contador]->titulo}}</h2>
+        <h2 class="title text-center">Nota Maxima de esta seccion:  {{$secciones[$contador]->NotaMaxima}}</h2>
         <?php 
             $Requerimiento_id=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-            
             $notaRequerimiento=\App\NotaRequerimiento::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->get()[0];
             $notaSeccion=\App\NotaSeccion::where('user_id',$idUsuario)->where('Requerimiento_id',$Requerimiento_id)->where('Seccion_id',$secciones[$contador]->id)->get()[0];
          ?>
-         <h2>Nota Final de la convocatoria : {{$notaRequerimiento->notaComision}}</h2>
-         <h2>Nota Final de esta Seccion : {{$notaSeccion->notaComision}}</h2>
+         <h2 class="text-center">Nota Final de la convocatoria : {{$notaRequerimiento->notaComision}}</h2>
+
+         <h2>Nota Final de esta Seccion Sistema : {{$notaSeccion->notaParcial}}</h2>
+         <h2>Nota Final de esta Seccion Comision Evaluadora : {{$notaSeccion->notaComision}}</h2>
         <div class="team">
           <div class="row">
             <label style="display:none">
