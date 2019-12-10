@@ -22,7 +22,7 @@
         <!--<h4 class="title">{{$subseccion->descripcion}}</h4>-->         
             <table class="table">
             	{{ csrf_field() }}
-             <thead>
+             <thead class="thead-dark border">
                  <tr>
                     <th>Nombre Item</th>
                     <th>Nota por Item</th>

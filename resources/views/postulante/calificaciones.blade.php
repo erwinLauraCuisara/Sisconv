@@ -18,6 +18,7 @@
                    <th>Correo</th> 
                    <th>Nota Sistema</th>
                    <th>Nota Comision</th>
+                   <th>Porcentaje de la tabla de Meritos en la Convocatoria</th>
             </thead>
             @foreach($notas as $nota)
             <tbody >
@@ -25,7 +26,7 @@
                    <td>{{$nota->email}}</td> 
                    <td>{{$nota->notaParcial}}</td>
                    <td>{{$nota->notaComision}}</td>
-                   <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a><td>
+                   <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a></td>
             </tbody>
             @endforeach
              <br> 
