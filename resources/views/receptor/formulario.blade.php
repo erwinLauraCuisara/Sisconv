@@ -19,25 +19,20 @@
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'>Ver Archivo</a>
                       @endforeach
                     </td>
-                      <td>
+                      <td><br>
                       @foreach($archivos as $archivo)
-                        <br>
+                        
                         <br>
                         <div class="togglebutton">
                         <label>
-                          <input type="checkbox" name="s" id="d" value="1">
+                        <input type="checkbox" name="{{$archivo->id}}" id="{{$archivo->id}}" value="1">
                           <span class="toggle"></span>
                           Ok
                         </label>
                       </div>
                       @endforeach
                       </td> 
-                      <td>
-                      @foreach($archivos as $archivo)
-                      <br>
-                        <input type="text" name="dd" class="form-control" id="fff" required>
-                        @endforeach
-                      </td>
+                      
 
                                
                       

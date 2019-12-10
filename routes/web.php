@@ -67,6 +67,7 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('register/receptor', 'Auth\RegisterController@showRegistrationFormReceptor')->name('register');
 Route::post('register/receptor', 'Auth\RegisterController@registerReceptor');
 
+
 //Rutas de Registro Evaluador
 Route::get('register/evaluador', 'Auth\RegisterController@showRegistrationFormEvaluador')->name('register');
 Route::post('register/evaluador', 'Auth\RegisterController@registerEvaluador');
@@ -104,6 +105,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 	Route::get("/receptor/evaluar/{idConvocatoria}/{idUser}",'RequisitoController@evaluar')->name('receptor.evaluar');
 	Route::get("/receptor/evaluar/save/{idConvocatoria}/{idUser}",'RequisitoController@evaluarSave')->name('receptor.evaluarSave');
+
+	Route::get("/receptor/evaluar/item/{idConvocatoria}/{idUser}/{contador}",'RequisitoController@evaluarItem')->name('receptor.evaluarItem');
 
 
 	//rutas para evaluador

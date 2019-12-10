@@ -3,6 +3,8 @@
 @section('content') 
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('../img/imagen4.jpg')">
   </div>
+  <form action="{{route('receptor.evaluarItem',['idConvocatoria'=>$idConvocatoria,'idUser'=>$idUser, 'contador'=>$contador])}}" method="get" style="display:inline">
+      {{ csrf_field() }}
   <div class="main main-raised">
     <div class="container">  
     <div class="section text-center">
@@ -32,7 +34,7 @@
                     
                     <th>Archivos por validar</th>
                     <th>item valido</th>
-                    <th>observacion</th>
+                   
 
 
               
@@ -56,16 +58,16 @@
 
 
 
-            <form action="{{route('evaluador.siguiente',['idConvocatoria'=>$idConvocatoria,'idUser'=>$idUser, 'contador'=>$contador])}}" method="get" style="display:inline">
-              {{ csrf_field() }}
+            
             <button type="submit" class="btn btn-primary btn-lg btn-block">Siguiente</button>
-            </form>
+           
 
           </div>
         </div>
       </div>
     </div>
   </div>
+  </form>
  <footer class="footer">
       <div class="container">
         <nav class="float-left">
