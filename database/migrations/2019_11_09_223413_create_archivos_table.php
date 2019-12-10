@@ -17,6 +17,7 @@ class CreateArchivosTable extends Migration
             $table->increments('id');
             $table->string('ruta');
             $table->string('tipo')->nullable();
+            $table->boolean('validado')->default(false);
             $table->string('nombreOriginal')->nullable();           
             $table->integer('Requisito_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();

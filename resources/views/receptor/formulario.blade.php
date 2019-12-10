@@ -1,13 +1,14 @@
 
    		<?php  
 
-		$archivos=\DB::select('SELECT archivos.* FROM items, archivos,users,convocatorias ,requerimientos WHERE archivos.user_id=users.id AND archivos.convocatoria_id=convocatorias.id AND archivos.Requerimiento_id=requerimientos.id AND archivos.Item_id=items.id AND archivos.validado=true AND items.id=? AND users.id=? ORDER BY archivos.id',[$idItem,$idUsuario]);
-    $nota_items=\DB::select('SELECT nota_items.* FROM nota_items, users, requerimientos, archivos ,items WHERE nota_items.user_id=users.id AND nota_items.Requerimiento_id=requerimientos.id AND nota_items.Archivo_id=archivos.id AND nota_items.Item_id=items.id AND items.id=? AND users.id=? ORDER BY nota_items.Archivo_id', [$idItem,$idUsuario]);
+		$archivos=\DB::select('SELECT archivos.* FROM items, archivos,users,convocatorias ,requerimientos WHERE archivos.user_id=users.id AND archivos.convocatoria_id=convocatorias.id AND archivos.Requerimiento_id=requerimientos.id AND archivos.Item_id=items.id AND items.id=? AND users.id=? ORDER BY archivos.id',[$idItem,$idUser]);
+    $nota_items=\DB::select('SELECT nota_items.* FROM nota_items, users, requerimientos, archivos ,items WHERE nota_items.user_id=users.id AND nota_items.Requerimiento_id=requerimientos.id AND nota_items.Archivo_id=archivos.id AND nota_items.Item_id=items.id AND items.id=? AND users.id=? ORDER BY nota_items.Archivo_id', [$idItem,$idUser]);
+		
 		?>
+
                 <tbody>   
                     <tr>
                       <td>{{$item->nombre}}</td>
-                      <td>{{$item->notaPorItem}}</td>
                       <td>
                         @foreach($archivos as $archivo)
                         <br>
@@ -18,27 +19,24 @@
                       <a type='button' href="{{$ruta}}" target='_blank' class='button'>Ver Archivo</a>
                       @endforeach
                     </td>
-                      <td>
-                        @foreach($nota_items as $nota_item)
+                      <td><br>
+                      @foreach($archivos as $archivo)
+                        
                         <br>
-                        <br>
+                        <div class="togglebutton">
+                        <label>
+                        <input type="checkbox" name="{{$archivo->id}}" id="{{$archivo->id}}" value="1">
+                          <span class="toggle"></span>
+                          Ok
+                        </label>
+                      </div>
+                      @endforeach
+                      </td> 
+                      
 
-                        {{$nota_item->notaComision}}
-                        @endforeach
-                      </td>  
                                
                       
-                      <td>
-                          <form action="{{route('evaluador.save',['idItem'=>$idItem, 'idUsuario'=>$idUsuario])}}" method="get" style="display:inline">
-                              {{ csrf_field() }}
-                        @foreach($archivos as $archivo)
-
-                        <br>
-                        <input type="text" name="{{$archivo->id}}" class="form-control" id="{{$archivo->id}}">
-                        @endforeach
-                      <button type="submit" class="btn btn-primary ">Corregir Nota</button>
-                    </form>
-                  </td>
+                  
                     </tr>       
                 </tbody>
             

@@ -194,16 +194,7 @@ class PostularController extends Controller
         }
         else{
             
-            $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-            $idSeccion=$secciones[$contador]->id;
-            $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=?',[$idUsuario,$idRequerimiento, $idSeccion])[0];
-            $nota_seccion=new \App\NotaSeccion;
-            $nota_seccion->notaComision=$notaSumItems->sumaItem;
-            $nota_seccion->notaParcial=$notaSumItems->sumaItem;
-            $nota_seccion->user_id=$idUsuario;
-            $nota_seccion->Requerimiento_id=$idRequerimiento;
-            $nota_seccion->Seccion_id=$idSeccion;
-            $nota_seccion->save();
+            
             $contador+=1;
         }
 
@@ -220,25 +211,7 @@ class PostularController extends Controller
            return view('postulante.items')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador'));
        }
        else{
-            $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-             try {
-
-
-
-            $notaSecciones=\DB::select('SELECT sum(nota_seccions.notaComision) as suma FROM nota_seccions, requerimientos,seccions WHERE nota_seccions.user_id=? AND nota_seccions.Requerimiento_id=requerimientos.id AND nota_seccions.Seccion_id=seccions.id AND requerimientos.id=?',[$idUsuario, $idRequerimiento])[0];
-            $postula=new \App\NotaRequerimiento;
-            $postula->user_id = $idUsuario;
-            $postula->Requerimiento_id = $idRequerimiento; 
-            $postula->notaComision=$notaSecciones->suma;
-            $postula->notaParcial=$notaSecciones->suma; 
-            $postula->save();
-
-            } catch (\Illuminate\Database\QueryException $ex) {
-                
-               
-            }
-
-     
+        
             return view('postulante.RegistroCompletado');
        }
      
@@ -274,15 +247,7 @@ class PostularController extends Controller
                 $pdf->move($destino_path,$nombreArchivo);
                 $archivo->save();
 
-                $nota_maximaItem=\App\Item::find($idItem)->notaPorItem;
-                $nota_item=new \App\NotaItem;
-                $nota_item->notaComision=$nota_maximaItem;
-                $nota_item->notaParcial=$nota_maximaItem;
-                $nota_item->user_id=$idUsuario;
-                $nota_item->Item_id=$idItem;
-                $nota_item->Requerimiento_id=$idRequerimiento;
-                $nota_item->Archivo_id=$archivo->id;
-                $nota_item->save();
+
                 }
                 }
             }
