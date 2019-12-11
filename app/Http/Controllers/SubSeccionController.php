@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subseccion;
 use Illuminate\Http\Request;
 
 class SubSeccionController extends Controller
@@ -82,9 +83,16 @@ class SubSeccionController extends Controller
      * @param  \App\SeccionGrupoitems  $seccionGrupoitems
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SeccionGrupoitems $seccionGrupoitems)
+    public function destroy($idSub)
     {
-        //
+        $subSeccion=Subseccion::find($idSub);
+        $id=\DB::select("SELECT requerimientos.id FROM subseccions,seccions,requerimientos WHERE subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND subseccions.id=?",[$idSub])[0]->id;
+        $subSeccion->delete();
+     
+        $subsecciones=\DB::select("SELECT subseccions.* ,  seccions.titulo AS titulo_seccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$id]);
+
+        
+        return view('convocatorias.formSubsecciones')->with(compact('subsecciones','id'));
     }
 
     public function agregar($subseccion, Request $request)
@@ -95,9 +103,6 @@ class SubSeccionController extends Controller
         $data->seccion_id =  $datosSubseccion['Seccion'];
         //$data->descripcion = $datosSubseccion['descripcion'];
         $data->save();
-        $subsecciones=\DB::select("SELECT subseccions.* ,  seccions.titulo AS titulo_seccion, requerimientos.id AS id_requerimiento from subseccions, seccions, requerimientos where subseccions.seccion_id=seccions.id and seccions.requerimiento_id=requerimientos.id and requerimientos.id=?",[$subseccion]);
-        $id=$subsecciones[0]->id_requerimiento;
-        
-        return view('convocatorias.formSubsecciones')->with(compact('subsecciones','id'));
+        return redirect(route('subsecciones.show', $subseccion));
         }
 }

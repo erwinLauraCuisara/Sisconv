@@ -29,7 +29,7 @@
             <td>{{$re->titulo_seccion}}</td>
             <td>{{$re->titulo_subseccion}}</td>
             <td>
-                <form action="" method="post" style="display:inline">
+            <form action="{{route('items.destroy',$re->id)}}" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{ method_field('DELETE')}}
                 <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar este item?')">Borrar</button>

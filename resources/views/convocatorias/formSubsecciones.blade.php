@@ -37,7 +37,7 @@ style="background-image: url( {{ asset('../img/imagen4.jpg') }} );">>
             <td>{{$re->puntoNumero}}</td> -->
             <td>{{$re->titulo_seccion}}</td>
             <td>
-                <form action="" method="post" style="display:inline">
+            <form action="{{route('subsecciones.destroy',$re->id)}}" method="post" style="display:inline">
                 {{csrf_field()}}
                 {{ method_field('DELETE')}}
                 <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estas seguro de borrar esta convocatoria?')">Borrar</button>
