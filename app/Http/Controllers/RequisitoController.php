@@ -135,6 +135,7 @@ class RequisitoController extends Controller
     public function evaluarSave($idConvocatoria, $idUser , Request $request){
     
                 $ids=request()->except("_token");
+                
                 $reqIndispensable=true;
                 foreach ($ids as $idRequisito =>$value) {
                    
@@ -154,16 +155,15 @@ class RequisitoController extends Controller
 
                         $req_usuarios=\App\Req_Usuario::where('Requisito_id',$idRequisito)->where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['valido' => $value]);
                         
-                        if(Requisito::find($idRequisito)->indispensable==1){
+                        $indi=\App\Requisito::find($idRequisito)->indispensable;
+                        
+                        if($indi==true){
                             $reqIndispensable=$reqIndispensable and $value;
                         }
 
-                        $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => true]);
-                        
-
                     }
                 }
-            
+                $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => $reqIndispensable]);
 
               
             $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
