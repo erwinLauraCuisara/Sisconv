@@ -106,9 +106,9 @@ class RequerimientoController extends Controller
     public function requerimientosShow($idConvocatoria){
         //muestra los postulantes por evaluar
 
-        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users ,nota_requerimientos, requerimientos , convocatorias,validados
-        WHERE users.id=nota_requerimientos.user_id AND requerimientos.id=nota_requerimientos.Requerimiento_id 
-       AND convocatorias.id=requerimientos.convocatoria_id AND validados.validado=TRUE AND validados.convocatoria_id=convocatorias.id AND validados.user_id=users.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , requerimientos , convocatorias,validados
+        WHERE convocatorias.id=requerimientos.convocatoria_id AND validados.validado=1
+		  AND validados.convocatoria_id=convocatorias.id AND validados.user_id=users.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
             
          return view('evaluador.showEvaluador')->with(compact('idConvocatoria', 'postulantes'));
 
