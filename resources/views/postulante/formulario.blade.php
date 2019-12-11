@@ -21,7 +21,7 @@
 		?>
 		<form action="{{action('PostularController@addItems',['idItem'=>$id, 'contador'=>$contador])}}" method="post" class="needs-validation" novalidate id="myForm" enctype="multipart/form-data">
             	{{ csrf_field() }}
-                <tbody>   
+                <tbody class="table-secondary">   
                     <tr>
                       <td>{{$item->nombre}}</td>
                       <td>{{$item->notaPorItem}}</td>

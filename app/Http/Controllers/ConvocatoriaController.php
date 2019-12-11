@@ -120,6 +120,10 @@ class ConvocatoriaController extends Controller
         and nota_requerimientos.evaluado=1
         AND nota_requerimientos.Requerimiento_id=?'
          ,[$idConvocatoria,]);        
-        return view('postulante.calificaciones')->with(compact('notas','convocatoria','idConvocatoria'));
+         $notaReq=\DB::select('SELECT requerimientos.MaximaNota
+        FROM requerimientos,convocatorias
+        WHERE convocatorias.id=requerimientos.convocatoria_id
+        AND requerimientos.convocatoria_id=?', [$idConvocatoria]);
+        return view('postulante.calificaciones')->with(compact('notas','convocatoria','idConvocatoria','notaReq'));
     }
 }

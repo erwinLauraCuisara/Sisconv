@@ -6,7 +6,7 @@
   <div class="main main-raised">
     <div class="container">  
     <div class="section text-center">
-        <h2 class="title">Adjunte los requisitos indispensables</h2>
+        <h2 class="title">Adjunte los requisitos indispensables OBLIGATORIO</h2>
         <div class="team">
           <div class="row">
 			

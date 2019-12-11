@@ -57,7 +57,7 @@
     </div>
     <div class="form-group col-md-6">
           <label for="NotaPorItem">{{'Nota por item'}}</label>
-          <input type="text" name="NotaPorItem" class="form-control" id="NotaPorItem" required>
+          <input type="text" name="NotaPorItem" class="form-control" id="NotaPorItem" required pattern="[0-9]+">
           <div class="invalid-feedback">
             Debe llenar el campo
           </div>

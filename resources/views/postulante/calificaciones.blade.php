@@ -16,16 +16,42 @@
             <thead class="thead-dark">
                    <th>Nombre Postulante</th>
                    <th>Correo</th> 
-                   <th>Nota Sistema</th>
-                   <th>Nota Comision</th>
+                   @role('evaluador')
+                    <th>Nota Sistema</th>
+                   @endrole
+                   <th>Nota Tabla de Meritos</th>
+                   <th>Porcentaje de la tabla de Meritos en la Convocatoria</th>
+                   
             </thead>
             @foreach($notas as $nota)
             <tbody >
                    <td>{{$nota->name}}</td>
-                   <td>{{$nota->email}}</td> 
+                   <td>{{$nota->email}}</td>
+                   @role('evaluador') 
                    <td>{{$nota->notaParcial}}</td>
+                   @endrole
                    <td>{{$nota->notaComision}}</td>
-                   <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a><td>
+                   <td>   
+                   <?php
+                    $notaReq=\DB::select('SELECT requerimientos.MaximaNota as nota
+                    FROM requerimientos,convocatorias
+                    WHERE convocatorias.id=requerimientos.convocatoria_id
+                    AND requerimientos.convocatoria_id=?', [$idConvocatoria]);
+                    $puntaje=$notaReq[0]->nota;
+                    $notas=\DB::select('SELECT nota_requerimientos.*, users.name, users.email,users.id
+                    FROM nota_requerimientos,users,requerimientos,convocatorias
+                    WHERE convocatorias.id=requerimientos.convocatoria_id
+                    AND nota_requerimientos.Requerimiento_id=requerimientos.id 
+                    AND nota_requerimientos.user_id=users.id
+                    and nota_requerimientos.evaluado=1
+                    AND nota_requerimientos.Requerimiento_id=?'
+                    ,[$idConvocatoria,]);
+                    $puntajeComi=$notas[0]->notaComision; 
+                    echo $puntaje*($puntajeComi/100);
+                   ?>
+                  
+                  </td>
+                   <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a></td>
             </tbody>
             @endforeach
              <br> 

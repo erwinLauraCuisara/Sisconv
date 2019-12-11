@@ -217,7 +217,7 @@ class RequisitoController extends Controller
             try {
             $notaMaxSeccion=$secciones[$contador]->NotaMaxima;
             $nota_seccion=new \App\NotaSeccion;
-            if($notaMaxSeccion<=$notaSumItems->sumaItem){
+            if($notaMaxSeccion>=$notaSumItems->sumaItem){
             $nota_seccion->notaComision=$notaSumItems->sumaItem;
             $nota_seccion->notaParcial=$notaSumItems->sumaItem;
             }

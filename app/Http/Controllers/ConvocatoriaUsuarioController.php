@@ -30,6 +30,7 @@ class ConvocatoriaUsuarioController extends Controller
         and nota_requerimientos.evaluado=1
         AND nota_requerimientos.Requerimiento_id=?'
          ,[$idConvocatoria,]);   
+        
         return view('postulante.calificacionIndividual')->with(compact('idConvocatoria', 'secciones','subsecciones','items','idUsuario','notas'));
     } 
 

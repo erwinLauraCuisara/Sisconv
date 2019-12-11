@@ -58,7 +58,7 @@
         
     <div class="form-group">
         <label for="NotaMaxima">{{'Nota Maxima'}}</label>
-        <textarea class="form-control" name="NotaMaxima" id="NotaMaxima" rows="3" required></textarea>
+        <input type="text" class="form-control" name="NotaMaxima" id="NotaMaxima" rows="3" required pattern="[0-9]+">
         <div class="invalid-feedback">
             Debe llenar el campo
         </div>

@@ -83,7 +83,7 @@
             <label for="imagen" class="subirImagen">
               <img src="{{URL::asset('/img/cargarImagen.png')}}" height="50">
               <i class="fas fa-cloud-upload-alt"></i>
-              <p class="texto_imagen_sub">IMAGEN</p>
+              <p class="texto_imagen_sub">IMAGEN solo JPG</p>
             </label> 
             <input id="imagen" name="imagen" onchange='cambiar("imagen","info")' type="file" 
             style='display: none;' accept="image/*"/>
