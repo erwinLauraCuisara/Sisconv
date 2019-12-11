@@ -106,9 +106,9 @@ class RequerimientoController extends Controller
     public function requerimientosShow($idConvocatoria){
         //muestra los postulantes por evaluar
 
-        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users ,nota_requerimientos, requerimientos , convocatorias,validados
-        WHERE users.id=nota_requerimientos.user_id AND requerimientos.id=nota_requerimientos.Requerimiento_id 
-       AND convocatorias.id=requerimientos.convocatoria_id AND validados.validado=TRUE AND validados.convocatoria_id=convocatorias.id AND validados.user_id=users.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , requerimientos , convocatorias,validados
+        WHERE convocatorias.id=requerimientos.convocatoria_id AND validados.validado=1
+		  AND validados.convocatoria_id=convocatorias.id AND validados.user_id=users.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
             
          return view('evaluador.showEvaluador')->with(compact('idConvocatoria', 'postulantes'));
 
@@ -134,10 +134,10 @@ class RequerimientoController extends Controller
                 }
          }
          
-         $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=?',[$idUsuario,$Ids->idRequerimiento, $Ids->idSeccion])[0];
-         
-        $notaMax=Seccion::find($Ids->idSeccion)->NotaMaxima;         
-         if($notaSumItems<=$notaMax){
+        $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=?',[$idUsuario,$Ids->idRequerimiento, $Ids->idSeccion])[0];
+        $valor=$notaSumItems->sumaItem;
+        $notaMax=Seccion::find($Ids->idSeccion)->NotaMaxima;          
+         if($valor<=$notaMax){
          \App\NotaSeccion::where('user_id',$idUsuario)->where('Requerimiento_id',$Ids->idRequerimiento)->where('Seccion_id', $Ids->idSeccion)->update(['notaComision' => $notaSumItems->sumaItem]);
          }
          $notaSecciones=\DB::select('SELECT sum(nota_seccions.notaComision) as suma FROM nota_seccions, requerimientos,seccions WHERE nota_seccions.user_id=? AND nota_seccions.Requerimiento_id=requerimientos.id AND nota_seccions.Seccion_id=seccions.id AND requerimientos.id=?',[$idUsuario, $Ids->idRequerimiento])[0];

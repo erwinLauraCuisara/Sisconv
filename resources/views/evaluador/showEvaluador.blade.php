@@ -24,7 +24,12 @@
                       <td>
                       <?php
                         $idReq=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-                        $evaluado=\App\NotaRequerimiento::where('user_id',$postulante->id)->where('Requerimiento_id', $idReq)->get()[0]->evaluado;  
+                        try {
+                          $evaluado=\App\NotaRequerimiento::where('user_id',$postulante->id)->where('Requerimiento_id', $idReq)->get()[0]->evaluado; 
+                        } catch (\Exception $e) {
+                          $evaluado=false;
+                        }
+                         
                         if($evaluado){
                           echo "Si";
                         }

@@ -34,7 +34,7 @@
                         @foreach($archivos as $archivo)
 
                         <br>
-                        <input type="text" name="{{$archivo->id}}" class="form-control" id="{{$archivo->id}}">
+                        <input type="text" name="{{$archivo->id}}" class="form-control" id="{{$archivo->id}} ">
                         @endforeach
                       <button type="submit" class="btn btn-primary ">Corregir Nota</button>
                     </form>

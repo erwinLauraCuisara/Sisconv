@@ -64,9 +64,9 @@
                                 <a type='button' href="{{$ruta}}" target='_blank' class='btn btn-success'>Ver Archivo</a>
                                 @endforeach
                             </td>
-                            <td>@foreach($nota_items as $nota)
+                            <td class="text-center" style="vertical-align:bottom;">@foreach($nota_items as $nota)
                                 {{$nota->notaParcial}}
-                                <br>
+                                <br> <br>
                                 @endforeach
                             </td>
                             <td>@foreach($nota_items as $notes)
