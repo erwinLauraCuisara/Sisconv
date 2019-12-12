@@ -23,7 +23,7 @@
               <div class="team-player">
                 <div class="card card-plain">
                   
-                    <img src="{{ asset(('storage/convocatorias').'/'.$convocatoria->id.'/'.'imagen.jpg') }}" alt="Convocatoria" class="rounded img-raised img-fluid">
+                    <img src="{{ asset(('storage/convocatorias').'/'.$convocatoria->id.'/'.'imagen.jpg') }}" alt="Convocatoria" class="rounded img-raised img-fluid" onerror="this.onerror=null;this.src='{{asset('img/logo-convocatoria.jpg')}}';">
                   
                   <h4 class="card-title">{{$convocatoria->titulo}}
                     <br>
