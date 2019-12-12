@@ -162,6 +162,7 @@ class RequisitoController extends Controller
                     }
                 }
                 $validado=\App\Validado::where('convocatoria_id',$idConvocatoria)->where('user_id',$idUser)->update(['validado' => $valor]);
+            if($valor==true){
             
 
               
@@ -179,40 +180,67 @@ class RequisitoController extends Controller
         $items=\DB::select('SELECT items.* FROM items, seccions, subseccions, requerimientos,convocatorias WHERE items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
 
         return view('receptor.evaluarItem')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador','idUser'));
+            }
+            else{
+                $postulantes=\DB::select('SELECT users.id , users.name, users.apellidos, users.email  from users , req_usuarios , convocatorias WHERE users.id=req_usuarios.user_id AND req_usuarios.convocatoria_id=convocatorias.id AND convocatorias.id=? GROUP BY users.id',[$idConvocatoria]);
+        
+        $validados=\DB::select('SELECT validados.validado, users.id FROM validados , users , convocatorias WHERE validados.user_id=users.id AND validados.convocatoria_id=convocatorias.id AND convocatorias.id=?',[$idConvocatoria]);
+            
+         return view('receptor.receptor')->with(compact('idConvocatoria', 'postulantes','validados'));
+            }
     }
 
     public function evaluarItem(Request $request ,$idConvocatoria, $idUser, $contador){
 
         $ids=request()->except("_token");
 
-        foreach ($ids as $idArchivo =>$value) {
-            if(!isset($value)){
-                $value=false;
+        $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
+        $idSeccion=$secciones[$contador]->id;
+        
+        $archiv=\DB::select("SELECT archivos.* FROM archivos, items, requerimientos, convocatorias,users,seccions,subseccions WHERE archivos.user_id=users.id AND archivos.convocatoria_id=convocatorias.id
+        AND archivos.Requerimiento_id=requerimientos.id AND archivos.Item_id=items.id AND items.subseccion_id=subseccions.id AND subseccions.seccion_id=seccions.id AND seccions.id=? AND users.id=?",[$idSeccion,$idUser]);
+
+        foreach($archiv as $arch){
+            if(isset($ids[$arch->id])){
+             \App\Archivo::find($arch->id)->update(['validado' => true]);
+             $archivo=\App\Archivo::find($arch->id);
+
+             try {
+                $nota_maximaItem=\App\Item::find($archivo->Item_id)->notaPorItem;
+                $nota_item=new \App\NotaItem;
+                $nota_item->notaComision=$nota_maximaItem;
+                $nota_item->notaParcial=$nota_maximaItem;
+                $nota_item->user_id=$archivo->user_id;
+                $nota_item->Item_id=$archivo->Item_id;
+                $nota_item->Requerimiento_id=$archivo->Requerimiento_id;
+                $nota_item->Archivo_id=$archivo->id;
+                $nota_item->save();
+                } catch (\Illuminate\Database\QueryException $ex) {
+                   
+                 }
+                
             }
-            \App\Archivo::find($idArchivo)->update(['validado' => $value]);
-            $archivo=\App\Archivo::find($idArchivo);
-            if($value==true){
+            else{
+                \App\Archivo::find($arch->id)->update(['validado' => false]);
+                $archivo=\App\Archivo::find($arch->id);
+
                 try {
-            $nota_maximaItem=\App\Item::find($archivo->Item_id)->notaPorItem;
-            $nota_item=new \App\NotaItem;
-            $nota_item->notaComision=$nota_maximaItem;
-            $nota_item->notaParcial=$nota_maximaItem;
-            $nota_item->user_id=$archivo->user_id;
-            $nota_item->Item_id=$archivo->Item_id;
-            $nota_item->Requerimiento_id=$archivo->Requerimiento_id;
-            $nota_item->Archivo_id=$archivo->id;
-            $nota_item->save();
-            } catch (\Illuminate\Database\QueryException $ex) {
-                
-               
-             }
+                    $nota_i=\App\NotaItem::where('user_id',$archivo->user_id)->where('Item_id',$archivo->Item_id)->where('Requerimiento_id',$archivo->Requerimiento_id)->where('Archivo_id',$archivo->id);
+                    $nota_i->delete();
+                    }
+                    catch (\Exception $e) {
+                       
+                     }
+
             }
-                
+            
+            
         } 
+       
+  
 
             $idRequerimiento=\App\Requerimiento::where('convocatoria_id',$idConvocatoria)->get()[0]->id;
-            $secciones=\DB::select('SELECT seccions.* , convocatorias.titulo as convocatoriaTitulo FROM convocatorias,seccions, requerimientos WHERE convocatorias.id=requerimientos.convocatoria_id and seccions.requerimiento_id=requerimientos.id AND requerimientos.convocatoria_id=?  ORDER BY seccions.id',[$idConvocatoria]);
-            $idSeccion=$secciones[$contador]->id;
+            
             $notaSumItems=\DB::select('SELECT sum(nota_items.notaComision) as sumaItem from nota_items, items, requerimientos,seccions, subseccions,archivos WHERE nota_items.user_id=? AND nota_items.Item_id=items.id AND nota_items.Requerimiento_id=requerimientos.id AND requerimientos.id=? AND seccions.id=subseccions.seccion_id AND subseccions.id=items.subseccion_id AND seccions.id=? AND archivos.id=nota_items.Archivo_id AND archivos.validado=true ',[$idUser,$idRequerimiento, $idSeccion])[0];
             try {
             $notaMaxSeccion=$secciones[$contador]->NotaMaxima;
@@ -230,9 +258,17 @@ class RequisitoController extends Controller
             $nota_seccion->Seccion_id=$idSeccion;
             $nota_seccion->save();
             } catch (\Illuminate\Database\QueryException $ex) {
-                
                
-            }
+                if($notaMaxSeccion>=$notaSumItems->sumaItem){
+                    \App\NotaSeccion::where('user_id',$idUser)->where('Requerimiento_id',$idRequerimiento)->where('Seccion_id',$idSeccion)->update(['notaComision' => $notaSumItems->sumaItem, 'notaParcial'=>$notaSumItems->sumaItem]);
+                    }
+                    else{
+                        \App\NotaSeccion::where('user_id',$idUser)->where('Requerimiento_id',$idRequerimiento)->where('Seccion_id',$idSeccion)->update(['notaComision' => $notaMaxSeccion, 'notaParcial'=>$notaMaxSeccion]);
+                    }
+                    
+             }
+               
+            
         $contador+=1;    
         
         if($contador<count($secciones)){
@@ -244,11 +280,8 @@ class RequisitoController extends Controller
         return view('receptor.evaluarItem')->with(compact('idConvocatoria', 'secciones','subsecciones','items','contador','idUser'));
         }
         else{
-             try {
-
-
-
             $notaSecciones=\DB::select('SELECT sum(nota_seccions.notaComision) as suma FROM nota_seccions, requerimientos,seccions WHERE nota_seccions.user_id=? AND nota_seccions.Requerimiento_id=requerimientos.id AND nota_seccions.Seccion_id=seccions.id AND requerimientos.id=?',[$idUser, $idRequerimiento])[0];
+             try {
             $postula=new \App\NotaRequerimiento;
             $postula->user_id = $idUser;
             $postula->Requerimiento_id = $idRequerimiento; 
@@ -257,7 +290,8 @@ class RequisitoController extends Controller
             $postula->save();
 
             } catch (\Illuminate\Database\QueryException $ex) {
-                
+
+                \App\NotaRequerimiento::where('user_id',$idUser)->where('Requerimiento_id',$idRequerimiento)->update(['notaComision' => $notaSecciones->suma, 'notaParcial'=>$notaSecciones->suma]);
                
             }
              
