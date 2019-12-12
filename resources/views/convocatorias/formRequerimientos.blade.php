@@ -42,7 +42,7 @@
           <label for="MaximaNota">{{'Porcentaje de la Tabla de Calificacion de Meritos en la Convocatoria'}}</label>
           <input type="text" name="MaximaNota" class="form-control" id="MaximaNota" required pattern="[0-9]+">
           <div class="invalid-feedback">
-            Debe llenar el campo
+            Ingrese un numero valido
           </div>
         </div>
       </div>

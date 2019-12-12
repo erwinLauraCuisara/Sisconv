@@ -7,9 +7,9 @@
     <div class="container">  
     <div class="section text-center">
 
-<H1>¿Confirmar su inscripcion?</H1>
+<H1>¿Confirmar postulacion?</H1>
 <form action="{{url('/')}}" method="get" style="display:inline">
-<button type="submit" class="btn btn-primary btn-lg btn-block">Confirmar inscripcion</button>
+<button type="submit" class="btn btn-primary btn-lg btn-block">Confirmar </button>
 </form>
 
 <footer class="footer">

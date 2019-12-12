@@ -101,7 +101,7 @@
           </div>
         </div>
         <div class="col-md-4 ml-auto mr-auto text-center">
-          <button type="submit" class="btn btn-primary ">Guardar convocatoria</button>
+          <button type="submit" class="btn btn-primary ">Siguiente</button>
         </div>
     </form>
   

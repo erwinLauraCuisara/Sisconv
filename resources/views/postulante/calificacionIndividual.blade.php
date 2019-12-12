@@ -69,9 +69,9 @@
                                 <br> <br>
                                 @endforeach
                             </td>
-                            <td>@foreach($nota_items as $notes)
-                            {{$nota->notaComision}}
-                            <br>
+                            <td class="text-center" style="vertical-align:bottom;">@foreach($nota_items as $notes)
+                            {{$notes->notaComision}}
+                            <br> <br>
                                 @endforeach
                             </td>    
                             </tr>
