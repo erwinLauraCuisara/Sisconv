@@ -51,7 +51,9 @@
                    ?>
                   
                   </td>
-                   <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a></td>
+                  @role('evaluador')                  
+                  <td><a href="{{route('convocatorias.getNota', ['idConvocatoria'=>$idConvocatoria, 'idUser'=>$nota->id])}}" class="btn btn-success">DETALLES</a></td>
+                  @endrole
             </tbody>
             @endforeach
              <br> 
