@@ -40,9 +40,16 @@
                     </form>
                   @else
                   @role('postulante')
+                  <?php 
+                  $fecha=\DB::select("SELECT convocatorias.fechaFin from convocatorias where convocatorias.id=?",[$convocatoria->id])[0];
+                  $fecha_actual = (date("Y-m-d H:i:00",time()));
+                  //echo $fecha->fechaFin;
+                  ?>
+                  @if($fecha->fechaFin>$fecha_actual)
                     <form action="{{route('postular.codigo', $convocatoria->id) }}" method="get" style="display:inline">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Postular</button>
-                    </form>
+                    </form>}
+                  @endif
                   @endrole
                   @role('administrador')
                     <form action="" method="get" style="display:inline">
